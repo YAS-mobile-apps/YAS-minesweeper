@@ -1,0 +1,120 @@
+[gd_scene load_steps=8 format=3 uid="uid://g74kfk2mcvx8"]
+
+[ext_resource type="Script" path="res://sweeper_ui.gd" id="1_bljj1"]
+[ext_resource type="Script" path="res://UIMarginContainer.gd" id="2_jrgtn"]
+[ext_resource type="Texture2D" uid="uid://cewyd38vautxy" path="res://assets/tiles/button_smile.png" id="2_l2o6o"]
+[ext_resource type="Texture2D" uid="uid://dxeuk57gdm7rv" path="res://assets/tiles/button_smile_click.png" id="3_p2lca"]
+[ext_resource type="Texture2D" uid="uid://bgqfjykm0qsii" path="res://icon.svg" id="5_dfxh1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_must1"]
+bg_color = Color(0.0313726, 0.0313726, 0.0313726, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0iscp"]
+bg_color = Color(0.0313726, 0.0313726, 0.0313726, 1)
+
+[node name="SweeperUI" type="CanvasLayer"]
+layer = -1
+script = ExtResource("1_bljj1")
+
+[node name="UIMarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 40.0
+grow_horizontal = 2
+size_flags_vertical = 0
+script = ExtResource("2_jrgtn")
+
+[node name="PanelContainer" type="PanelContainer" parent="UIMarginContainer"]
+custom_minimum_size = Vector2(0, 39)
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="GameStatusBox" type="HBoxContainer" parent="UIMarginContainer/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 50
+
+[node name="MineCountPanel" type="Panel" parent="UIMarginContainer/PanelContainer/GameStatusBox"]
+custom_minimum_size = Vector2(50, 30)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_must1")
+
+[node name="MineCountLabel" type="Label" parent="UIMarginContainer/PanelContainer/GameStatusBox/MineCountPanel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.670588, 0, 0, 1)
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GameStatusButton" type="TextureButton" parent="UIMarginContainer/PanelContainer/GameStatusBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+action_mode = 0
+texture_normal = ExtResource("2_l2o6o")
+texture_pressed = ExtResource("3_p2lca")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="TimerCountPanel" type="Panel" parent="UIMarginContainer/PanelContainer/GameStatusBox"]
+custom_minimum_size = Vector2(50, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_0iscp")
+
+[node name="TimerCountLabel" type="Label" parent="UIMarginContainer/PanelContainer/GameStatusBox/TimerCountPanel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.631373, 0, 0, 1)
+text = "000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Save Score window" type="Window" parent="."]
+unique_name_in_owner = true
+title = "Save Score"
+initial_position = 2
+size = Vector2i(300, 300)
+visible = false
+
+[node name="Camera2D" type="Camera2D" parent="Save Score window"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Save Score window/Camera2D"]
+texture = ExtResource("5_dfxh1")
+
+[node name="List Score window" type="Window" parent="."]
+unique_name_in_owner = true
+title = "Save Score"
+initial_position = 2
+size = Vector2i(300, 300)
+visible = false
+
+[node name="Camera2D" type="Camera2D" parent="List Score window"]
+
+[node name="Sprite2D" type="Sprite2D" parent="List Score window/Camera2D"]
+texture = ExtResource("5_dfxh1")
