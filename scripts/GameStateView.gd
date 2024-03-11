@@ -9,6 +9,7 @@ class_name GameStateView
 
 var time_elapsed = 0
 
+
 func _ready():
 	mine_grid.game_lost.connect(on_game_lost)
 	mine_grid.flag_placed.connect(on_flag_placed)

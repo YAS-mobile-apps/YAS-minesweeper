@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://g74kfk2mcvx8"]
 
-[ext_resource type="Script" path="res://scripts/sweeper_ui.gd" id="1_apilf"]
+[ext_resource type="Script" path="res://scripts/SweeperUi.gd" id="1_apilf"]
 [ext_resource type="Script" path="res://scripts/UIMarginContainer.gd" id="2_jrgtn"]
 [ext_resource type="Texture2D" uid="uid://cewyd38vautxy" path="res://assets/tiles/button_smile.png" id="2_l2o6o"]
 [ext_resource type="Texture2D" uid="uid://dxeuk57gdm7rv" path="res://assets/tiles/button_smile_click.png" id="3_p2lca"]
-[ext_resource type="Texture2D" uid="uid://bgqfjykm0qsii" path="res://icon.svg" id="5_dfxh1"]
+[ext_resource type="Texture2D" uid="uid://bgqfjykm0qsii" path="res://assets/icon.svg" id="5_dfxh1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_must1"]
 bg_color = Color(0.0313726, 0.0313726, 0.0313726, 1)

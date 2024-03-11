@@ -115,6 +115,7 @@ func place_mines():
 		erase_cell(DEFAULT_LAYER, cell)
 		set_tile_cell(cell, CELLS.default, 1)
 
+
 func get_board_3bv_score() -> int:		
 	var marked_cells: Array[Vector2i] = []
 	var mine_count: int = 0

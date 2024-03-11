@@ -20,8 +20,10 @@ var default_button_texture = preload("res://assets/tiles/button_smile.png")
 func _ready():
 	game_status_button.pressed.connect(_game_status_button_pressed)
 
+
 func _game_status_button_pressed():
 	get_tree().reload_current_scene()
+
 
 func set_mine_count(mine_count: int):
 	var mine_count_string = str(mine_count)
@@ -40,6 +42,7 @@ func set_timer_count(timer_count: int):
 func game_lost():
 	game_status_button.texture_normal = game_lost_button_texture
 	save_score_window.visible = true
+
 
 func game_won():
 	game_status_button.texture_normal = game_won_button_texture
