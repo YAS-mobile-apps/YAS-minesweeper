@@ -83,7 +83,6 @@ func new_game():
 	place_mines()
 
 
-
 func _input(event: InputEvent):
 	if !(event is InputEventMouseButton) or !event.is_pressed():
 		return
@@ -100,7 +99,6 @@ func _input(event: InputEvent):
 		on_cell_selection(selected_cell_coord)
 	elif event.button_index == MOUSE_BUTTON_RIGHT:
 		flag_placement(selected_cell_coord)
-	
 
 
 func place_mines():
@@ -133,6 +131,7 @@ func get_board_3bv_score() -> int:
 		elif mine_count > 0 and !marked_cells.has(cell_coord) and !cells_with_mine.has(cell_coord):
 			value_3bv = value_3bv + 1
 	return value_3bv
+
 
 func _calculate_3bv_neighbor_cells(cell_coord: Vector2i, marked_cells: Array[Vector2i], value_3bv: int):
 	var neighboor_coord: Vector2i
@@ -180,11 +179,13 @@ func flag_placement(cell_coord: Vector2i):
 
 
 func on_cell_selection(cell_coord: Vector2i):
-	cells_checked.append(cell_coord)
 	if cells_with_mine.has(cell_coord):
 		game_over(cell_coord)
-	else:
-		handle_cell(cell_coord)
+		return
+	if cells_checked.has(cell_coord):
+		return
+	cells_checked.append(cell_coord)
+	handle_cell(cell_coord)
 
 
 func handle_cell(cell_coord: Vector2i):
