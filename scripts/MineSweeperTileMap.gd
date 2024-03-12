@@ -48,7 +48,7 @@ var is_game_finished: bool = false
 var first_move: bool = false
 var placed_flags: int = 0
 var cells_open: int = 0
-var board_score = 0
+var board_3bv_score: int = 0
 
 
 func get_tile_range() -> Array[int]:
@@ -109,7 +109,7 @@ func place_mines():
 				while cells_with_mine.has(mine_coords):
 					mine_coords = Vector2i(randi_range(row_start, row_end), randi_range(column_start, column_end))
 				cells_with_mine.append(mine_coords)
-			print(get_board_3bv_score())
+			board_3bv_score = get_board_3bv_score()
 	
 	for cell in cells_with_mine:
 		erase_cell(DEFAULT_LAYER, cell)

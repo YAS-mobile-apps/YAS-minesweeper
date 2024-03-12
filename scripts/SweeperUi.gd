@@ -41,10 +41,9 @@ func set_timer_count(timer_count: int):
 
 func game_lost():
 	game_status_button.texture_normal = game_lost_button_texture
-	save_score_window.visible = true
 
 
-func game_won():
+func game_won(time_elapsed):
 	game_status_button.texture_normal = game_won_button_texture
 	save_score_window.visible = true
 

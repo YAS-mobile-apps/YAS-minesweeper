@@ -27,13 +27,13 @@ func _on_timer_timeout():
 
 
 func on_game_lost():
-	sweeper_ui.game_lost()
 	timer.stop()
+	sweeper_ui.game_lost()
 
 
 func on_game_won():
-	sweeper_ui.game_won()
 	timer.stop()
+	sweeper_ui.game_won(time_elapsed)
 
 
 func on_game_start():
