@@ -62,10 +62,12 @@ func load_score_table():
 	var json_object = JSON.new()
 	var parse_err = json_object.parse(score_file.get_as_text())
 	score_file.close()
-	
 	if parse_err != OK:
+		print('b')
 		reset_file_score_table()
-		
+
+	GlobalVariables.current_scores = json_object.data
+
 
 func reset_file_score_table():
 	var file = FileAccess.open(GlobalVariables.SCORE_TABLE_FILE_PATH, FileAccess.WRITE_READ)
