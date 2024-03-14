@@ -96,15 +96,16 @@ text = "000"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Save Score window" type="Window" parent="."]
+[node name="SaveScoreWindow" type="Window" parent="."]
 unique_name_in_owner = true
 title = "Save Score"
 initial_position = 2
 size = Vector2i(300, 300)
 visible = false
+borderless = true
 script = ExtResource("5_ypgx0")
 
-[node name="MarginContainer" type="MarginContainer" parent="Save Score window"]
+[node name="MarginContainer" type="MarginContainer" parent="SaveScoreWindow"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -117,51 +118,56 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Save Score window/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="SaveScoreWindow/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="CurrentUserName" type="HBoxContainer" parent="Save Score window/MarginContainer/VBoxContainer"]
+[node name="CurrentUserName" type="HBoxContainer" parent="SaveScoreWindow/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="TextEdit" type="TextEdit" parent="Save Score window/MarginContainer/VBoxContainer/CurrentUserName"]
+[node name="CurrentUserTextEdit" type="TextEdit" parent="SaveScoreWindow/MarginContainer/VBoxContainer/CurrentUserName"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "Score owner name..."
 
-[node name="CurrentScore" type="HBoxContainer" parent="Save Score window/MarginContainer/VBoxContainer"]
+[node name="CurrentScore" type="HBoxContainer" parent="SaveScoreWindow/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Save Score window/MarginContainer/VBoxContainer/CurrentScore"]
+[node name="ScoreTextLabel" type="RichTextLabel" parent="SaveScoreWindow/MarginContainer/VBoxContainer/CurrentScore"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Your Score:"
+text = "Your Score: "
 
-[node name="CurrentTime" type="HBoxContainer" parent="Save Score window/MarginContainer/VBoxContainer"]
+[node name="CurrentTime" type="HBoxContainer" parent="SaveScoreWindow/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Save Score window/MarginContainer/VBoxContainer/CurrentTime"]
+[node name="TimeTextLabel" type="RichTextLabel" parent="SaveScoreWindow/MarginContainer/VBoxContainer/CurrentTime"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Your time:"
+text = "Your time: "
 
-[node name="SaveScoreOrCancel" type="HBoxContainer" parent="Save Score window/MarginContainer/VBoxContainer"]
+[node name="SaveScoreOrCancel" type="HBoxContainer" parent="SaveScoreWindow/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 10
 
-[node name="CancelButton" type="Button" parent="Save Score window/MarginContainer/VBoxContainer/SaveScoreOrCancel"]
+[node name="SaveCancelButton" type="Button" parent="SaveScoreWindow/MarginContainer/VBoxContainer/SaveScoreOrCancel"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Cancel"
 
-[node name="SaveButton" type="Button" parent="Save Score window/MarginContainer/VBoxContainer/SaveScoreOrCancel"]
+[node name="SaveConfirmButton" type="Button" parent="SaveScoreWindow/MarginContainer/VBoxContainer/SaveScoreOrCancel"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Save"

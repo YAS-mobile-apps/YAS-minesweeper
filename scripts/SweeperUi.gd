@@ -3,25 +3,41 @@ extends CanvasLayer
 class_name SweeperUI 
 
 @export var mine_grid: MineSweeperTileMap
-
 @onready var mine_count_label = %MineCountLabel
 @onready var game_status_button = %GameStatusButton
 @onready var timer_count_label = %TimerCountLabel
-@onready var save_score_window = %"Save Score window"
+@onready var save_score_window = %"SaveScoreWindow"
 @onready var list_score_window = %"List Score window"
+@onready var current_user_name_field = %CurrentUserTextEdit
+@onready var current_score_label = %ScoreTextLabel
+@onready var current_time_score_label = %TimeTextLabel
+@onready var save_cancel_button = %SaveCancelButton
+@onready var save_confirm_button = %SaveConfirmButton
 
 const TEXT_PADDING_SIZE: int = 3
 
 var game_lost_button_texture = preload("res://assets/tiles/button_lose.png")
 var game_won_button_texture = preload("res://assets/tiles/button_win.png")
 var default_button_texture = preload("res://assets/tiles/button_smile.png")
+var final_score: int = 0
+var final_time: int = 0
+var current_player_name: String = ""
 
+signal save_score
 
 func _ready():
-	game_status_button.pressed.connect(_game_status_button_pressed)
+	game_status_button.pressed.connect(game_reset_button_pressed)
+	save_cancel_button.pressed.connect(game_reset_button_pressed)
+	save_confirm_button.pressed.connect(save_confirm_button_button_pressed)
+
+func game_reset_button_pressed():
+	get_tree().reload_current_scene()
 
 
-func _game_status_button_pressed():
+func save_confirm_button_button_pressed():
+	current_player_name = current_score_label.text
+	save_score.emit(current_player_name, final_score, final_time)
+	print("Name: ", current_player_name, " Score: ", final_score, " Time: ", final_time)
 	get_tree().reload_current_scene()
 
 
@@ -43,14 +59,22 @@ func game_lost():
 	game_status_button.texture_normal = game_lost_button_texture
 
 
-func game_won(time_elapsed):
+func game_won(time_elapsed, current_score):
+	final_time = time_elapsed
+	final_score = current_score
 	game_status_button.texture_normal = game_won_button_texture
 	save_score_window.visible = true
+	
+	current_score_label.add_text(str(final_score))
+	current_time_score_label.add_text(str(time_elapsed))
+	
+	if current_player_name:
+		current_score_label.add_text(current_player_name)
 
 
 func max_flag_warning(reset: bool = false):
 	var color: String = GlobalVariables.COUNTERS_FONT_COLOUR if reset else "white"
-	mine_count_label.add_theme_color_override("font_color",color)
+	mine_count_label.add_theme_color_override("font_color", color)
 
 
 func reset_smile_button():

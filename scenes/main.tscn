@@ -36,7 +36,8 @@ sources/0 = SubResource("TileSetAtlasSource_ootrp")
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(24, 0)
 
-[node name="SweeperUI" parent="." instance=ExtResource("1_o7pdv")]
+[node name="SweeperUI" parent="." node_paths=PackedStringArray("mine_grid") instance=ExtResource("1_o7pdv")]
+mine_grid = NodePath("../TileMap")
 
 [node name="TileMap" type="TileMap" parent="." node_paths=PackedStringArray("game_state_view")]
 texture_filter = 2

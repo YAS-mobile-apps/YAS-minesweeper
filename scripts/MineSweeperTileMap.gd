@@ -240,7 +240,7 @@ func check_for_win_condition():
 	var all_cells_were_checked = false
 	if cells_open + existing_mines == columns * rows:
 		all_cells_were_checked = true
-	if all_cells_were_checked:
+	if all_cells_were_checked and not is_game_finished:
 		game_won()
 
 

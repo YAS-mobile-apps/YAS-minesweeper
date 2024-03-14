@@ -4,6 +4,7 @@ class_name GameStateView
 
 @export var mine_grid: MineSweeperTileMap
 @export var sweeper_ui: SweeperUI
+@export var save_window: SaveScoreWindow
 
 @onready var timer = $Timer
 
@@ -33,7 +34,9 @@ func on_game_lost():
 
 func on_game_won():
 	timer.stop()
-	sweeper_ui.game_won(time_elapsed)
+	var total_score = mine_grid.board_3bv_score / max(time_elapsed, 1)
+	var current_score = max(total_score, mine_grid.board_3bv_score)
+	sweeper_ui.game_won(time_elapsed, current_score)
 
 
 func on_game_start():
