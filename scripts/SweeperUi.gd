@@ -3,6 +3,7 @@ extends CanvasLayer
 class_name SweeperUI 
 
 @export var mine_grid: MineSweeperTileMap
+
 @onready var mine_count_label = %MineCountLabel
 @onready var game_status_button = %GameStatusButton
 @onready var timer_count_label = %TimerCountLabel
@@ -35,10 +36,9 @@ func game_reset_button_pressed():
 
 
 func save_confirm_button_button_pressed():
-	current_player_name = current_score_label.text
+	current_player_name = current_user_name_field.text
 	save_score.emit(current_player_name, final_score, final_time)
-	print("Name: ", current_player_name, " Score: ", final_score, " Time: ", final_time)
-	get_tree().reload_current_scene()
+
 
 
 func set_mine_count(mine_count: int):
@@ -69,8 +69,7 @@ func game_won(time_elapsed, current_score):
 	current_time_score_label.add_text(str(time_elapsed))
 	
 	if current_player_name:
-		current_score_label.add_text(current_player_name)
-
+		current_user_name_field.insert_text_at_caret(current_player_name)
 
 func max_flag_warning(reset: bool = false):
 	var color: String = GlobalVariables.COUNTERS_FONT_COLOUR if reset else "white"
