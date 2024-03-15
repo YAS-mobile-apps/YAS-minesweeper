@@ -4,7 +4,7 @@ class_name MineSweeperTileMap
 
 const TILE_SET_ID = 0
 const DEFAULT_LAYER = 0
-const SURROUNDING_POSITIONS = [
+const SURROUNDING_POSITIONS: Array = [
 	Vector2i.UP, 
 	Vector2i.DOWN, 
 	Vector2i.LEFT, 
@@ -14,7 +14,7 @@ const SURROUNDING_POSITIONS = [
 	Vector2i.DOWN + Vector2i.LEFT, 
 	Vector2i.DOWN + Vector2i.RIGHT
 ] 
-const CELLS = {
+const CELLS: Dictionary = {
 	"0": Vector2i(12, 0),
 	"1": Vector2i(0,0),
 	"2": Vector2i(1,0),
@@ -29,10 +29,14 @@ const CELLS = {
 	"default": Vector2i(10,0),
 	"mine_hit": Vector2i(11,0),
 }
-
+const MINE_AMOUNT:Dictionary = {
+	"dev_mode": 1,
+	"normal_mode": 9,
+	"medium_mode": 12,
+	"hard_mode": 19,
+}
 @export var columns = 8
 @export var rows = 8
-@export var existing_mines = 8
 @export var game_state_view: GameStateView
 
 signal game_start
@@ -104,7 +108,7 @@ func _input(event: InputEvent):
 func place_mines():
 	match get_tile_range():
 		[var row_start, var row_end, var column_start, var column_end]:
-			for i in existing_mines:
+			for i in MINE_AMOUNT[GlobalVars.settings.dificulty]:
 				var mine_coords = Vector2i(randi_range(row_start, row_end), randi_range(column_start, column_end))
 				while cells_with_mine.has(mine_coords):
 					mine_coords = Vector2i(randi_range(row_start, row_end), randi_range(column_start, column_end))
@@ -159,7 +163,7 @@ func flag_placement(cell_coord: Vector2i):
 	var atlas_coord = get_cell_atlas_coords(DEFAULT_LAYER, cell_coord)
 	
 	if atlas_coord == CELLS.default:
-		if placed_flags == existing_mines:
+		if placed_flags == MINE_AMOUNT[GlobalVars.settings.dificulty]:
 			max_flags_placed.emit()
 			return
 			
@@ -238,7 +242,7 @@ func check_surrounding_mines(cell_coord: Vector2i):
 
 func check_for_win_condition():
 	var all_cells_were_checked = false
-	if cells_open + existing_mines == columns * rows:
+	if cells_open + MINE_AMOUNT[GlobalVars.settings.dificulty] == columns * rows:
 		all_cells_were_checked = true
 	if all_cells_were_checked and not is_game_finished:
 		game_won()

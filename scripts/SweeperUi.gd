@@ -68,18 +68,18 @@ func game_won(time_elapsed, current_score):
 	current_score_label.add_text(str(final_score))
 	current_time_score_label.add_text(str(time_elapsed))
 	
-	if GlobalVariables.current_scores[
-		GlobalVariables.current_dificulty_level
+	if GlobalVars.current_scores[
+		GlobalVars.settings.dificulty
 	].last_player_name:
 		current_user_name_field.insert_text_at_caret(
-			GlobalVariables.current_scores[
-				GlobalVariables.current_dificulty_level
+			GlobalVars.current_scores[
+				GlobalVars.settings.dificulty
 				].last_player_name
 		)
 
 
 func max_flag_warning(reset: bool = false):
-	var color: String = GlobalVariables.COUNTERS_FONT_COLOUR if reset else "white"
+	var color: String = GlobalVars.COUNTERS_FONT_COLOUR if reset else "white"
 	mine_count_label.add_theme_color_override("font_color", color)
 
 

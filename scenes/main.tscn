@@ -47,7 +47,6 @@ format = 2
 script = ExtResource("3_m6pnu")
 columns = 14
 rows = 9
-existing_mines = 1
 game_state_view = NodePath("../GameStateView")
 
 [node name="GameStateView" parent="." node_paths=PackedStringArray("mine_grid", "sweeper_ui") instance=ExtResource("4_5tf64")]
