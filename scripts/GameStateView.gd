@@ -61,7 +61,8 @@ func load_score_table():
 		reset_file_score_table()
 		return
 	GlobalVars.current_scores = file_scores
-
+	for score_line in GlobalVars.current_scores[GlobalVars.settings.dificulty].scores:
+		sweeper_ui.score_table.add_item(str(score_line))
 
 func reset_file_score_table():
 	GlobalFuncs.write_to_json_file(GlobalVars.SCORE_TABLE_FILE_PATH, GlobalVars.current_scores)

@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cs7xfipko16xx"]
+[gd_scene load_steps=8 format=3 uid="uid://cs7xfipko16xx"]
 
 [ext_resource type="PackedScene" uid="uid://g74kfk2mcvx8" path="res://scenes/sweeper_ui.tscn" id="1_o7pdv"]
 [ext_resource type="Texture2D" uid="uid://dunq15if5jhxm" path="res://assets/tiles/base_tiles.png" id="2_ecboi"]
 [ext_resource type="Script" path="res://scripts/MineSweeperTileMap.gd" id="3_m6pnu"]
 [ext_resource type="PackedScene" uid="uid://b76vc2cfwp2j" path="res://scenes/game_state_view.tscn" id="4_5tf64"]
+[ext_resource type="PackedScene" uid="uid://ct4tnkbunfu6w" path="res://scenes/high_scores.tscn" id="5_2hsfg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ootrp"]
 texture = ExtResource("2_ecboi")
@@ -52,3 +53,18 @@ game_state_view = NodePath("../GameStateView")
 [node name="GameStateView" parent="." node_paths=PackedStringArray("mine_grid", "sweeper_ui") instance=ExtResource("4_5tf64")]
 mine_grid = NodePath("../TileMap")
 sweeper_ui = NodePath("../SweeperUI")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="HighScoresWindow" type="PanelContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+
+[node name="HighScores" parent="CanvasLayer/HighScoresWindow" instance=ExtResource("5_2hsfg")]
+z_as_relative = false
+layout_mode = 2

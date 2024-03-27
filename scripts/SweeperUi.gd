@@ -9,11 +9,13 @@ class_name SweeperUI
 @onready var timer_count_label = %TimerCountLabel
 @onready var save_score_window = %"SaveScoreWindow"
 @onready var list_score_window = %"List Score window"
+@onready var score_button = %ScoreButton
 @onready var current_user_name_field = %CurrentUserTextEdit
 @onready var current_score_label = %ScoreTextLabel
 @onready var current_time_score_label = %TimeTextLabel
 @onready var save_cancel_button = %SaveCancelButton
 @onready var save_confirm_button = %SaveConfirmButton
+@onready var score_table = %ScoreTable
 
 const TEXT_PADDING_SIZE: int = 3
 
@@ -29,16 +31,21 @@ signal save_score
 func _ready():
 	game_status_button.pressed.connect(game_reset_button_pressed)
 	save_cancel_button.pressed.connect(game_reset_button_pressed)
-	save_confirm_button.pressed.connect(save_confirm_button_button_pressed)
+	save_confirm_button.pressed.connect(save_confirm_button_pressed)
+	score_button.pressed.connect(score_button_pressed)
+
 
 func game_reset_button_pressed():
 	get_tree().reload_current_scene()
 
 
-func save_confirm_button_button_pressed():
+func save_confirm_button_pressed():
 	current_player_name = current_user_name_field.text
 	save_score.emit(current_player_name, final_score, final_time)
 
+
+func score_button_pressed():
+	get_tree().change_scene_to_file("res://scenes/high_scores.tscn")
 
 
 func set_mine_count(mine_count: int):

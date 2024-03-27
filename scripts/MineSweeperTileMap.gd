@@ -203,7 +203,6 @@ func handle_cell(cell_coord: Vector2i):
 		game_state_view.timer.start()
 
 	var atlas_coord = get_cell_atlas_coords(DEFAULT_LAYER, cell_coord)
-	
 	if atlas_coord == CELLS.flag:
 		placed_flags = placed_flags - 1
 		flag_placed.emit(placed_flags)
