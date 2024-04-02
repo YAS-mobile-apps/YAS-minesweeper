@@ -11,12 +11,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("1_hg7n2")
 
 [node name="ScoreScreen" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="ScreenHeader" type="HBoxContainer" parent="ScoreScreen"]
 layout_mode = 2
@@ -28,14 +32,18 @@ text = "<-"
 
 [node name="TableMargins" type="MarginContainer" parent="ScoreScreen"]
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="TableContents" type="VBoxContainer" parent="ScoreScreen/TableMargins"]
 layout_mode = 2
-size_flags_vertical = 0
 
 [node name="Header" type="HBoxContainer" parent="ScoreScreen/TableMargins/TableContents"]
 layout_mode = 2
 size_flags_vertical = 0
+
+[node name="VSeparator4" type="VSeparator" parent="ScoreScreen/TableMargins/TableContents/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="Name" type="Label" parent="ScoreScreen/TableMargins/TableContents/Header"]
 layout_mode = 2
@@ -44,6 +52,7 @@ horizontal_alignment = 1
 
 [node name="VSeparator" type="VSeparator" parent="ScoreScreen/TableMargins/TableContents/Header"]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="Score" type="Label" parent="ScoreScreen/TableMargins/TableContents/Header"]
 layout_mode = 2
@@ -52,6 +61,7 @@ horizontal_alignment = 1
 
 [node name="VSeparator2" type="VSeparator" parent="ScoreScreen/TableMargins/TableContents/Header"]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="Time" type="Label" parent="ScoreScreen/TableMargins/TableContents/Header"]
 layout_mode = 2
@@ -60,11 +70,16 @@ horizontal_alignment = 1
 
 [node name="VSeparator3" type="VSeparator" parent="ScoreScreen/TableMargins/TableContents/Header"]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="CreatedAt" type="Label" parent="ScoreScreen/TableMargins/TableContents/Header"]
 layout_mode = 2
 text = "Datetime"
 horizontal_alignment = 1
+
+[node name="VSeparator5" type="VSeparator" parent="ScoreScreen/TableMargins/TableContents/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="TableRows" type="VBoxContainer" parent="ScoreScreen/TableMargins/TableContents"]
 layout_mode = 2
@@ -74,3 +89,12 @@ size_flags_vertical = 0
 visible = false
 layout_mode = 2
 size_flags_vertical = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
