@@ -3,7 +3,8 @@ class_name Table
 
 @onready var m_NodeTableRows : Control = get_node("ScoreScreen/TableMargins/TableContents/TableRows")
 @onready var return_to_home = %ReturnToHome
-@onready var table_contents = $ScoreScreen/TableMargins/TableContents
+@onready var table_contents = $ScoreScreen/TableMargins/ScrollContainer/TableContents
+@onready var scroll_container = %ScrollContainer
 
 
 func _ready():
