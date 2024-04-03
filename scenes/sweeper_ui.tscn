@@ -150,11 +150,12 @@ alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="CurrentUserTextEdit" type="TextEdit" parent="SaveScoreWindow/MarginContainer/VBoxContainer/CurrentUserName"]
+[node name="CurrentUserTextEdit" type="LineEdit" parent="SaveScoreWindow/MarginContainer/VBoxContainer/CurrentUserName"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "Score owner name..."
+max_length = 8
 
 [node name="CurrentScore" type="HBoxContainer" parent="SaveScoreWindow/MarginContainer/VBoxContainer"]
 layout_mode = 2
