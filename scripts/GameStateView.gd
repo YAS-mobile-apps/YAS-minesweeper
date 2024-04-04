@@ -13,20 +13,20 @@ var opened_menu = false
 
 
 func _ready():
+	opened_menu = sweeper_ui_bottom.menu_button.get_popup()
+	opened_menu.connect("id_pressed", swap_dificulty)
+	load_score_table()
+	load_settings()
+	sweeper_ui_bottom.update_dificulty(GlobalVars.settings.dificulty, opened_menu)
+
 	mine_grid.game_lost.connect(on_game_lost)
 	mine_grid.flag_placed.connect(on_flag_placed)
 	mine_grid.game_win.connect(on_game_won)
 	mine_grid.game_start.connect(on_game_start)
 	mine_grid.max_flags_placed.connect(on_max_flags_placed)
-	opened_menu = sweeper_ui_bottom.menu_button.get_popup()
-	opened_menu.connect("id_pressed", swap_dificulty)
 	sweeper_ui_top.set_mine_count(
 		mine_grid.MINE_AMOUNT[GlobalVars.settings.dificulty]
 	)
-	load_score_table()
-	load_settings()
-
-	sweeper_ui_bottom.update_dificulty(GlobalVars.settings.dificulty, opened_menu)
 
 
 func swap_dificulty(pressed_id: int):
@@ -58,6 +58,7 @@ func on_game_won():
 func on_game_start():
 	time_elapsed = 0
 	load_score_table()
+	load_settings()
 	sweeper_ui_top.set_timer_count(time_elapsed)
 	sweeper_ui_top.set_mine_count(
 		mine_grid.MINE_AMOUNT[GlobalVars.settings.dificulty]
