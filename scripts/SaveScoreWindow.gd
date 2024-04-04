@@ -10,7 +10,9 @@ func _ready():
 
 
 func save_score(current_player_name, final_score, final_time):
-	var file = FileAccess.open(GlobalVars.SCORE_TABLE_FILE_PATH, FileAccess.WRITE_READ)
+	var file = FileAccess.open(
+		GlobalVars.SCORE_TABLE_FILE_PATH, FileAccess.WRITE_READ
+	)
 	var score_line: Dictionary = {
 		"Name": current_player_name, 
 		"Score": final_score, 

@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://cs7xfipko16xx"]
+[gd_scene load_steps=9 format=3 uid="uid://cs7xfipko16xx"]
 
-[ext_resource type="PackedScene" uid="uid://g74kfk2mcvx8" path="res://scenes/sweeper_ui.tscn" id="1_o7pdv"]
+[ext_resource type="PackedScene" uid="uid://g74kfk2mcvx8" path="res://scenes/sweeper_ui_top.tscn" id="1_o7pdv"]
 [ext_resource type="Texture2D" uid="uid://dunq15if5jhxm" path="res://assets/tiles/base_tiles.png" id="2_ecboi"]
 [ext_resource type="Script" path="res://scripts/MineSweeperTileMap.gd" id="3_m6pnu"]
 [ext_resource type="PackedScene" uid="uid://b76vc2cfwp2j" path="res://scenes/game_state_view.tscn" id="4_5tf64"]
+[ext_resource type="PackedScene" uid="uid://cc53y0e1m8xtm" path="res://scenes/sweeper_ui_bottom.tscn" id="4_oq6ld"]
 [ext_resource type="PackedScene" uid="uid://ct4tnkbunfu6w" path="res://scenes/high_scores.tscn" id="5_2hsfg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ootrp"]
@@ -37,7 +38,7 @@ sources/0 = SubResource("TileSetAtlasSource_ootrp")
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(24, 0)
 
-[node name="SweeperUI" parent="." node_paths=PackedStringArray("mine_grid") instance=ExtResource("1_o7pdv")]
+[node name="SweeperUITop" parent="." node_paths=PackedStringArray("mine_grid") instance=ExtResource("1_o7pdv")]
 mine_grid = NodePath("../TileMap")
 
 [node name="TileMap" type="TileMap" parent="." node_paths=PackedStringArray("game_state_view")]
@@ -50,9 +51,12 @@ columns = 14
 rows = 9
 game_state_view = NodePath("../GameStateView")
 
-[node name="GameStateView" parent="." node_paths=PackedStringArray("mine_grid", "sweeper_ui") instance=ExtResource("4_5tf64")]
+[node name="SweeperUiBottom" parent="." instance=ExtResource("4_oq6ld")]
+
+[node name="GameStateView" parent="." node_paths=PackedStringArray("mine_grid", "sweeper_ui_top", "sweeper_ui_bottom") instance=ExtResource("4_5tf64")]
 mine_grid = NodePath("../TileMap")
-sweeper_ui = NodePath("../SweeperUI")
+sweeper_ui_top = NodePath("../SweeperUITop")
+sweeper_ui_bottom = NodePath("../SweeperUiBottom")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 visible = false

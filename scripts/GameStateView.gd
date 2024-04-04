@@ -3,11 +3,13 @@ extends Node
 class_name GameStateView
 
 @export var mine_grid: MineSweeperTileMap
-@export var sweeper_ui: SweeperUI
+@export var sweeper_ui_top: SweeperUI
+@export var sweeper_ui_bottom: SweeperUIBottom
 
 @onready var timer = $Timer
 
 var time_elapsed = 0
+var opened_menu = false
 
 
 func _ready():
@@ -16,64 +18,102 @@ func _ready():
 	mine_grid.game_win.connect(on_game_won)
 	mine_grid.game_start.connect(on_game_start)
 	mine_grid.max_flags_placed.connect(on_max_flags_placed)
-	sweeper_ui.set_mine_count(mine_grid.MINE_AMOUNT[GlobalVars.settings.dificulty])
+	opened_menu = sweeper_ui_bottom.menu_button.get_popup()
+	opened_menu.connect("id_pressed", swap_dificulty)
+	sweeper_ui_top.set_mine_count(
+		mine_grid.MINE_AMOUNT[GlobalVars.settings.dificulty]
+	)
 	load_score_table()
 	load_settings()
+
+	sweeper_ui_bottom.update_dificulty(GlobalVars.settings.dificulty, opened_menu)
+
+
+func swap_dificulty(pressed_id: int):
+	GlobalVars.settings.dificulty = sweeper_ui_bottom.PRESSED_ID[pressed_id]
+	sweeper_ui_bottom.update_dificulty(GlobalVars.settings.dificulty, opened_menu)
+	write_file_settings()
+	get_tree().reload_current_scene()
+
 
 func _on_timer_timeout():
 	if mine_grid.first_move:
 		time_elapsed = time_elapsed + 1
-	sweeper_ui.set_timer_count(time_elapsed)
-	sweeper_ui.max_flag_warning(true)
+	sweeper_ui_top.set_timer_count(time_elapsed)
+	sweeper_ui_top.max_flag_warning(true)
 
 
 func on_game_lost():
 	timer.stop()
-	sweeper_ui.game_lost()
+	sweeper_ui_top.game_lost()
 
 
 func on_game_won():
 	timer.stop()
 	var total_score = mine_grid.board_3bv_score / max(time_elapsed, 1)
 	var current_score = max(total_score, mine_grid.board_3bv_score)
-	sweeper_ui.game_won(time_elapsed, current_score)
+	sweeper_ui_top.game_won(time_elapsed, current_score)
 
 
 func on_game_start():
 	time_elapsed = 0
 	load_score_table()
-	sweeper_ui.set_timer_count(time_elapsed)
-	sweeper_ui.set_mine_count(mine_grid.MINE_AMOUNT[GlobalVars.settings.dificulty])
-	sweeper_ui.reset_smile_button()
+	sweeper_ui_top.set_timer_count(time_elapsed)
+	sweeper_ui_top.set_mine_count(
+		mine_grid.MINE_AMOUNT[GlobalVars.settings.dificulty]
+	)
+	sweeper_ui_top.reset_smile_button()
+	sweeper_ui_bottom.update_dificulty(GlobalVars.settings.dificulty, opened_menu)
 
 
 func on_flag_placed(flag_count: int):
-	sweeper_ui.set_mine_count(mine_grid.MINE_AMOUNT[GlobalVars.settings.dificulty] - flag_count)
+	sweeper_ui_top.set_mine_count(
+		mine_grid.MINE_AMOUNT[GlobalVars.settings.dificulty] - flag_count
+	)
 
 
 func on_max_flags_placed():
-	sweeper_ui.max_flag_warning()
+	sweeper_ui_top.max_flag_warning()
 
 
 func load_score_table():
-	var file_scores = GlobalFuncs.load_from_json_file(GlobalVars.SCORE_TABLE_FILE_PATH)
+	var file_scores = GlobalFuncs.load_from_json_file(
+		GlobalVars.SCORE_TABLE_FILE_PATH
+	)
 	if not file_scores:
 		reset_file_score_table()
 		return
 	GlobalVars.current_scores = file_scores
-	for score_line in GlobalVars.current_scores[GlobalVars.settings.dificulty].scores:
-		sweeper_ui.score_table.add_item(str(score_line))
+	for score_line in GlobalVars.current_scores[
+		GlobalVars.settings.dificulty
+	].scores:
+		sweeper_ui_top.score_table.add_item(str(score_line))
+
 
 func reset_file_score_table():
-	GlobalFuncs.write_to_json_file(GlobalVars.SCORE_TABLE_FILE_PATH, GlobalVars.current_scores)
+	GlobalFuncs.write_to_json_file(
+		GlobalVars.SCORE_TABLE_FILE_PATH, GlobalVars.current_scores
+	)
 
 
 func load_settings():
-	var settings = GlobalFuncs.load_from_json_file(GlobalVars.SETTINGS_FILE_PATH)
+	var settings = GlobalFuncs.load_from_json_file(
+		GlobalVars.SETTINGS_FILE_PATH
+	)
 	if not settings:
 		reset_file_settings()
 		return
 	GlobalVars.settings = settings
+	sweeper_ui_bottom.update_dificulty(GlobalVars.settings.dificulty, opened_menu)
+
+
+func write_file_settings():
+	GlobalFuncs.write_to_json_file(
+		GlobalVars.SETTINGS_FILE_PATH, GlobalVars.settings
+	)
+
 
 func reset_file_settings():
-	GlobalFuncs.write_to_json_file(GlobalVars.SETTINGS_FILE_PATH, GlobalVars.settings)
+	GlobalFuncs.write_to_json_file(
+		GlobalVars.SETTINGS_FILE_PATH, GlobalVars.settings
+	)

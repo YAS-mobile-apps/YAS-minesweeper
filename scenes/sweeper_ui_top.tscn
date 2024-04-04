@@ -1,12 +1,12 @@
 [gd_scene load_steps=10 format=3 uid="uid://g74kfk2mcvx8"]
 
-[ext_resource type="Script" path="res://scripts/SweeperUi.gd" id="1_apilf"]
-[ext_resource type="Script" path="res://scripts/UIMarginContainer.gd" id="2_jrgtn"]
-[ext_resource type="Texture2D" uid="uid://cewyd38vautxy" path="res://assets/tiles/button_smile.png" id="2_l2o6o"]
-[ext_resource type="Texture2D" uid="uid://dvb3neucaic4d" path="res://assets/tiles/score_button.png" id="3_754tj"]
-[ext_resource type="Texture2D" uid="uid://dxeuk57gdm7rv" path="res://assets/tiles/button_smile_click.png" id="3_p2lca"]
-[ext_resource type="Texture2D" uid="uid://ca00tpaimcbc4" path="res://assets/tiles/score_button_hover.png" id="4_waoeo"]
-[ext_resource type="Script" path="res://scripts/SaveScoreWindow.gd" id="5_ypgx0"]
+[ext_resource type="Script" path="res://scripts/SweeperUi.gd" id="1_kxlhs"]
+[ext_resource type="Script" path="res://scripts/UIMarginContainer.gd" id="2_kwtfc"]
+[ext_resource type="Texture2D" uid="uid://dvb3neucaic4d" path="res://assets/tiles/score_button.png" id="3_hg1gr"]
+[ext_resource type="Texture2D" uid="uid://ca00tpaimcbc4" path="res://assets/tiles/score_button_hover.png" id="4_wtvbx"]
+[ext_resource type="Texture2D" uid="uid://cewyd38vautxy" path="res://assets/tiles/button_smile.png" id="5_p2c24"]
+[ext_resource type="Texture2D" uid="uid://dxeuk57gdm7rv" path="res://assets/tiles/button_smile_click.png" id="6_mfaii"]
+[ext_resource type="Script" path="res://scripts/SaveScoreWindow.gd" id="7_v1a7w"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_must1"]
 bg_color = Color(0.0313726, 0.0313726, 0.0313726, 1)
@@ -16,7 +16,7 @@ bg_color = Color(0.0313726, 0.0313726, 0.0313726, 1)
 
 [node name="SweeperUI" type="CanvasLayer"]
 layer = -1
-script = ExtResource("1_apilf")
+script = ExtResource("1_kxlhs")
 
 [node name="UIMarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 10
@@ -24,7 +24,7 @@ anchor_right = 1.0
 offset_bottom = 40.0
 grow_horizontal = 2
 size_flags_vertical = 0
-script = ExtResource("2_jrgtn")
+script = ExtResource("2_kwtfc")
 
 [node name="PanelContainer" type="PanelContainer" parent="UIMarginContainer"]
 custom_minimum_size = Vector2(0, 39)
@@ -66,9 +66,9 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 action_mode = 0
-texture_normal = ExtResource("3_754tj")
-texture_pressed = ExtResource("4_waoeo")
-texture_hover = ExtResource("4_waoeo")
+texture_normal = ExtResource("3_hg1gr")
+texture_pressed = ExtResource("4_wtvbx")
+texture_hover = ExtResource("4_wtvbx")
 ignore_texture_size = true
 stretch_mode = 5
 
@@ -77,8 +77,8 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 action_mode = 0
-texture_normal = ExtResource("2_l2o6o")
-texture_pressed = ExtResource("3_p2lca")
+texture_normal = ExtResource("5_p2c24")
+texture_pressed = ExtResource("6_mfaii")
 ignore_texture_size = true
 stretch_mode = 5
 
@@ -87,8 +87,8 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 action_mode = 0
-texture_normal = ExtResource("2_l2o6o")
-texture_pressed = ExtResource("3_p2lca")
+texture_normal = ExtResource("5_p2c24")
+texture_pressed = ExtResource("6_mfaii")
 ignore_texture_size = true
 stretch_mode = 5
 
@@ -125,7 +125,7 @@ initial_position = 2
 size = Vector2i(300, 300)
 visible = false
 borderless = true
-script = ExtResource("5_ypgx0")
+script = ExtResource("7_v1a7w")
 sweeper_ui = NodePath("..")
 
 [node name="MarginContainer" type="MarginContainer" parent="SaveScoreWindow"]

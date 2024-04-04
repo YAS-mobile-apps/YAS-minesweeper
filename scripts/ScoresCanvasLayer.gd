@@ -1,6 +1,4 @@
-class_name UIMarginContainer
 extends MarginContainer
 
-
-func _ready() -> void:
+func _ready():
 	GlobalFuncs.avoid_notch(self)

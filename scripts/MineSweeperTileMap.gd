@@ -109,9 +109,15 @@ func place_mines():
 	match get_tile_range():
 		[var row_start, var row_end, var column_start, var column_end]:
 			for i in MINE_AMOUNT[GlobalVars.settings.dificulty]:
-				var mine_coords = Vector2i(randi_range(row_start, row_end), randi_range(column_start, column_end))
+				var mine_coords = Vector2i(
+					randi_range(row_start, row_end), 
+					randi_range(column_start, column_end)
+				)
 				while cells_with_mine.has(mine_coords):
-					mine_coords = Vector2i(randi_range(row_start, row_end), randi_range(column_start, column_end))
+					mine_coords = Vector2i(
+						randi_range(row_start, row_end),
+						randi_range(column_start, column_end)
+					)
 				cells_with_mine.append(mine_coords)
 			board_3bv_score = get_board_3bv_score()
 	
@@ -131,9 +137,15 @@ func get_board_3bv_score() -> int:
 			if !marked_cells.has(cell_coord):
 				value_3bv = value_3bv + 1
 				marked_cells.append(cell_coord)
-				marked_cells = _calculate_3bv_neighbor_cells(cell_coord, marked_cells, value_3bv)[0]
-				value_3bv = _calculate_3bv_neighbor_cells(cell_coord, marked_cells, value_3bv)[1]
-		elif mine_count > 0 and !marked_cells.has(cell_coord) and !cells_with_mine.has(cell_coord):
+				marked_cells = _calculate_3bv_neighbor_cells(
+					cell_coord, marked_cells, value_3bv
+				)[0]
+				value_3bv = _calculate_3bv_neighbor_cells(
+					cell_coord, marked_cells, value_3bv
+				)[1]
+		elif mine_count > 0 \
+		and !marked_cells.has(cell_coord) \
+		and !cells_with_mine.has(cell_coord):
 			value_3bv = value_3bv + 1
 	return value_3bv
 
@@ -148,12 +160,16 @@ func _calculate_3bv_neighbor_cells(cell_coord: Vector2i, marked_cells: Array[Vec
 		if !marked_cells.has(neighboor_coord):
 			marked_cells.append(neighboor_coord)
 			if check_surrounding_mines(neighboor_coord) == "0":
-				_calculate_3bv_neighbor_cells(neighboor_coord, marked_cells, value_3bv)
+				_calculate_3bv_neighbor_cells(
+					neighboor_coord, marked_cells, value_3bv
+				)
 	return [marked_cells, value_3bv]
 
 
 func set_tile_cell(cell_coord: Vector2i,  cell_type: Vector2i, alternative_tile: int = 0):
-	set_cell(DEFAULT_LAYER, cell_coord, TILE_SET_ID, cell_type, alternative_tile)
+	set_cell(
+		DEFAULT_LAYER, cell_coord, TILE_SET_ID, cell_type, alternative_tile
+	)
 
 
 func flag_placement(cell_coord: Vector2i):
@@ -241,7 +257,9 @@ func check_surrounding_mines(cell_coord: Vector2i):
 
 func check_for_win_condition():
 	var all_cells_were_checked = false
-	if cells_open + MINE_AMOUNT[GlobalVars.settings.dificulty] == columns * rows:
+	if cells_open + MINE_AMOUNT[
+		GlobalVars.settings.dificulty
+	] == columns * rows:
 		all_cells_were_checked = true
 	if all_cells_were_checked and not is_game_finished:
 		game_won()

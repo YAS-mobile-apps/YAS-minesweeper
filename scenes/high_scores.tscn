@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://ct4tnkbunfu6w"]
+[gd_scene load_steps=3 format=3 uid="uid://ct4tnkbunfu6w"]
 
 [ext_resource type="Script" path="res://scripts/HighScoresTable.gd" id="1_hg7n2"]
+[ext_resource type="Script" path="res://scripts/ScoresCanvasLayer.gd" id="2_e11xt"]
 
 [node name="HighScoresTable" type="Control"]
 layout_mode = 3
@@ -13,118 +14,124 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_hg7n2")
 
-[node name="ScoreScreen" type="VBoxContainer" parent="."]
+[node name="ScoreMarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("2_e11xt")
 
-[node name="ScreenHeader" type="HBoxContainer" parent="ScoreScreen"]
+[node name="ScoreScreen" type="VBoxContainer" parent="ScoreMarginContainer"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="ScoreScreen/ScreenHeader"]
+[node name="ScreenHeader" type="HBoxContainer" parent="ScoreMarginContainer/ScoreScreen"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ScoreMarginContainer/ScoreScreen/ScreenHeader"]
 layout_mode = 2
 theme_override_constants/margin_left = 2
 theme_override_constants/margin_top = 2
 
-[node name="ReturnToHome" type="Button" parent="ScoreScreen/ScreenHeader/MarginContainer"]
+[node name="ReturnToHome" type="Button" parent="ScoreMarginContainer/ScoreScreen/ScreenHeader/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "   <  BACK   "
 icon_alignment = 1
 language = "en"
 
-[node name="HighScoresLabel" type="Label" parent="ScoreScreen/ScreenHeader"]
+[node name="HighScoresLabel" type="Label" parent="ScoreMarginContainer/ScoreScreen/ScreenHeader"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "High Scores"
 horizontal_alignment = 1
 language = "en"
 
-[node name="HSeparator5" type="HSeparator" parent="ScoreScreen"]
+[node name="HSeparator5" type="HSeparator" parent="ScoreMarginContainer/ScoreScreen"]
 layout_mode = 2
 
-[node name="TableMargins" type="MarginContainer" parent="ScoreScreen"]
+[node name="TableMargins" type="MarginContainer" parent="ScoreMarginContainer/ScoreScreen"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ScrollContainer" type="ScrollContainer" parent="ScoreScreen/TableMargins"]
+[node name="ScrollContainer" type="ScrollContainer" parent="ScoreMarginContainer/ScoreScreen/TableMargins"]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="TableContents" type="GridContainer" parent="ScoreScreen/TableMargins/ScrollContainer"]
+[node name="ScoreTableContents" type="GridContainer" parent="ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 columns = 9
 
-[node name="VSeparator4" type="VSeparator" parent="ScoreScreen/TableMargins/ScrollContainer/TableContents"]
+[node name="VSeparator4" type="VSeparator" parent="ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
 layout_mode = 2
 
-[node name="Name" type="Label" parent="ScoreScreen/TableMargins/ScrollContainer/TableContents"]
+[node name="Name" type="Label" parent="ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Name"
 horizontal_alignment = 1
 language = "en"
 
-[node name="VSeparator" type="VSeparator" parent="ScoreScreen/TableMargins/ScrollContainer/TableContents"]
+[node name="VSeparator" type="VSeparator" parent="ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
 layout_mode = 2
 
-[node name="Score" type="Label" parent="ScoreScreen/TableMargins/ScrollContainer/TableContents"]
+[node name="Score" type="Label" parent="ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Score"
 horizontal_alignment = 1
 language = "en"
 
-[node name="VSeparator2" type="VSeparator" parent="ScoreScreen/TableMargins/ScrollContainer/TableContents"]
+[node name="VSeparator2" type="VSeparator" parent="ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
 layout_mode = 2
 
-[node name="Time" type="Label" parent="ScoreScreen/TableMargins/ScrollContainer/TableContents"]
+[node name="Time" type="Label" parent="ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Time"
 horizontal_alignment = 1
 language = "en"
 
-[node name="VSeparator3" type="VSeparator" parent="ScoreScreen/TableMargins/ScrollContainer/TableContents"]
+[node name="VSeparator3" type="VSeparator" parent="ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
 layout_mode = 2
 
-[node name="CreatedAt" type="Label" parent="ScoreScreen/TableMargins/ScrollContainer/TableContents"]
+[node name="CreatedAt" type="Label" parent="ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Datetime"
 horizontal_alignment = 1
 language = "en"
 
-[node name="VSeparator5" type="VSeparator" parent="ScoreScreen/TableMargins/ScrollContainer/TableContents"]
+[node name="VSeparator5" type="VSeparator" parent="ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
 layout_mode = 2
 
-[node name="HSeparator" type="HSeparator" parent="ScoreScreen/TableMargins/ScrollContainer/TableContents"]
+[node name="HSeparator" type="HSeparator" parent="ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
 layout_mode = 2
 
-[node name="HSeparator2" type="HSeparator" parent="ScoreScreen/TableMargins/ScrollContainer/TableContents"]
+[node name="HSeparator2" type="HSeparator" parent="ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
 layout_mode = 2
 
-[node name="HSeparator3" type="HSeparator" parent="ScoreScreen/TableMargins/ScrollContainer/TableContents"]
+[node name="HSeparator3" type="HSeparator" parent="ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
 layout_mode = 2
 
-[node name="HSeparator4" type="HSeparator" parent="ScoreScreen/TableMargins/ScrollContainer/TableContents"]
+[node name="HSeparator4" type="HSeparator" parent="ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
 layout_mode = 2
 
-[node name="HSeparator5" type="HSeparator" parent="ScoreScreen/TableMargins/ScrollContainer/TableContents"]
+[node name="HSeparator5" type="HSeparator" parent="ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
 layout_mode = 2
 
-[node name="HSeparator6" type="HSeparator" parent="ScoreScreen/TableMargins/ScrollContainer/TableContents"]
+[node name="HSeparator6" type="HSeparator" parent="ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
 layout_mode = 2
 
-[node name="HSeparator7" type="HSeparator" parent="ScoreScreen/TableMargins/ScrollContainer/TableContents"]
+[node name="HSeparator7" type="HSeparator" parent="ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
 layout_mode = 2
 
-[node name="HSeparator9" type="HSeparator" parent="ScoreScreen/TableMargins/ScrollContainer/TableContents"]
+[node name="HSeparator9" type="HSeparator" parent="ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
 layout_mode = 2
 
-[node name="HSeparator8" type="HSeparator" parent="ScoreScreen/TableMargins/ScrollContainer/TableContents"]
+[node name="HSeparator8" type="HSeparator" parent="ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
 layout_mode = 2
