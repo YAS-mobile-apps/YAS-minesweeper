@@ -13,7 +13,8 @@ const PRESSED_ID: Dictionary = {
 const DIFICULTY_ID: Dictionary = {
 	"normal_mode":0,
 	"medium_mode":1,
-	"hard_mode":2
+	"hard_mode":2,
+	"dev_mode":0
 }
 
 func update_dificulty(dificulty: String, opened_menu: PopupMenu):

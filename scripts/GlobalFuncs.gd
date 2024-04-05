@@ -30,3 +30,4 @@ func avoid_notch(node):
 			top_margin = int(notch_area.size.y)
 			
 	node.add_theme_constant_override("margin_top", top_margin)
+

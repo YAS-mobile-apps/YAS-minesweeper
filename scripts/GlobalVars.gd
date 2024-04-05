@@ -8,6 +8,9 @@ const SCORE_LIST_MAX_SIZE: int = 200
 
 var settings: Dictionary = {
 	"dificulty": "dev_mode",
+	"hold_click": "long",
+	"click_reverse": false,
+	"dude_key": 1,
 }
 var current_scores: Dictionary = {
 	"dev_mode":{

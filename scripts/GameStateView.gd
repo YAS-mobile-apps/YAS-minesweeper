@@ -104,6 +104,11 @@ func load_settings():
 	if not settings:
 		reset_file_settings()
 		return
+	for key in GlobalVars.settings:
+		if key not in settings:
+			reset_file_settings()
+			return
+	
 	GlobalVars.settings = settings
 	sweeper_ui_bottom.update_dificulty(GlobalVars.settings.dificulty, opened_menu)
 

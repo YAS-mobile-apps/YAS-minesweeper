@@ -29,11 +29,16 @@ const CELLS: Dictionary = {
 	"default": Vector2i(10,0),
 	"mine_hit": Vector2i(11,0),
 }
-const MINE_AMOUNT:Dictionary = {
+const MINE_AMOUNT: Dictionary = {
 	"dev_mode": 1,
 	"normal_mode": 9,
 	"medium_mode": 12,
 	"hard_mode": 19,
+}
+const MOUSE_HOLD_TIMES: Dictionary = {
+	"short": 0.200,
+	"medium": 0.350,
+	"long": 0.450,
 }
 @export var columns = 8
 @export var rows = 8
@@ -53,6 +58,8 @@ var first_move: bool = false
 var placed_flags: int = 0
 var cells_open: int = 0
 var board_3bv_score: int = 0
+var is_mouse_hold: bool = false
+var mouse_held_timer: float = 0
 
 
 func get_tile_range() -> Array[int]:
@@ -64,7 +71,12 @@ func get_tile_range() -> Array[int]:
 
 
 func _ready():
+	game_start.emit()
 	new_game()
+
+func _physics_process(delta):
+	if is_mouse_hold:
+		mouse_held_timer = mouse_held_timer + delta
 
 
 func new_game():
@@ -88,22 +100,47 @@ func new_game():
 
 
 func _input(event: InputEvent):
-	if !(event is InputEventMouseButton) or !event.is_pressed():
+	var is_mouse_event: bool = event is InputEventMouseButton
+	var is_touch_event: bool = event is InputEventScreenTouch
+	var is_press: bool = event.is_pressed()
+	var is_release: bool = event.is_released()
+	
+	if !is_mouse_event and !is_touch_event:
 		return
 		
+	if is_press:
+		is_mouse_hold = true
+		mouse_held_timer = 0
+	if is_release:
+		is_mouse_hold = false
+
 	var selected_position: Vector2
 	var selected_cell_coord: Vector2i
+	var held_long_enough: bool = mouse_held_timer > MOUSE_HOLD_TIMES[
+		GlobalVars.settings.hold_click
+		]
 
 	selected_position = get_local_mouse_position()
 	selected_cell_coord = local_to_map(selected_position)
+	
+	var release_left_button: bool = event.button_index == MOUSE_BUTTON_LEFT \
+		and is_release
+	var release_right_button: bool = event.button_index == MOUSE_BUTTON_RIGHT \
+		and is_release
 
-	if event.button_index == MOUSE_BUTTON_LEFT:
-		if is_game_finished:
-			new_game()
-		on_cell_selection(selected_cell_coord)
-	elif event.button_index == MOUSE_BUTTON_RIGHT:
+	var mine_button = release_right_button if GlobalVars.settings.click_reverse else release_left_button
+	var flag_button = release_right_button if !GlobalVars.settings.click_reverse else release_left_button
+	
+	if mine_button:
+		if held_long_enough:
+			flag_placement(selected_cell_coord)
+		else:
+			if is_game_finished:
+				new_game()
+			on_cell_selection(selected_cell_coord)
+	elif flag_button:
 		flag_placement(selected_cell_coord)
-
+	
 
 func place_mines():
 	match get_tile_range():
@@ -278,4 +315,4 @@ func game_over(cell_coord: Vector2i):
 	for cell in cells_with_mine:
 			set_tile_cell(cell, CELLS.mine)
 	set_tile_cell(cell_coord, CELLS.mine_hit)
-	
+
