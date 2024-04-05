@@ -70,10 +70,6 @@ func get_tile_range() -> Array[int]:
 	return [row_start, row_end, column_start, column_end]
 
 
-func _ready():
-	game_start.emit()
-	new_game()
-
 func _physics_process(delta):
 	if is_mouse_hold:
 		mouse_held_timer = mouse_held_timer + delta
@@ -87,7 +83,6 @@ func new_game():
 	is_game_finished = false
 	placed_flags = 0
 	cells_open = 0
-	game_start.emit()
 	first_move = false
 	
 	for row in rows:

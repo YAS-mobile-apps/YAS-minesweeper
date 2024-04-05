@@ -34,6 +34,7 @@ func _ready():
 		mine_grid.MINE_AMOUNT[GlobalVars.settings.dificulty]
 	)
 	sweeper_ui_top.flip_flag_placement.connect(flip_flag_placement)
+	mine_grid.new_game()
 
 
 func flip_flag_placement():
@@ -85,6 +86,7 @@ func on_game_start():
 	sweeper_ui_top.reset_smile_button()
 	sweeper_ui_bottom.update_dificulty(GlobalVars.settings.dificulty, opened_menu)
 	sweeper_ui_bottom.update_hold_timer(GlobalVars.settings.hold_click, opened_menu)
+
 
 func on_flag_placed(flag_count: int):
 	sweeper_ui_top.set_mine_count(
