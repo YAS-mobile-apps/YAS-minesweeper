@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://cc53y0e1m8xtm"]
+[gd_scene load_steps=3 format=3 uid="uid://cc53y0e1m8xtm"]
 
 [ext_resource type="Script" path="res://scripts/SweeperUiBottom.gd" id="1_d6ppa"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gwjly"]
 
 [node name="SweeperUiBottom" type="CanvasLayer"]
 script = ExtResource("1_d6ppa")
@@ -39,4 +41,27 @@ popup/item_0/id = 0
 popup/item_1/text = "Medium"
 popup/item_1/id = 1
 popup/item_2/text = "Hard"
+popup/item_2/id = 2
+
+[node name="HSeparator" type="HSeparator" parent="BottomUIMarginContainer/BottomUIHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_gwjly")
+
+[node name="HoldTimerMenu" type="MenuButton" parent="BottomUIMarginContainer/BottomUIHBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = ":Hold timer"
+flat = false
+alignment = 2
+icon_alignment = 1
+expand_icon = true
+item_count = 3
+popup/item_0/text = "Short"
+popup/item_0/id = 0
+popup/item_1/text = "Medium"
+popup/item_1/id = 1
+popup/item_2/text = "Long"
 popup/item_2/id = 2

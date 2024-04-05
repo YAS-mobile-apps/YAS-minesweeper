@@ -128,8 +128,10 @@ func _input(event: InputEvent):
 	var release_right_button: bool = event.button_index == MOUSE_BUTTON_RIGHT \
 		and is_release
 
-	var mine_button = release_right_button if GlobalVars.settings.click_reverse else release_left_button
-	var flag_button = release_right_button if !GlobalVars.settings.click_reverse else release_left_button
+	var mine_button = release_right_button if GlobalVars.settings.click_reverse \
+		else release_left_button
+	var flag_button = release_right_button if !GlobalVars.settings.click_reverse \
+		else release_left_button
 	
 	if mine_button:
 		if held_long_enough:
@@ -139,7 +141,12 @@ func _input(event: InputEvent):
 				new_game()
 			on_cell_selection(selected_cell_coord)
 	elif flag_button:
-		flag_placement(selected_cell_coord)
+		if held_long_enough and GlobalVars.settings.click_reverse:
+			if is_game_finished:
+				new_game()
+			on_cell_selection(selected_cell_coord)
+		else:
+			flag_placement(selected_cell_coord)
 	
 
 func place_mines():

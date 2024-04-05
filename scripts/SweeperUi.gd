@@ -16,22 +16,29 @@ class_name SweeperUI
 @onready var save_cancel_button = %SaveCancelButton
 @onready var save_confirm_button = %SaveConfirmButton
 @onready var score_table = %ScoreTable
+@onready var flag_placement_set_button = %FlagPlacementSetButton
 
 const TEXT_PADDING_SIZE: int = 3
 
 var game_lost_button_texture = preload("res://assets/tiles/button_lose.png")
 var game_won_button_texture = preload("res://assets/tiles/button_win.png")
 var default_button_texture = preload("res://assets/tiles/button_smile.png")
+
+var flag_placement_set_right_texture = preload("res://assets/top_ui/mine_as_default.png")
+var flag_placement_set_left_texture = preload("res://assets/top_ui/flag_as_default.png")
+
 var final_score: int = 0
 var final_time: int = 0
 var current_player_name: String = ""
 
 signal save_score
+signal flip_flag_placement
 
 func _ready():
 	game_status_button.pressed.connect(game_reset_button_pressed)
 	save_cancel_button.pressed.connect(game_reset_button_pressed)
 	save_confirm_button.pressed.connect(save_confirm_button_pressed)
+	flag_placement_set_button.pressed.connect(swap_flag_placement_type)
 	score_button.pressed.connect(score_button_pressed)
 
 
@@ -43,6 +50,15 @@ func save_confirm_button_pressed():
 	current_player_name = current_user_name_field.text
 	save_score.emit(current_player_name, final_score, final_time)
 
+func swap_flag_placement_type(emit_flip_signal: bool = true):
+	if emit_flip_signal:
+		flip_flag_placement.emit()
+	if GlobalVars.settings.click_reverse:
+		flag_placement_set_button.texture_normal = \
+			flag_placement_set_left_texture
+	else:
+		flag_placement_set_button.texture_normal = \
+			flag_placement_set_right_texture
 
 func score_button_pressed():
 	get_tree().change_scene_to_file("res://scenes/high_scores.tscn")

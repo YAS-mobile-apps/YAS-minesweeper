@@ -10,15 +10,21 @@ class_name GameStateView
 
 var time_elapsed = 0
 var opened_menu = false
-
+var timer_menu = false
 
 func _ready():
 	opened_menu = sweeper_ui_bottom.menu_button.get_popup()
 	opened_menu.connect("id_pressed", swap_dificulty)
+	timer_menu = sweeper_ui_bottom.hold_timer_menu.get_popup()
+	timer_menu.connect("id_pressed", swap_hold_timer)
+	
 	load_score_table()
 	load_settings()
+	
+	sweeper_ui_top.swap_flag_placement_type(false)
 	sweeper_ui_bottom.update_dificulty(GlobalVars.settings.dificulty, opened_menu)
-
+	sweeper_ui_bottom.update_hold_timer(GlobalVars.settings.hold_click, timer_menu)
+	
 	mine_grid.game_lost.connect(on_game_lost)
 	mine_grid.flag_placed.connect(on_flag_placed)
 	mine_grid.game_win.connect(on_game_won)
@@ -27,6 +33,15 @@ func _ready():
 	sweeper_ui_top.set_mine_count(
 		mine_grid.MINE_AMOUNT[GlobalVars.settings.dificulty]
 	)
+	sweeper_ui_top.flip_flag_placement.connect(flip_flag_placement)
+
+
+func flip_flag_placement():
+	if GlobalVars.settings.click_reverse:
+		GlobalVars.settings.click_reverse = false
+	else:
+		GlobalVars.settings.click_reverse = true
+	write_file_settings()
 
 
 func swap_dificulty(pressed_id: int):
@@ -35,6 +50,10 @@ func swap_dificulty(pressed_id: int):
 	write_file_settings()
 	get_tree().reload_current_scene()
 
+func swap_hold_timer(pressed_id: int):
+	GlobalVars.settings.hold_click = sweeper_ui_bottom.HOLD_TIMER_ID[pressed_id]
+	sweeper_ui_bottom.update_hold_timer(GlobalVars.settings.hold_click, timer_menu)
+	write_file_settings()
 
 func _on_timer_timeout():
 	if mine_grid.first_move:
@@ -65,7 +84,7 @@ func on_game_start():
 	)
 	sweeper_ui_top.reset_smile_button()
 	sweeper_ui_bottom.update_dificulty(GlobalVars.settings.dificulty, opened_menu)
-
+	sweeper_ui_bottom.update_hold_timer(GlobalVars.settings.hold_click, opened_menu)
 
 func on_flag_placed(flag_count: int):
 	sweeper_ui_top.set_mine_count(
@@ -111,7 +130,7 @@ func load_settings():
 	
 	GlobalVars.settings = settings
 	sweeper_ui_bottom.update_dificulty(GlobalVars.settings.dificulty, opened_menu)
-
+	sweeper_ui_bottom.update_hold_timer(GlobalVars.settings.hold_click, timer_menu)
 
 func write_file_settings():
 	GlobalFuncs.write_to_json_file(

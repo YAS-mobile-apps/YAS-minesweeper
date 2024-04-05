@@ -81,13 +81,12 @@ texture_pressed = ExtResource("6_mfaii")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="SettingsButton" type="TextureButton" parent="UIMarginContainer/PanelContainer/GameStatusBox"]
+[node name="FlagPlacementSetButton" type="TextureButton" parent="UIMarginContainer/PanelContainer/GameStatusBox"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 action_mode = 0
 texture_normal = ExtResource("5_p2c24")
-texture_pressed = ExtResource("6_mfaii")
 ignore_texture_size = true
 stretch_mode = 5
 
