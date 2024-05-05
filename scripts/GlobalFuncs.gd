@@ -31,3 +31,23 @@ func avoid_notch(node):
 			
 	node.add_theme_constant_override("margin_top", top_margin)
 
+
+func quick_sort(arr, key_to_sort):
+	if arr.size() <= 1:
+		return arr
+
+	var pivot = arr[arr.size() / 2][key_to_sort]
+	var less = []
+	var equal = []
+	var greater = []
+
+	for item in arr:
+		var value = item[key_to_sort]
+		if value < pivot:
+			less.append(item)
+		elif value == pivot:
+			equal.append(item)
+		else:
+			greater.append(item)
+
+	return quick_sort(less, key_to_sort) + equal + quick_sort(greater, key_to_sort)

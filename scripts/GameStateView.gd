@@ -46,15 +46,17 @@ func flip_flag_placement():
 
 
 func swap_dificulty(pressed_id: int):
-	GlobalVars.settings.dificulty = sweeper_ui_bottom.PRESSED_ID[pressed_id]
+	GlobalVars.settings.dificulty = GlobalVars.PRESSED_ID[pressed_id]
 	sweeper_ui_bottom.update_dificulty(GlobalVars.settings.dificulty, opened_menu)
 	write_file_settings()
 	get_tree().reload_current_scene()
 
+
 func swap_hold_timer(pressed_id: int):
-	GlobalVars.settings.hold_click = sweeper_ui_bottom.HOLD_TIMER_ID[pressed_id]
+	GlobalVars.settings.hold_click = GlobalVars.HOLD_TIMER_ID[pressed_id]
 	sweeper_ui_bottom.update_hold_timer(GlobalVars.settings.hold_click, timer_menu)
 	write_file_settings()
+
 
 func _on_timer_timeout():
 	if mine_grid.first_move:
@@ -85,7 +87,7 @@ func on_game_start():
 	)
 	sweeper_ui_top.reset_smile_button()
 	sweeper_ui_bottom.update_dificulty(GlobalVars.settings.dificulty, opened_menu)
-	sweeper_ui_bottom.update_hold_timer(GlobalVars.settings.hold_click, opened_menu)
+	sweeper_ui_bottom.update_hold_timer(GlobalVars.settings.hold_click, timer_menu)
 
 
 func on_flag_placed(flag_count: int):

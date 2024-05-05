@@ -76,6 +76,7 @@ func _physics_process(delta):
 
 
 func new_game():
+	game_start.emit()
 	clear_layer(DEFAULT_LAYER)
 	cells_with_mine = []
 	existing_cells = []

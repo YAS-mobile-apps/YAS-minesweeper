@@ -41,13 +41,20 @@ text = "   <  BACK   "
 icon_alignment = 1
 language = "en"
 
-[node name="HighScoresLabel" type="Label" parent="ScoreMarginContainer/ScoreScreen/ScreenHeader"]
+[node name="HighScoresLabel" type="MenuButton" parent="ScoreMarginContainer/ScoreScreen/ScreenHeader"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "High Scores"
-horizontal_alignment = 1
+flat = false
 language = "en"
+item_count = 3
+popup/item_0/text = "Normal"
+popup/item_0/id = 0
+popup/item_1/text = "Medium"
+popup/item_1/id = 1
+popup/item_2/text = "Hard"
+popup/item_2/id = 2
 
 [node name="HSeparator5" type="HSeparator" parent="ScoreMarginContainer/ScoreScreen"]
 layout_mode = 2
@@ -69,41 +76,45 @@ columns = 9
 [node name="VSeparator4" type="VSeparator" parent="ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
 layout_mode = 2
 
-[node name="Name" type="Label" parent="ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
+[node name="Name" type="Button" parent="ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Name"
-horizontal_alignment = 1
+focus_mode = 0
+text = "Name  ˅"
+flat = true
 language = "en"
 
 [node name="VSeparator" type="VSeparator" parent="ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
 layout_mode = 2
 
-[node name="Score" type="Label" parent="ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
+[node name="Score" type="Button" parent="ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Score"
-horizontal_alignment = 1
+focus_mode = 0
+text = "Score  ˅"
+flat = true
 language = "en"
 
 [node name="VSeparator2" type="VSeparator" parent="ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
 layout_mode = 2
 
-[node name="Time" type="Label" parent="ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
+[node name="Time" type="Button" parent="ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Time"
-horizontal_alignment = 1
+focus_mode = 0
+text = "Time  ˅"
+flat = true
 language = "en"
 
 [node name="VSeparator3" type="VSeparator" parent="ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
 layout_mode = 2
 
-[node name="CreatedAt" type="Label" parent="ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
+[node name="CreatedAt" type="Button" parent="ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Datetime"
-horizontal_alignment = 1
+focus_mode = 0
+text = "Datetime  ˅"
+flat = true
 language = "en"
 
 [node name="VSeparator5" type="VSeparator" parent="ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
