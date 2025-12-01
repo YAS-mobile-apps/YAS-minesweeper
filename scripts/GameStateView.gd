@@ -3,7 +3,7 @@ extends Node
 class_name GameStateView
 
 @export var mine_grid: MineSweeperTileMap
-@export var sweeper_ui_top: SweeperUI
+@export var sweeper_ui_top: SweeperUiTop
 @export var sweeper_ui_bottom: SweeperUIBottom
 
 @onready var timer = $Timer

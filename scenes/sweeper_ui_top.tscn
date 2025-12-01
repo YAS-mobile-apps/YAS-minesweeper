@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://g74kfk2mcvx8"]
 
-[ext_resource type="Script" path="res://scripts/SweeperUi.gd" id="1_kxlhs"]
+[ext_resource type="Script" path="res://scripts/SweeperUiTop.gd" id="1_kxlhs"]
 [ext_resource type="Script" path="res://scripts/UIMarginContainer.gd" id="2_kwtfc"]
 [ext_resource type="Texture2D" uid="uid://dvb3neucaic4d" path="res://assets/tiles/score_button.png" id="3_hg1gr"]
 [ext_resource type="Texture2D" uid="uid://ca00tpaimcbc4" path="res://assets/tiles/score_button_hover.png" id="4_wtvbx"]
@@ -14,7 +14,7 @@ bg_color = Color(0.0313726, 0.0313726, 0.0313726, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0iscp"]
 bg_color = Color(0.0313726, 0.0313726, 0.0313726, 1)
 
-[node name="SweeperUI" type="CanvasLayer"]
+[node name="SweeperUiTop" type="CanvasLayer"]
 layer = -1
 script = ExtResource("1_kxlhs")
 

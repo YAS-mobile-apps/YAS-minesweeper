@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-class_name SweeperUI 
+class_name SweeperUiTop 
 
 @export var mine_grid: MineSweeperTileMap
 
