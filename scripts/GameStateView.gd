@@ -3,9 +3,8 @@ extends Node
 class_name GameStateView
 
 @export var mine_grid: MineSweeperTileMap
-@export var sweeper_ui_top: SweeperUiTop
-@export var sweeper_ui_bottom: SweeperUIBottom
-
+@onready var sweeper_ui_top = %SweeperUiTop
+@onready var sweeper_ui_bottom = %SweeperUiBottom
 @onready var timer = $Timer
 
 var time_elapsed = 0
@@ -13,6 +12,8 @@ var opened_menu = false
 var timer_menu = false
 
 func _ready():
+	await get_tree().process_frame  # garante que a cena inteira carregou
+	
 	opened_menu = sweeper_ui_bottom.menu_button.get_popup()
 	opened_menu.connect("id_pressed", swap_dificulty)
 	timer_menu = sweeper_ui_bottom.hold_timer_menu.get_popup()

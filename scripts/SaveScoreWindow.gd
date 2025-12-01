@@ -2,7 +2,7 @@ extends Window
 
 class_name SaveScoreWindow
 
-@export var sweeper_ui: SweeperUiTop
+@onready var sweeper_ui = %SweeperUiTop
 
 
 func _ready():

@@ -1,6 +1,6 @@
-extends CanvasLayer
+extends PanelContainer
 
-class_name SweeperUIBottom 
+class_name SweeperUiBottom 
 
 @onready var menu_button = %MenuButton
 @onready var hold_timer_menu = %HoldTimerMenu

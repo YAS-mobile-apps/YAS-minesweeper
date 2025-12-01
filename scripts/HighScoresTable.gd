@@ -77,11 +77,11 @@ func fill_score_table(dificulty: String, reload: bool = false, sort_key: String 
 		)
 
 
-func score_table_dificulty_menu(dificulty: String, opened_menu: PopupMenu):
+func score_table_dificulty_menu(dificulty: String, current_opened_menu: PopupMenu):
 	score_dificilty_menu.text = "High Socres: " + dificulty
-	for id in range(opened_menu.item_count):
-		opened_menu.set_item_disabled(id, false)
-	opened_menu.set_item_disabled(GlobalVars.DIFICULTY_ID[dificulty], true)
+	for id in range(current_opened_menu.item_count):
+		current_opened_menu.set_item_disabled(id, false)
+	current_opened_menu.set_item_disabled(GlobalVars.DIFICULTY_ID[dificulty], true)
 
 
 func new_score_row(
