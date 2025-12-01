@@ -119,9 +119,9 @@ func _input(event: InputEvent):
 	selected_position = get_local_mouse_position()
 	selected_cell_coord = local_to_map(selected_position)
 	
-	var release_left_button: bool = event.button_index == MOUSE_BUTTON_LEFT \
+	var release_left_button: bool = is_mouse_event and event.button_index == MOUSE_BUTTON_LEFT \
 		and is_release
-	var release_right_button: bool = event.button_index == MOUSE_BUTTON_RIGHT \
+	var release_right_button: bool = is_mouse_event and event.button_index == MOUSE_BUTTON_RIGHT \
 		and is_release
 
 	var mine_button = release_right_button if GlobalVars.settings.click_reverse \
@@ -131,17 +131,17 @@ func _input(event: InputEvent):
 	
 	if mine_button:
 		if held_long_enough:
+			if is_game_finished: return new_game()
 			flag_placement(selected_cell_coord)
 		else:
-			if is_game_finished:
-				new_game()
+			if is_game_finished: return new_game()
 			on_cell_selection(selected_cell_coord)
 	elif flag_button:
 		if held_long_enough and GlobalVars.settings.click_reverse:
-			if is_game_finished:
-				new_game()
+			if is_game_finished: return new_game()
 			on_cell_selection(selected_cell_coord)
 		else:
+			if is_game_finished: return new_game()
 			flag_placement(selected_cell_coord)
 	
 
