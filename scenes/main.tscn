@@ -212,6 +212,7 @@ alignment = 1
 [node name="MineCountPanel" type="Panel" parent="Camera2D/SweeperGameUi/SweeperUiTop/UIMarginContainer/PanelContainer/GameStatusBox"]
 custom_minimum_size = Vector2(50, 30)
 layout_mode = 2
+tooltip_text = "Mine count"
 theme_override_styles/panel = SubResource("StyleBoxFlat_ct5oy")
 
 [node name="MineCountLabel" type="Label" parent="Camera2D/SweeperGameUi/SweeperUiTop/UIMarginContainer/PanelContainer/GameStatusBox/MineCountPanel"]
@@ -237,6 +238,7 @@ vertical_alignment = 1
 unique_name_in_owner = true
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
+tooltip_text = "Score Table"
 action_mode = 0
 texture_normal = ExtResource("8_ljd2o")
 texture_pressed = ExtResource("9_tabki")
@@ -248,6 +250,7 @@ stretch_mode = 5
 unique_name_in_owner = true
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
+tooltip_text = "New Game"
 texture_normal = ExtResource("10_ucv3x")
 texture_pressed = ExtResource("11_g1jv4")
 ignore_texture_size = true
@@ -257,6 +260,7 @@ stretch_mode = 5
 unique_name_in_owner = true
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
+tooltip_text = "Toggle hold to select"
 action_mode = 0
 texture_normal = ExtResource("10_ucv3x")
 ignore_texture_size = true
@@ -267,6 +271,7 @@ custom_minimum_size = Vector2(50, 30)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+tooltip_text = "Timer"
 theme_override_styles/panel = SubResource("StyleBoxFlat_wiw1v")
 
 [node name="TimerCountLabel" type="Label" parent="Camera2D/SweeperGameUi/SweeperUiTop/UIMarginContainer/PanelContainer/GameStatusBox/TimerCountPanel"]
