@@ -1,14 +1,14 @@
-extends CanvasLayer
+extends PanelContainer
 
-class_name SweeperUI 
+class_name SweeperUiTop 
 
 @export var mine_grid: MineSweeperTileMap
 
 @onready var mine_count_label = %MineCountLabel
 @onready var game_status_button = %GameStatusButton
 @onready var timer_count_label = %TimerCountLabel
-@onready var save_score_window = %"SaveScoreWindow"
-@onready var list_score_window = %"List Score window"
+@onready var save_score_window = %SaveScoreWindow
+@onready var list_score_window = %ListScoreWindow
 @onready var score_button = %ScoreButton
 @onready var current_user_name_field = %CurrentUserTextEdit
 @onready var current_score_label = %ScoreTextLabel
@@ -54,11 +54,9 @@ func swap_flag_placement_type(emit_flip_signal: bool = true):
 	if emit_flip_signal:
 		flip_flag_placement.emit()
 	if GlobalVars.settings.click_reverse:
-		flag_placement_set_button.texture_normal = \
-			flag_placement_set_left_texture
+		flag_placement_set_button.texture_normal = flag_placement_set_left_texture
 	else:
-		flag_placement_set_button.texture_normal = \
-			flag_placement_set_right_texture
+		flag_placement_set_button.texture_normal = flag_placement_set_right_texture
 
 func score_button_pressed():
 	get_tree().change_scene_to_file("res://scenes/high_scores.tscn")
@@ -95,9 +93,7 @@ func game_won(time_elapsed, current_score):
 		GlobalVars.settings.dificulty
 	].last_player_name:
 		current_user_name_field.insert_text_at_caret(
-			GlobalVars.current_scores[
-				GlobalVars.settings.dificulty
-				].last_player_name
+			GlobalVars.current_scores[GlobalVars.settings.dificulty].last_player_name
 		)
 
 
