@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://p0x1f2ki0fe8"
-path="res://.godot/imported/button_win.png-ccdfe5b5606c9f5c27047b4d5d4d4a05.ctex"
+uid="uid://dxeuk57gdm7rv"
+path="res://.godot/imported/button_smile_click.png-822cb02dbf3f286cb319368c6a91a2a2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tiles/button_win.png"
-dest_files=["res://.godot/imported/button_win.png-ccdfe5b5606c9f5c27047b4d5d4d4a05.ctex"]
+source_file="res://assets/themes/dev_theme/top_ui/button_smile_click.png"
+dest_files=["res://.godot/imported/button_smile_click.png-822cb02dbf3f286cb319368c6a91a2a2.ctex"]
 
 [params]
 

@@ -4,6 +4,7 @@ class_name MineSweeperTileMap
 
 const TILE_SET_ID = 0
 const DEFAULT_LAYER = 0
+const TILE_SIZE = Vector2i(49, 48)
 const SURROUNDING_POSITIONS: Array = [
 	Vector2i.UP, 
 	Vector2i.DOWN, 
@@ -60,6 +61,31 @@ var cells_open: int = 0
 var board_3bv_score: int = 0
 var is_mouse_hold: bool = false
 var mouse_held_timer: float = 0
+var new_tileset = TileSet.new()
+var atlas_source = TileSetAtlasSource.new()
+
+func _ready():
+	var current_theme: Theme = %BaseNode.theme
+	var texture: Texture2D = current_theme.get_meta("base_tiles")
+
+
+	new_tileset.tile_size = TILE_SIZE
+	atlas_source.texture_region_size = TILE_SIZE
+	atlas_source.texture = texture
+	
+	var texture_size = texture.get_size()
+	var tiles_x = texture_size.x / TILE_SIZE.x
+	
+	for x in range(tiles_x):
+		atlas_source.create_tile(Vector2i(x, 0))
+	
+	atlas_source.create_alternative_tile(CELLS["default"])
+
+	new_tileset.add_source(atlas_source)
+
+	self.rendering_quadrant_size = 49
+	self.tile_set = new_tileset
+
 
 
 func get_tile_range() -> Array[int]:
@@ -206,7 +232,7 @@ func _calculate_3bv_neighbor_cells(cell_coord: Vector2i, marked_cells: Array[Vec
 	return [marked_cells, value_3bv]
 
 
-func set_tile_cell(cell_coord: Vector2i,  cell_type: Vector2i, alternative_tile: int = 0):
+func set_tile_cell(cell_coord: Vector2i, cell_type: Vector2i, alternative_tile: int = 0):
 	set_cell(
 		DEFAULT_LAYER, cell_coord, TILE_SET_ID, cell_type, alternative_tile
 	)

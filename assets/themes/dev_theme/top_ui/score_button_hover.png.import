@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ds7sfkpj5bx5t"
-path="res://.godot/imported/mine_as_default.png-4ddb22e4b3d4ebe38c0b44405468d2f7.ctex"
+uid="uid://ca00tpaimcbc4"
+path="res://.godot/imported/score_button_hover.png-beec68c03d2e341a00e82914a3b458ae.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/top_ui/mine_as_default.png"
-dest_files=["res://.godot/imported/mine_as_default.png-4ddb22e4b3d4ebe38c0b44405468d2f7.ctex"]
+source_file="res://assets/themes/dev_theme/top_ui/score_button_hover.png"
+dest_files=["res://.godot/imported/score_button_hover.png-beec68c03d2e341a00e82914a3b458ae.ctex"]
 
 [params]
 

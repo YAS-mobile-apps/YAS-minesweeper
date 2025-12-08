@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ca00tpaimcbc4"
-path="res://.godot/imported/score_button_hover.png-49b10d39713e330f1562bdb806c08a1d.ctex"
+uid="uid://dunq15if5jhxm"
+path="res://.godot/imported/base_tiles.png-4e606dfd5bcdf76df0e77565e5c5b189.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tiles/score_button_hover.png"
-dest_files=["res://.godot/imported/score_button_hover.png-49b10d39713e330f1562bdb806c08a1d.ctex"]
+source_file="res://assets/themes/dev_theme/base_tiles.png"
+dest_files=["res://.godot/imported/base_tiles.png-4e606dfd5bcdf76df0e77565e5c5b189.ctex"]
 
 [params]
 

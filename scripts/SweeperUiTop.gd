@@ -20,12 +20,14 @@ class_name SweeperUiTop
 
 const TEXT_PADDING_SIZE: int = 3
 
-var game_lost_button_texture = preload("res://assets/tiles/button_lose.png")
-var game_won_button_texture = preload("res://assets/tiles/button_win.png")
-var default_button_texture = preload("res://assets/tiles/button_smile.png")
+var current_theme = null
 
-var flag_placement_set_right_texture = preload("res://assets/top_ui/mine_as_default.png")
-var flag_placement_set_left_texture = preload("res://assets/top_ui/flag_as_default.png")
+var game_lost_button_texture = null
+var game_won_button_texture = null
+var default_button_texture = null
+
+var flag_placement_set_right_texture = null
+var flag_placement_set_left_texture = null
 
 var final_score: int = 0
 var final_time: int = 0
@@ -35,6 +37,16 @@ signal save_score
 signal flip_flag_placement
 
 func _ready():
+	current_theme = %BaseNode.theme
+
+	game_lost_button_texture = current_theme.get_meta("button_lose")
+	game_won_button_texture = current_theme.get_meta("button_win")
+	default_button_texture = current_theme.get_meta("button_smile")
+
+	flag_placement_set_right_texture = current_theme.get_meta("mine_as_default")
+	flag_placement_set_left_texture = current_theme.get_meta("flag_as_default")
+	
+	
 	game_status_button.pressed.connect(game_reset_button_pressed)
 	save_cancel_button.pressed.connect(game_reset_button_pressed)
 	save_confirm_button.pressed.connect(save_confirm_button_pressed)
