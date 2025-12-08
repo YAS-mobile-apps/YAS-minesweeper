@@ -33,6 +33,16 @@ func swap_dificulty(pressed_id: int):
 	score_table_dificulty_menu(score_table_dificulty, opened_menu)
 	fill_score_table(score_table_dificulty, true)
 
+func format_datetime_string(datetime_string: String) -> String:
+	var dt = Time.get_datetime_dict_from_datetime_string(datetime_string, false)
+	return "%02d/%02d/%04d %02d:%02d" % [
+		dt.day,
+		dt.month,
+		dt.year,
+		dt.hour,
+		dt.minute
+	]
+
 func go_back():
 	get_tree().change_scene_to_file("res://scenes/main.tscn")
 
@@ -102,7 +112,7 @@ func new_score_row(
 	value_time.text = time
 	var separator4 = VSeparator.new()
 	var value_date = Label.new()
-	value_date.text = datetime
+	value_date.text = format_datetime_string(datetime)
 	var separator5 = VSeparator.new()
 
 	separator1.add_to_group('score_line')
