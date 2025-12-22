@@ -248,6 +248,7 @@ func get_title_label(cell_coord: Vector2i, cell_type: Vector2i) -> Label:
 		cell_label.theme = current_theme
 		cell_label.position = cell_coord * TILE_SIZE
 		cell_label.size = TILE_SIZE
+		add_child(cell_label)
 		cell_label.add_theme_font_size_override("font_size", current_theme.get_meta("label_font_size"))
 		cell_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 		cell_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -260,7 +261,7 @@ func get_title_label(cell_coord: Vector2i, cell_type: Vector2i) -> Label:
 func set_tile_cell(cell_coord: Vector2i, cell_type: Vector2i, alternative_tile: int = 0):
 	if (cell_type.x <= 7): 
 		var cell_label: Label = get_title_label(cell_coord, cell_type)
-		add_child(cell_label)
+
 		cell_type.x = 12
 
 	set_cell(
