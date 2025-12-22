@@ -44,6 +44,8 @@ const MOUSE_HOLD_TIMES: Dictionary = {
 @export var columns = 8
 @export var rows = 8
 @export var game_state_view: GameStateView
+@onready var mine_field_container = %MineFieldContainer
+@onready var current_theme: Theme = %BaseNode.theme
 
 signal game_start
 signal game_lost
@@ -52,6 +54,7 @@ signal flag_placed
 signal max_flags_placed
 
 var existing_cells: Array[Vector2i] = []
+var cell_labels: Dictionary = {}
 var cells_with_mine: Array[Vector2i] = []
 var cells_checked: Array[Vector2i] = []
 var is_game_finished: bool = false
@@ -64,9 +67,7 @@ var mouse_held_timer: float = 0
 var new_tileset = TileSet.new()
 var atlas_source = TileSetAtlasSource.new()
 
-
 func _ready():
-	var current_theme: Theme = %BaseNode.theme
 	var texture: Texture2D = current_theme.get_meta("base_tiles")
 	set_tile_set(texture)
 
@@ -110,6 +111,10 @@ func new_game():
 	placed_flags = 0
 	cells_open = 0
 	first_move = false
+	cell_labels = {}
+	
+	for child in get_children():
+		remove_child(child)
 	
 	for row in rows:
 		for column in columns:
@@ -230,11 +235,34 @@ func _calculate_3bv_neighbor_cells(cell_coord: Vector2i, marked_cells: Array[Vec
 				)
 	return [marked_cells, value_3bv]
 
+func get_tile_label_text(cell_type: Vector2i) -> Dictionary:
+	var color_codes = current_theme.get_meta("NumberColors")
+	return {"text": str(cell_type.x + 1), "color": color_codes[cell_type.x + 1]}
+
+func get_title_label(cell_coord: Vector2i, cell_type: Vector2i) -> Label:
+	var cell_label: Label
+	if cell_labels.has(cell_coord):
+		cell_label = cell_labels[cell_coord]
+	else:
+		cell_label = Label.new()
+		cell_label.theme = current_theme
+		cell_label.position = cell_coord * TILE_SIZE
+		cell_label.size = TILE_SIZE
+		cell_label.add_theme_font_size_override("font_size", current_theme.get_meta("label_font_size"))
+		cell_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		cell_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		cell_labels[cell_coord] = cell_label
+		var tile_data = get_tile_label_text(cell_type)
+		cell_label.text = tile_data["text"]
+		cell_label.add_theme_color_override("font_color", tile_data["color"])
+	return cell_label
 
 func set_tile_cell(cell_coord: Vector2i, cell_type: Vector2i, alternative_tile: int = 0):
-	
+	if (cell_type.x <= 7): 
+		var cell_label: Label = get_title_label(cell_coord, cell_type)
+		add_child(cell_label)
+		cell_type.x = 12
 
-	
 	set_cell(
 		DEFAULT_LAYER, cell_coord, TILE_SET_ID, cell_type, alternative_tile
 	)
