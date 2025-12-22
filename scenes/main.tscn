@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://cs7xfipko16xx"]
+[gd_scene load_steps=17 format=3 uid="uid://cs7xfipko16xx"]
 
 [ext_resource type="Theme" uid="uid://o0re7h3ft77b" path="res://assets/themes/dev_theme/development_theme.tres" id="1_5sqsy"]
 [ext_resource type="Script" path="res://scripts/SweeperUiTop.gd" id="1_ic7g8"]
+[ext_resource type="Script" path="res://scripts/HighScoresTable.gd" id="2_fra66"]
+[ext_resource type="Script" path="res://scripts/ScoresCanvasLayer.gd" id="3_0ccf3"]
 [ext_resource type="Script" path="res://scripts/MineSweeperTileMap.gd" id="3_m6pnu"]
 [ext_resource type="PackedScene" uid="uid://b76vc2cfwp2j" path="res://scenes/game_state_view.tscn" id="4_5tf64"]
-[ext_resource type="PackedScene" uid="uid://ct4tnkbunfu6w" path="res://scenes/high_scores.tscn" id="5_2hsfg"]
 [ext_resource type="Script" path="res://scripts/UIMarginContainer.gd" id="7_1uv6y"]
 [ext_resource type="Texture2D" uid="uid://dvb3neucaic4d" path="res://assets/themes/dev_theme/top_ui/score_button.png" id="8_ljd2o"]
 [ext_resource type="Texture2D" uid="uid://ca00tpaimcbc4" path="res://assets/themes/dev_theme/top_ui/score_button_hover.png" id="9_tabki"]
@@ -35,19 +36,159 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_5sqsy")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D/BaseNode"]
+[node name="HighScoreCanvas" type="Control" parent="Camera2D/BaseNode"]
+unique_name_in_owner = true
 visible = false
+custom_minimum_size = Vector2(440, 752)
+layout_mode = 1
+anchors_preset = 0
+offset_left = -223.0
+offset_top = -376.0
+offset_right = 217.0
+offset_bottom = 376.0
 
-[node name="HighScoresWindow" type="PanelContainer" parent="Camera2D/BaseNode/CanvasLayer"]
+[node name="HighScoresWindow" type="PanelContainer" parent="Camera2D/BaseNode/HighScoreCanvas"]
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HighScoresTable" type="Control" parent="Camera2D/BaseNode/HighScoreCanvas/HighScoresWindow"]
+layout_mode = 2
+script = ExtResource("2_fra66")
+
+[node name="ScoreMarginContainer" type="MarginContainer" parent="Camera2D/BaseNode/HighScoreCanvas/HighScoresWindow/HighScoresTable"]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 3
+script = ExtResource("3_0ccf3")
 
-[node name="HighScores" parent="Camera2D/BaseNode/CanvasLayer/HighScoresWindow" instance=ExtResource("5_2hsfg")]
-z_as_relative = false
+[node name="ScoreScreen" type="VBoxContainer" parent="Camera2D/BaseNode/HighScoreCanvas/HighScoresWindow/HighScoresTable/ScoreMarginContainer"]
+layout_mode = 2
+
+[node name="ScreenHeader" type="HBoxContainer" parent="Camera2D/BaseNode/HighScoreCanvas/HighScoresWindow/HighScoresTable/ScoreMarginContainer/ScoreScreen"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Camera2D/BaseNode/HighScoreCanvas/HighScoresWindow/HighScoresTable/ScoreMarginContainer/ScoreScreen/ScreenHeader"]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+
+[node name="ReturnToHome" type="Button" parent="Camera2D/BaseNode/HighScoreCanvas/HighScoresWindow/HighScoresTable/ScoreMarginContainer/ScoreScreen/ScreenHeader/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "<  BACK"
+icon_alignment = 1
+language = "en"
+
+[node name="HighScoresLabel" type="MenuButton" parent="Camera2D/BaseNode/HighScoreCanvas/HighScoresWindow/HighScoresTable/ScoreMarginContainer/ScoreScreen/ScreenHeader"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "High Scores"
+flat = false
+language = "en"
+item_count = 3
+popup/item_0/text = "Normal"
+popup/item_0/id = 0
+popup/item_1/text = "Medium"
+popup/item_1/id = 1
+popup/item_2/text = "Hard"
+popup/item_2/id = 2
+
+[node name="HSeparator5" type="HSeparator" parent="Camera2D/BaseNode/HighScoreCanvas/HighScoresWindow/HighScoresTable/ScoreMarginContainer/ScoreScreen"]
+layout_mode = 2
+
+[node name="TableMargins" type="MarginContainer" parent="Camera2D/BaseNode/HighScoreCanvas/HighScoresWindow/HighScoresTable/ScoreMarginContainer/ScoreScreen"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Camera2D/BaseNode/HighScoreCanvas/HighScoresWindow/HighScoresTable/ScoreMarginContainer/ScoreScreen/TableMargins"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="ScoreTableContents" type="GridContainer" parent="Camera2D/BaseNode/HighScoreCanvas/HighScoresWindow/HighScoresTable/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 9
+
+[node name="VSeparator4" type="VSeparator" parent="Camera2D/BaseNode/HighScoreCanvas/HighScoresWindow/HighScoresTable/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
+layout_mode = 2
+
+[node name="Name" type="Button" parent="Camera2D/BaseNode/HighScoreCanvas/HighScoresWindow/HighScoresTable/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+text = "Name  ˅"
+flat = true
+language = "en"
+
+[node name="VSeparator" type="VSeparator" parent="Camera2D/BaseNode/HighScoreCanvas/HighScoresWindow/HighScoresTable/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
+layout_mode = 2
+
+[node name="Score" type="Button" parent="Camera2D/BaseNode/HighScoreCanvas/HighScoresWindow/HighScoresTable/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+text = "Score  ˅"
+flat = true
+language = "en"
+
+[node name="VSeparator2" type="VSeparator" parent="Camera2D/BaseNode/HighScoreCanvas/HighScoresWindow/HighScoresTable/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
+layout_mode = 2
+
+[node name="Time" type="Button" parent="Camera2D/BaseNode/HighScoreCanvas/HighScoresWindow/HighScoresTable/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+text = "Time  ˅"
+flat = true
+language = "en"
+
+[node name="VSeparator3" type="VSeparator" parent="Camera2D/BaseNode/HighScoreCanvas/HighScoresWindow/HighScoresTable/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
+layout_mode = 2
+
+[node name="CreatedAt" type="Button" parent="Camera2D/BaseNode/HighScoreCanvas/HighScoresWindow/HighScoresTable/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+text = "Datetime  ˅"
+flat = true
+language = "en"
+
+[node name="VSeparator5" type="VSeparator" parent="Camera2D/BaseNode/HighScoreCanvas/HighScoresWindow/HighScoresTable/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="Camera2D/BaseNode/HighScoreCanvas/HighScoresWindow/HighScoresTable/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="Camera2D/BaseNode/HighScoreCanvas/HighScoresWindow/HighScoresTable/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
+layout_mode = 2
+
+[node name="HSeparator3" type="HSeparator" parent="Camera2D/BaseNode/HighScoreCanvas/HighScoresWindow/HighScoresTable/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
+layout_mode = 2
+
+[node name="HSeparator4" type="HSeparator" parent="Camera2D/BaseNode/HighScoreCanvas/HighScoresWindow/HighScoresTable/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
+layout_mode = 2
+
+[node name="HSeparator5" type="HSeparator" parent="Camera2D/BaseNode/HighScoreCanvas/HighScoresWindow/HighScoresTable/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
+layout_mode = 2
+
+[node name="HSeparator6" type="HSeparator" parent="Camera2D/BaseNode/HighScoreCanvas/HighScoresWindow/HighScoresTable/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
+layout_mode = 2
+
+[node name="HSeparator7" type="HSeparator" parent="Camera2D/BaseNode/HighScoreCanvas/HighScoresWindow/HighScoresTable/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
+layout_mode = 2
+
+[node name="HSeparator9" type="HSeparator" parent="Camera2D/BaseNode/HighScoreCanvas/HighScoresWindow/HighScoresTable/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
+layout_mode = 2
+
+[node name="HSeparator8" type="HSeparator" parent="Camera2D/BaseNode/HighScoreCanvas/HighScoresWindow/HighScoresTable/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
 layout_mode = 2
 
 [node name="ListScoreWindow" type="Window" parent="Camera2D/BaseNode"]
@@ -120,7 +261,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "Score owner name..."
-max_length = 8
+max_length = 7
 
 [node name="CurrentScore" type="HBoxContainer" parent="Camera2D/BaseNode/SaveScoreWindow/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -160,6 +301,7 @@ size_flags_horizontal = 3
 text = "Save"
 
 [node name="SweeperGameUi" type="VBoxContainer" parent="Camera2D/BaseNode"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(440, 752)
 layout_mode = 1
 anchors_preset = 15
@@ -279,6 +421,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="MineFieldContainer" type="PanelContainer" parent="Camera2D/BaseNode/SweeperGameUi"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(300, 670)
 layout_mode = 2
 
@@ -314,7 +457,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
-text = "Dificulty: "
+text = "DIFICULTY: "
 flat = false
 alignment = 0
 icon_alignment = 1
@@ -337,7 +480,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-text = ":Hold timer"
+text = ":HOLD TIMER"
 flat = false
 alignment = 2
 icon_alignment = 1

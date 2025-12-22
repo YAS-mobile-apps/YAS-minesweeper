@@ -64,28 +64,27 @@ var mouse_held_timer: float = 0
 var new_tileset = TileSet.new()
 var atlas_source = TileSetAtlasSource.new()
 
+
 func _ready():
 	var current_theme: Theme = %BaseNode.theme
 	var texture: Texture2D = current_theme.get_meta("base_tiles")
+	set_tile_set(texture)
 
-
+func set_tile_set(tile_theme: Texture2D):
 	new_tileset.tile_size = TILE_SIZE
 	atlas_source.texture_region_size = TILE_SIZE
-	atlas_source.texture = texture
+	atlas_source.texture = tile_theme
 	
-	var texture_size = texture.get_size()
+	var texture_size = tile_theme.get_size()
 	var tiles_x = texture_size.x / TILE_SIZE.x
 	
 	for x in range(tiles_x):
 		atlas_source.create_tile(Vector2i(x, 0))
 	
 	atlas_source.create_alternative_tile(CELLS["default"])
-
 	new_tileset.add_source(atlas_source)
-
 	self.rendering_quadrant_size = 49
 	self.tile_set = new_tileset
-
 
 
 func get_tile_range() -> Array[int]:
@@ -233,6 +232,9 @@ func _calculate_3bv_neighbor_cells(cell_coord: Vector2i, marked_cells: Array[Vec
 
 
 func set_tile_cell(cell_coord: Vector2i, cell_type: Vector2i, alternative_tile: int = 0):
+	
+
+	
 	set_cell(
 		DEFAULT_LAYER, cell_coord, TILE_SET_ID, cell_type, alternative_tile
 	)

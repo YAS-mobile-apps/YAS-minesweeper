@@ -46,7 +46,6 @@ func _ready():
 	flag_placement_set_right_texture = current_theme.get_meta("mine_as_default")
 	flag_placement_set_left_texture = current_theme.get_meta("flag_as_default")
 	
-	
 	game_status_button.pressed.connect(game_reset_button_pressed)
 	save_cancel_button.pressed.connect(game_reset_button_pressed)
 	save_confirm_button.pressed.connect(save_confirm_button_pressed)
@@ -71,8 +70,9 @@ func swap_flag_placement_type(emit_flip_signal: bool = true):
 		flag_placement_set_button.texture_normal = flag_placement_set_right_texture
 
 func score_button_pressed():
-	get_tree().change_scene_to_file("res://scenes/high_scores.tscn")
-
+	%HighScoreCanvas.visible = true
+	%SweeperGameUi.visible = false
+	%SweeperGameUi.process_mode = PROCESS_MODE_DISABLED
 
 func set_mine_count(mine_count: int):
 	var mine_count_string = str(mine_count)

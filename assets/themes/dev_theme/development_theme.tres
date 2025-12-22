@@ -1,6 +1,7 @@
-[gd_resource type="Theme" load_steps=11 format=3 uid="uid://o0re7h3ft77b"]
+[gd_resource type="Theme" load_steps=12 format=3 uid="uid://o0re7h3ft77b"]
 
 [ext_resource type="Texture2D" uid="uid://dunq15if5jhxm" path="res://assets/themes/dev_theme/base_tiles.png" id="1_87jpu"]
+[ext_resource type="FontFile" uid="uid://xm6l2vgx03qi" path="res://assets/themes/dev_theme/font/PrStart.ttf" id="1_v2bpu"]
 [ext_resource type="Texture2D" uid="uid://bsnckmxjnxpta" path="res://assets/themes/dev_theme/top_ui/button_kk.png" id="2_78qtx"]
 [ext_resource type="Texture2D" uid="uid://b7e4fqxtbubjd" path="res://assets/themes/dev_theme/top_ui/button_lose.png" id="3_riutd"]
 [ext_resource type="Texture2D" uid="uid://cewyd38vautxy" path="res://assets/themes/dev_theme/top_ui/button_smile.png" id="4_4y35h"]
@@ -13,6 +14,8 @@
 
 [resource]
 resource_name = "dev_theme"
+default_font = ExtResource("1_v2bpu")
+default_font_size = 10
 metadata/button_kk = ExtResource("2_78qtx")
 metadata/button_lose = ExtResource("3_riutd")
 metadata/button_smile = ExtResource("4_4y35h")
