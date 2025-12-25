@@ -37,10 +37,12 @@ func swap_dificulty(pressed_id: int):
 
 func format_datetime_string(datetime_string: String) -> String:
 	var dt = Time.get_datetime_dict_from_datetime_string(datetime_string, false)
-	return "%02d/%02d/%04d %02d:%02d" % [
+	var dt_year = str(dt.year)
+	var half_year = dt_year[-2] + dt_year[-1]
+	return "%02d/%02d/%s %02d:%02d" % [
 		dt.day,
 		dt.month,
-		dt.year,
+		half_year,
 		dt.hour,
 		dt.minute
 	]

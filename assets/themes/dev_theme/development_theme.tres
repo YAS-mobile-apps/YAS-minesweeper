@@ -15,7 +15,7 @@
 [resource]
 resource_name = "dev_theme"
 default_font = ExtResource("1_v2bpu")
-default_font_size = 10
+default_font_size = 11
 metadata/button_kk = ExtResource("2_78qtx")
 metadata/button_lose = ExtResource("3_riutd")
 metadata/button_smile = ExtResource("4_4y35h")

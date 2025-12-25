@@ -124,7 +124,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
-text = "Name  ˅"
+text = "Name ˅"
 flat = true
 language = "en"
 
@@ -135,7 +135,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
-text = "Score  ˅"
+text = "Score ˅"
 flat = true
 language = "en"
 
@@ -146,7 +146,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
-text = "Time  ˅"
+text = "Time ˅"
 flat = true
 language = "en"
 
@@ -157,7 +157,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
-text = "Datetime  ˅"
+text = "Datetime ˅"
 flat = true
 language = "en"
 

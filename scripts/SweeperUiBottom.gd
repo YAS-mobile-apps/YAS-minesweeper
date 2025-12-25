@@ -7,7 +7,7 @@ class_name SweeperUiBottom
 
 
 func update_dificulty(dificulty: String, opened_menu: PopupMenu):
-	menu_button.text = "DIFICULTY: " + dificulty.to_upper()
+	menu_button.text = "DIFICULTY: " + dificulty.to_upper().split("_")[0]
 	for id in range(opened_menu.item_count):
 		opened_menu.set_item_disabled(id, false)
 	opened_menu.set_item_disabled(GlobalVars.DIFICULTY_ID[dificulty], true)
