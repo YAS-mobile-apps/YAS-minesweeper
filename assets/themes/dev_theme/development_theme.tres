@@ -37,3 +37,7 @@ metadata/NumberColors = {
 8: Color(0.861653, 0.580052, 0.13534, 1)
 }
 metadata/label_font_size = 20
+metadata/mine_counter_font_color = Color(1, 0, 0, 1)
+metadata/timer_font_color = Color(1, 0, 0, 1)
+metadata/mine_counter_font_size = 11
+metadata/timer_font_size = 11

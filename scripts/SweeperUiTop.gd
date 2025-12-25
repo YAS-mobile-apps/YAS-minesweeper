@@ -17,10 +17,9 @@ class_name SweeperUiTop
 @onready var save_confirm_button = %SaveConfirmButton
 @onready var score_table = %ScoreTable
 @onready var flag_placement_set_button = %FlagPlacementSetButton
+@onready var current_theme: Theme = %BaseNode.theme
 
 const TEXT_PADDING_SIZE: int = 3
-
-var current_theme = null
 
 var game_lost_button_texture = null
 var game_won_button_texture = null
@@ -37,8 +36,6 @@ signal save_score
 signal flip_flag_placement
 
 func _ready():
-	current_theme = %BaseNode.theme
-
 	game_lost_button_texture = current_theme.get_meta("button_lose")
 	game_won_button_texture = current_theme.get_meta("button_win")
 	default_button_texture = current_theme.get_meta("button_smile")
@@ -75,6 +72,12 @@ func score_button_pressed():
 	%SweeperGameUi.process_mode = PROCESS_MODE_DISABLED
 
 func set_mine_count(mine_count: int):
+	var font_color = current_theme.get_meta("mine_counter_font_color")
+	mine_count_label.add_theme_color_override("font_color", font_color)
+
+	var font_size = current_theme.get_meta("mine_counter_font_size")
+	mine_count_label.add_theme_font_size_override("font_size", font_size)
+
 	var mine_count_string = str(mine_count)
 	if len(mine_count_string) < TEXT_PADDING_SIZE:
 		mine_count_string = mine_count_string.lpad(TEXT_PADDING_SIZE, "0")
@@ -82,6 +85,12 @@ func set_mine_count(mine_count: int):
 
 
 func set_timer_count(timer_count: int):
+	var font_color = current_theme.get_meta("timer_font_color")
+	timer_count_label.add_theme_color_override("font_color", font_color)
+
+	var font_size = current_theme.get_meta("timer_font_size")
+	mine_count_label.add_theme_font_size_override("font_size", font_size)
+
 	var time_string = str(timer_count)
 	if len(time_string) < 3:
 		time_string = time_string.lpad(3, "0")
@@ -110,7 +119,7 @@ func game_won(time_elapsed, current_score):
 
 
 func max_flag_warning(reset: bool = false):
-	var color: String = GlobalVars.COUNTERS_FONT_COLOUR if reset else "white"
+	var color = current_theme.get_meta("mine_counter_font_color")
 	mine_count_label.add_theme_color_override("font_color", color)
 
 

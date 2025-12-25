@@ -239,7 +239,7 @@ func get_tile_label_text(cell_type: Vector2i) -> Dictionary:
 	var color_codes = current_theme.get_meta("NumberColors")
 	return {"text": str(cell_type.x + 1), "color": color_codes[cell_type.x + 1]}
 
-func get_title_label(cell_coord: Vector2i, cell_type: Vector2i) -> Label:
+func set_title_label(cell_coord: Vector2i, cell_type: Vector2i) -> Label:
 	var cell_label: Label
 	if cell_labels.has(cell_coord):
 		cell_label = cell_labels[cell_coord]
@@ -260,8 +260,7 @@ func get_title_label(cell_coord: Vector2i, cell_type: Vector2i) -> Label:
 
 func set_tile_cell(cell_coord: Vector2i, cell_type: Vector2i, alternative_tile: int = 0):
 	if (cell_type.x <= 7): 
-		var cell_label: Label = get_title_label(cell_coord, cell_type)
-
+		set_title_label(cell_coord, cell_type)
 		cell_type.x = 12
 
 	set_cell(
