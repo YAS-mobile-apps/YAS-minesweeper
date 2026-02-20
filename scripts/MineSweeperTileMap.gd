@@ -297,9 +297,7 @@ func check_surrounding_mines(cell_coord: Vector2i):
 
 func check_for_win_condition():
 	var all_cells_were_checked = false
-	if cells_open + MINE_AMOUNT[
-		GlobalVars.settings.dificulty
-	] == columns * rows:
+	if cells_open + MINE_AMOUNT[GlobalVars.settings.dificulty] == columns * rows:
 		all_cells_were_checked = true
 	if all_cells_were_checked and not is_game_finished:
 		game_won()
