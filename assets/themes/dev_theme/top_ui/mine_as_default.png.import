@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7e4fqxtbubjd"
-path="res://.godot/imported/button_lose.png-6c8cf17d22df89a87b603e4504313648.ctex"
+uid="uid://ds7sfkpj5bx5t"
+path="res://.godot/imported/mine_as_default.png-2658db02c99d0d1f67e12a0c82a3cbdf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tiles/button_lose.png"
-dest_files=["res://.godot/imported/button_lose.png-6c8cf17d22df89a87b603e4504313648.ctex"]
+source_file="res://assets/themes/dev_theme/top_ui/mine_as_default.png"
+dest_files=["res://.godot/imported/mine_as_default.png-2658db02c99d0d1f67e12a0c82a3cbdf.ctex"]
 
 [params]
 

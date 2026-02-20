@@ -15,6 +15,8 @@ var score_table_dificulty: String = GlobalVars.settings.dificulty
 var opened_menu = null
 
 func _ready():
+	var current_theme: Theme = %BaseNode.theme
+	self.theme = current_theme
 	opened_menu = score_dificilty_menu.get_popup()
 	opened_menu.connect("id_pressed", swap_dificulty)
 	
@@ -35,17 +37,20 @@ func swap_dificulty(pressed_id: int):
 
 func format_datetime_string(datetime_string: String) -> String:
 	var dt = Time.get_datetime_dict_from_datetime_string(datetime_string, false)
-	return "%02d/%02d/%04d %02d:%02d" % [
+	var dt_year = str(dt.year)
+	var half_year = dt_year[-2] + dt_year[-1]
+	return "%02d/%02d/%s %02d:%02d" % [
 		dt.day,
 		dt.month,
-		dt.year,
+		half_year,
 		dt.hour,
 		dt.minute
 	]
 
 func go_back():
-	get_tree().change_scene_to_file("res://scenes/main.tscn")
-
+	%HighScoreCanvas.visible = false
+	%SweeperGameUi.visible = true
+	%SweeperGameUi.process_mode = PROCESS_MODE_INHERIT
 
 func sort_by_name():
 	fill_score_table(score_table_dificulty, true, "Name")
@@ -88,7 +93,7 @@ func fill_score_table(dificulty: String, reload: bool = false, sort_key: String 
 
 
 func score_table_dificulty_menu(dificulty: String, current_opened_menu: PopupMenu):
-	score_dificilty_menu.text = "High Socres: " + dificulty
+	score_dificilty_menu.text = "High Scores: " + dificulty
 	for id in range(current_opened_menu.item_count):
 		current_opened_menu.set_item_disabled(id, false)
 	current_opened_menu.set_item_disabled(GlobalVars.DIFICULTY_ID[dificulty], true)
