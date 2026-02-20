@@ -18,6 +18,7 @@ class_name SweeperUiTop
 @onready var score_table = %ScoreTable
 @onready var flag_placement_set_button = %FlagPlacementSetButton
 @onready var current_theme: Theme = %BaseNode.theme
+@onready var tile_map = $"../MineFieldContainer/TileMap"
 
 const TEXT_PADDING_SIZE: int = 3
 
@@ -51,7 +52,7 @@ func _ready():
 
 
 func game_reset_button_pressed():
-	get_tree().reload_current_scene()
+	tile_map.new_game()
 
 
 func save_confirm_button_pressed():
