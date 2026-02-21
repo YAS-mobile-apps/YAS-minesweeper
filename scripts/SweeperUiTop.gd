@@ -119,7 +119,7 @@ func game_won(time_elapsed, current_score):
 		)
 
 
-func max_flag_warning(reset: bool = false):
+func max_flag_warning(_reset: bool = false):
 	var color = current_theme.get_meta("mine_counter_font_color")
 	mine_count_label.add_theme_color_override("font_color", color)
 
