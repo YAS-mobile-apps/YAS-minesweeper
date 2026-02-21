@@ -50,7 +50,7 @@ func swap_dificulty(pressed_id: int):
 	GlobalVars.settings.dificulty = GlobalVars.PRESSED_ID[pressed_id]
 	sweeper_ui_bottom.update_dificulty(GlobalVars.settings.dificulty, opened_menu)
 	write_file_settings()
-	get_tree().reload_current_scene()
+	mine_grid.new_game()
 
 
 func swap_hold_timer(pressed_id: int):
