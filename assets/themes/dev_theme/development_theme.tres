@@ -41,3 +41,7 @@ metadata/mine_counter_font_color = Color(1, 0, 0, 1)
 metadata/timer_font_color = Color(1, 0, 0, 1)
 metadata/mine_counter_font_size = 11
 metadata/timer_font_size = 11
+metadata/background_color = Color(0.317647, 0.384314, 0.447059, 1)
+metadata/top_ui_background_color = Color(0.317647, 0.384314, 0.447059, 1)
+metadata/bottom_ui_background_color = Color(0.317647, 0.384314, 0.447059, 1)
+metadata/minefield_background_color = Color(0.317647, 0.384314, 0.447059, 1)
