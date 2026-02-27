@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cs7xfipko16xx"]
+[gd_scene load_steps=26 format=3 uid="uid://cs7xfipko16xx"]
 
 [ext_resource type="Theme" uid="uid://o0re7h3ft77b" path="res://assets/themes/dev_theme/development_theme.tres" id="1_5sqsy"]
 [ext_resource type="Script" path="res://scripts/SweeperUiTop.gd" id="1_ic7g8"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scripts/BaseNode.gd" id="2_rvne4"]
 [ext_resource type="Script" path="res://scripts/ScoresCanvasLayer.gd" id="3_0ccf3"]
 [ext_resource type="Script" path="res://scripts/MineSweeperTileMap.gd" id="3_m6pnu"]
+[ext_resource type="Script" path="res://scripts/SweeperGameUi.gd" id="3_ndd0u"]
 [ext_resource type="PackedScene" uid="uid://b76vc2cfwp2j" path="res://scenes/game_state_view.tscn" id="4_5tf64"]
 [ext_resource type="Script" path="res://scripts/TopUiPanelContainer.gd" id="4_yavyw"]
 [ext_resource type="Script" path="res://scripts/UIMarginContainer.gd" id="7_1uv6y"]
@@ -16,6 +17,10 @@
 [ext_resource type="Texture2D" uid="uid://cewyd38vautxy" path="res://assets/themes/dev_theme/top_ui/button_smile.png" id="10_ucv3x"]
 [ext_resource type="Texture2D" uid="uid://dxeuk57gdm7rv" path="res://assets/themes/dev_theme/top_ui/button_smile_click.png" id="11_g1jv4"]
 [ext_resource type="Script" path="res://scripts/SaveScoreWindow.gd" id="12_31fka"]
+[ext_resource type="Script" path="res://scripts/BottomUIMarginContainer.gd" id="13_4e6vy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sd3yl"]
+bg_color = Color(0.376154, 0.58438, 1, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gr3qv"]
 bg_color = Color(0.978807, 0.000518657, 0.928136, 1)
@@ -41,8 +46,6 @@ unique_name_in_owner = true
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = -1.0
-offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -55,15 +58,20 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(440, 752)
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 3
 theme_override_constants/separation = 0
 alignment = 1
+script = ExtResource("3_ndd0u")
+
+[node name="SeparatorTop" type="Control" parent="BaseNode/SweeperGameUi"]
+layout_mode = 2
+size_flags_vertical = 3
 
 [node name="SweeperUiTop" type="PanelContainer" parent="BaseNode/SweeperGameUi" node_paths=PackedStringArray("mine_grid")]
 unique_name_in_owner = true
 clip_contents = true
 layout_mode = 2
 size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_sd3yl")
 script = ExtResource("1_ic7g8")
 mine_grid = NodePath("../MineFieldContainer/TileMap")
 
@@ -171,9 +179,13 @@ text = "000"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="SeparatorCenterTop" type="Control" parent="BaseNode/SweeperGameUi"]
+layout_mode = 2
+size_flags_vertical = 3
+
 [node name="MineFieldContainer" type="PanelContainer" parent="BaseNode/SweeperGameUi"]
 unique_name_in_owner = true
-clip_contents = true
+custom_minimum_size = Vector2(440, 689)
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_5le7i")
@@ -188,11 +200,15 @@ columns = 14
 rows = 9
 game_state_view = NodePath("../../../../GameStateView")
 
+[node name="SeparatorCenterBottom" type="Control" parent="BaseNode/SweeperGameUi"]
+layout_mode = 2
+size_flags_vertical = 3
+
 [node name="SweeperUiBottom" type="PanelContainer" parent="BaseNode/SweeperGameUi"]
 unique_name_in_owner = true
 clip_contents = true
 layout_mode = 2
-size_flags_vertical = 0
+size_flags_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_0ndsw")
 script = ExtResource("10_3fbao")
 
@@ -203,6 +219,7 @@ size_flags_vertical = 0
 theme_override_constants/margin_left = 6
 theme_override_constants/margin_right = 6
 theme_override_constants/margin_bottom = 4
+script = ExtResource("13_4e6vy")
 
 [node name="BottomUIHBoxContainer" type="HBoxContainer" parent="BaseNode/SweeperGameUi/SweeperUiBottom/BottomUIMarginContainer"]
 layout_mode = 2
@@ -249,6 +266,11 @@ popup/item_1/text = "Medium"
 popup/item_1/id = 1
 popup/item_2/text = "Long"
 popup/item_2/id = 2
+
+[node name="SeparatorBottom" type="Control" parent="BaseNode/SweeperGameUi"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+size_flags_vertical = 0
 
 [node name="HighScoreCanvas" type="Control" parent="BaseNode"]
 unique_name_in_owner = true
@@ -442,6 +464,7 @@ initial_position = 2
 size = Vector2i(300, 300)
 visible = false
 borderless = true
+theme = ExtResource("1_5sqsy")
 script = ExtResource("12_31fka")
 
 [node name="MarginContainer" type="MarginContainer" parent="SaveScoreWindow"]

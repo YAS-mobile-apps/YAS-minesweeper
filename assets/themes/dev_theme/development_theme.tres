@@ -45,3 +45,4 @@ metadata/background_color = Color(0.317647, 0.384314, 0.447059, 1)
 metadata/top_ui_background_color = Color(0.317647, 0.384314, 0.447059, 1)
 metadata/bottom_ui_background_color = Color(0.317647, 0.384314, 0.447059, 1)
 metadata/minefield_background_color = Color(0.317647, 0.384314, 0.447059, 1)
+metadata/sweeper_game_ui_separation = 0

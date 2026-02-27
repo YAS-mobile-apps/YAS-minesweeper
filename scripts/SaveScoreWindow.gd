@@ -4,7 +4,6 @@ class_name SaveScoreWindow
 
 @onready var sweeper_ui = %SweeperUiTop
 
-
 func _ready():
 	sweeper_ui.save_score.connect(save_score)
 
@@ -38,4 +37,5 @@ func save_score(current_player_name, final_score, final_time):
 	file.store_line(JSON.stringify(GlobalVars.current_scores, "\t"))
 	file.close()
 	
-	get_tree().reload_current_scene()
+	self.visible = false
+

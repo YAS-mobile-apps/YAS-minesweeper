@@ -50,6 +50,9 @@ func _ready():
 	flag_placement_set_button.pressed.connect(swap_flag_placement_type)
 	score_button.pressed.connect(score_button_pressed)
 
+	var styleBox: StyleBoxFlat = get_theme_stylebox("panel").duplicate()
+	styleBox.set("bg_color", current_theme.get_meta("background_color"))
+	add_theme_stylebox_override("panel", styleBox)
 
 func game_reset_button_pressed():
 	tile_map.new_game()

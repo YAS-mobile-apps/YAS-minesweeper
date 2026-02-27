@@ -8,7 +8,3 @@ func _ready():
 	styleBox.set("bg_color", current_theme.get_meta("minefield_background_color"))
 	add_theme_stylebox_override("panel", styleBox)
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
