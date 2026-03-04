@@ -11,6 +11,7 @@ var time_elapsed = 0
 var opened_menu = false
 var timer_menu = false
 
+
 func _ready():
 	await get_tree().process_frame  # garante que a cena inteira carregou
 	
@@ -109,9 +110,7 @@ func load_score_table():
 		reset_file_score_table()
 		return
 	GlobalVars.current_scores = file_scores
-	for score_line in GlobalVars.current_scores[
-		GlobalVars.settings.dificulty
-	].scores:
+	for score_line in GlobalVars.current_scores[GlobalVars.settings.dificulty].scores:
 		sweeper_ui_top.score_table.add_item(str(score_line))
 
 
@@ -136,6 +135,7 @@ func load_settings():
 	GlobalVars.settings = settings
 	sweeper_ui_bottom.update_dificulty(GlobalVars.settings.dificulty, opened_menu)
 	sweeper_ui_bottom.update_hold_timer(GlobalVars.settings.hold_click, timer_menu)
+
 
 func write_file_settings():
 	GlobalFuncs.write_to_json_file(

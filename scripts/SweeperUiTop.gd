@@ -18,7 +18,9 @@ class_name SweeperUiTop
 @onready var score_table = %ScoreTable
 @onready var flag_placement_set_button = %FlagPlacementSetButton
 @onready var current_theme: Theme = %BaseNode.theme
-@onready var tile_map = $"../MineFieldContainer/TileMap"
+@onready var highscore_canvas = %HighScoreCanvas
+@onready var highscore_table = %HighScoresTable
+@onready var sweeper_game_ui = %SweeperGameUi
 
 const TEXT_PADDING_SIZE: int = 3
 
@@ -33,8 +35,8 @@ var final_score: int = 0
 var final_time: int = 0
 var current_player_name: String = ""
 
-signal save_score
 signal flip_flag_placement
+
 
 func _ready():
 	game_lost_button_texture = current_theme.get_meta("button_lose")
@@ -51,16 +53,22 @@ func _ready():
 	score_button.pressed.connect(score_button_pressed)
 
 	var styleBox: StyleBoxFlat = get_theme_stylebox("panel").duplicate()
-	styleBox.set("bg_color", current_theme.get_meta("background_color"))
+	styleBox.set("bg_color", current_theme.get_meta("top_ui_background_color"))
 	add_theme_stylebox_override("panel", styleBox)
+	
+	GlobalFuncs.avoid_notch(self)
+
 
 func game_reset_button_pressed():
-	tile_map.new_game()
+	save_score_window.visible = false
+	clear_save_score_fields()
 
 
 func save_confirm_button_pressed():
 	current_player_name = current_user_name_field.text
-	save_score.emit(current_player_name, final_score, final_time)
+	save_score_window.save_score(current_player_name, final_score, final_time)
+	clear_save_score_fields()
+
 
 func swap_flag_placement_type(emit_flip_signal: bool = true):
 	if emit_flip_signal:
@@ -70,10 +78,12 @@ func swap_flag_placement_type(emit_flip_signal: bool = true):
 	else:
 		flag_placement_set_button.texture_normal = flag_placement_set_right_texture
 
+
 func score_button_pressed():
-	%HighScoreCanvas.visible = true
-	%SweeperGameUi.visible = false
-	%SweeperGameUi.process_mode = PROCESS_MODE_DISABLED
+	highscore_table.fill_score_table(GlobalVars.settings.dificulty)
+	highscore_canvas.visible = true
+	sweeper_game_ui.visible = false
+	sweeper_game_ui.process_mode = PROCESS_MODE_DISABLED
 
 func set_mine_count(mine_count: int):
 	var font_color = current_theme.get_meta("mine_counter_font_color")
@@ -109,17 +119,15 @@ func game_won(time_elapsed, current_score):
 	final_time = time_elapsed
 	final_score = current_score
 	game_status_button.texture_normal = game_won_button_texture
-	save_score_window.visible = true
 	
 	current_score_label.add_text(str(final_score))
 	current_time_score_label.add_text(str(time_elapsed))
 	
-	if GlobalVars.current_scores[
-		GlobalVars.settings.dificulty
-	].last_player_name:
+	if GlobalVars.current_scores[GlobalVars.settings.dificulty].last_player_name:
 		current_user_name_field.insert_text_at_caret(
 			GlobalVars.current_scores[GlobalVars.settings.dificulty].last_player_name
 		)
+	save_score_window.visible = true
 
 
 func max_flag_warning(_reset: bool = false):
@@ -129,3 +137,12 @@ func max_flag_warning(_reset: bool = false):
 
 func reset_smile_button():
 	game_status_button.texture_normal = default_button_texture
+
+
+func clear_save_score_fields():
+	current_score_label.clear()
+	current_time_score_label.clear()
+	current_user_name_field.clear()
+
+	current_score_label.add_text("Your Score: ")
+	current_time_score_label.add_text("Your Time: ")

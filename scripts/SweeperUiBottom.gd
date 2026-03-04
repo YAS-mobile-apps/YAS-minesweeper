@@ -11,6 +11,8 @@ func _ready():
 	var styleBox: StyleBoxFlat = get_theme_stylebox("panel").duplicate()
 	styleBox.set("bg_color", current_theme.get_meta("bottom_ui_background_color"))
 	add_theme_stylebox_override("panel", styleBox)
+	GlobalFuncs.avoid_notch_bottom(self)
+
 
 func update_dificulty(dificulty: String, opened_menu: PopupMenu):
 	menu_button.text = "DIFICULTY: " + dificulty.to_upper().split("_")[0]

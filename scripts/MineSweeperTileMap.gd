@@ -46,6 +46,7 @@ const MOUSE_HOLD_TIMES: Dictionary = {
 @export var game_state_view: GameStateView
 @onready var mine_field_container = %MineFieldContainer
 @onready var current_theme: Theme = %BaseNode.theme
+@onready var sweeper_ui_top = %SweeperUiTop
 
 signal game_start
 signal game_lost
@@ -67,9 +68,11 @@ var mouse_held_timer: float = 0
 var new_tileset = TileSet.new()
 var atlas_source = TileSetAtlasSource.new()
 
+
 func _ready():
 	var texture: Texture2D = current_theme.get_meta("base_tiles")
 	set_tile_set(texture)
+
 
 func set_tile_set(tile_theme: Texture2D):
 	new_tileset.tile_size = TILE_SIZE
@@ -102,7 +105,6 @@ func _physics_process(delta):
 
 
 func new_game():
-	game_start.emit()
 	clear_layer(DEFAULT_LAYER)
 	cells_with_mine = []
 	existing_cells = []
@@ -112,7 +114,8 @@ func new_game():
 	cells_open = 0
 	first_move = false
 	cell_labels = {}
-	
+	game_start.emit()
+
 	for child in get_children():
 		remove_child(child)
 	
@@ -235,9 +238,11 @@ func _calculate_3bv_neighbor_cells(cell_coord: Vector2i, marked_cells: Array[Vec
 				)
 	return [marked_cells, value_3bv]
 
+
 func get_tile_label_text(cell_type: Vector2i) -> Dictionary:
 	var color_codes = current_theme.get_meta("NumberColors")
 	return {"text": str(cell_type.x + 1), "color": color_codes[cell_type.x + 1]}
+
 
 func set_title_label(cell_coord: Vector2i, cell_type: Vector2i) -> Label:
 	var cell_label: Label
@@ -257,6 +262,7 @@ func set_title_label(cell_coord: Vector2i, cell_type: Vector2i) -> Label:
 		cell_label.text = tile_data["text"]
 		cell_label.add_theme_color_override("font_color", tile_data["color"])
 	return cell_label
+
 
 func set_tile_cell(cell_coord: Vector2i, cell_type: Vector2i, alternative_tile: int = 0):
 	if (cell_type.x <= 7): 
