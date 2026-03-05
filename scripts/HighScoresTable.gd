@@ -1,14 +1,16 @@
 extends Control
 class_name Table
 
-@onready var return_to_home = %ReturnToHome
-@onready var table_contents = %ScoreTableContents
-@onready var scroll_container = %ScrollContainer
-@onready var score_dificilty_menu = %HighScoresLabel
-@onready var header_name = %ScoreTableContents/Name
-@onready var header_score = %ScoreTableContents/Score
-@onready var header_time = %ScoreTableContents/Time
-@onready var header_created_at = %ScoreTableContents/CreatedAt
+@onready var returnToHome = %ReturnToHome
+@onready var scoreTableContents = %ScoreTableContents
+@onready var scoreDificiltyMenu = %HighScoresLabel
+@onready var headerName = %ScoreTableContents/Name
+@onready var headerScore = %ScoreTableContents/Score
+@onready var headerTime = %ScoreTableContents/Time
+@onready var headerCreatedAt = %ScoreTableContents/CreatedAt
+@onready var highScoreCanvas = %HighScoreCanvas
+@onready var sweeperGameUi = %SweeperGameUi
+@onready var baseNode = %BaseNode
 
 var current_sort_table: String = 'none'
 var score_table_dificulty: String = GlobalVars.settings.dificulty
@@ -17,19 +19,18 @@ var opened_menu = null
 func _ready():
 	GlobalFuncs.avoid_notch(self)
 
-	var current_theme: Theme = %BaseNode.theme
-	self.theme = current_theme
-	opened_menu = score_dificilty_menu.get_popup()
+	self.theme = baseNode.theme
+	opened_menu = scoreDificiltyMenu.get_popup()
 	opened_menu.connect("id_pressed", swap_dificulty)
 	
 	score_table_dificulty = GlobalVars.settings.dificulty
 	fill_score_table(score_table_dificulty)
-	return_to_home.pressed.connect(go_back)
-	score_dificilty_menu.text = "High Scores: " + score_table_dificulty
-	header_name.pressed.connect(sort_by_name)
-	header_score.pressed.connect(sort_by_score)
-	header_time.pressed.connect(sort_by_time)
-	header_created_at.pressed.connect(sort_by_created)
+	returnToHome.pressed.connect(go_back)
+	scoreDificiltyMenu.text = "High Scores: " + score_table_dificulty
+	headerName.pressed.connect(sort_by_name)
+	headerScore.pressed.connect(sort_by_score)
+	headerTime.pressed.connect(sort_by_time)
+	headerCreatedAt.pressed.connect(sort_by_created)
 
 func swap_dificulty(pressed_id: int):
 	score_table_dificulty = GlobalVars.PRESSED_ID[pressed_id]
@@ -50,9 +51,9 @@ func format_datetime_string(datetime_string: String) -> String:
 
 
 func go_back():
-	%HighScoreCanvas.visible = false
-	%SweeperGameUi.visible = true
-	%SweeperGameUi.process_mode = PROCESS_MODE_INHERIT
+	highScoreCanvas.visible = false
+	sweeperGameUi.visible = true
+	sweeperGameUi.process_mode = PROCESS_MODE_INHERIT
 
 
 func sort_by_name():
@@ -77,9 +78,9 @@ func fill_score_table(dificulty: String, sort_key: String = ""):
 	if sort_key and sort_key == current_sort_table:
 		return
 	
-	for child in table_contents.get_children():
+	for child in scoreTableContents.get_children():
 		if child.is_in_group('score_line'):
-			table_contents.remove_child(child)
+			scoreTableContents.remove_child(child)
 			child.queue_free() 
 	
 	if sort_key:
@@ -96,7 +97,7 @@ func fill_score_table(dificulty: String, sort_key: String = ""):
 
 
 func score_table_dificulty_menu(dificulty: String, current_opened_menu: PopupMenu):
-	score_dificilty_menu.text = "High Scores: " + dificulty
+	scoreDificiltyMenu.text = "High Scores: " + dificulty
 	for id in range(current_opened_menu.item_count):
 		current_opened_menu.set_item_disabled(id, false)
 	current_opened_menu.set_item_disabled(GlobalVars.DIFICULTY_ID[dificulty], true)
@@ -133,12 +134,12 @@ func new_score_row(
 	value_date.add_to_group('score_line')
 	separator5.add_to_group('score_line')
 
-	table_contents.add_child(separator1)
-	table_contents.add_child(value_name)
-	table_contents.add_child(separator2)
-	table_contents.add_child(value_score)
-	table_contents.add_child(separator3)
-	table_contents.add_child(value_time)
-	table_contents.add_child(separator4)
-	table_contents.add_child(value_date)
-	table_contents.add_child(separator5)
+	scoreTableContents.add_child(separator1)
+	scoreTableContents.add_child(value_name)
+	scoreTableContents.add_child(separator2)
+	scoreTableContents.add_child(value_score)
+	scoreTableContents.add_child(separator3)
+	scoreTableContents.add_child(value_time)
+	scoreTableContents.add_child(separator4)
+	scoreTableContents.add_child(value_date)
+	scoreTableContents.add_child(separator5)

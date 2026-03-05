@@ -12,6 +12,7 @@ func load_from_json_file(filepath: String):
 		
 	return json_object.data
 
+
 func write_to_json_file(file_path: String, file_contents: Dictionary):
 	var file = FileAccess.open(file_path, FileAccess.WRITE_READ)
 	file.store_line(JSON.stringify(file_contents, "\t"))
@@ -31,6 +32,7 @@ func avoid_notch(node):
 			
 	node.add_theme_constant_override("margin_top", top_margin)
 
+
 func avoid_notch_bottom(node):
 	var notch_list: Array[Rect2] = DisplayServer.get_display_cutouts()
 	var window_size: Vector2i = \
@@ -43,6 +45,7 @@ func avoid_notch_bottom(node):
 			top_margin = int(notch_area.size.y)
 			
 	node.add_theme_constant_override("margin_bottom", top_margin)
+
 
 func quick_sort(arr, key_to_sort):
 	if arr.size() <= 1:

@@ -41,12 +41,13 @@ const MOUSE_HOLD_TIMES: Dictionary = {
 	"medium": 0.350,
 	"long": 0.450,
 }
+
+
 @export var columns = 8
 @export var rows = 8
-@export var game_state_view: GameStateView
-@onready var mine_field_container = %MineFieldContainer
-@onready var current_theme: Theme = %BaseNode.theme
-@onready var sweeper_ui_top = %SweeperUiTop
+
+@onready var gameStateView = %GameStateView
+@onready var baseNode = %BaseNode
 
 signal game_start
 signal game_lost
@@ -70,7 +71,7 @@ var atlas_source = TileSetAtlasSource.new()
 
 
 func _ready():
-	var texture: Texture2D = current_theme.get_meta("base_tiles")
+	var texture: Texture2D = baseNode.theme.get_meta("base_tiles")
 	set_tile_set(texture)
 
 
@@ -240,7 +241,7 @@ func _calculate_3bv_neighbor_cells(cell_coord: Vector2i, marked_cells: Array[Vec
 
 
 func get_tile_label_text(cell_type: Vector2i) -> Dictionary:
-	var color_codes = current_theme.get_meta("NumberColors")
+	var color_codes = baseNode.theme.get_meta("NumberColors")
 	return {"text": str(cell_type.x + 1), "color": color_codes[cell_type.x + 1]}
 
 
@@ -250,11 +251,11 @@ func set_title_label(cell_coord: Vector2i, cell_type: Vector2i) -> Label:
 		cell_label = cell_labels[cell_coord]
 	else:
 		cell_label = Label.new()
-		cell_label.theme = current_theme
+		cell_label.theme = baseNode.theme
 		cell_label.position = cell_coord * TILE_SIZE
 		cell_label.size = TILE_SIZE
 		add_child(cell_label)
-		cell_label.add_theme_font_size_override("font_size", current_theme.get_meta("label_font_size"))
+		cell_label.add_theme_font_size_override("font_size", baseNode.theme.get_meta("label_font_size"))
 		cell_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 		cell_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		cell_labels[cell_coord] = cell_label
@@ -318,7 +319,7 @@ func handle_cell(cell_coord: Vector2i):
 
 	if not first_move:
 		first_move = true
-		game_state_view.timer.start()
+		gameStateView.timer.start()
 
 	var atlas_coord = get_cell_atlas_coords(DEFAULT_LAYER, cell_coord)
 	if atlas_coord == CELLS.flag:

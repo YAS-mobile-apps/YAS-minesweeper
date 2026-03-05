@@ -60,14 +60,13 @@ script = ExtResource("3_ndd0u")
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="SweeperUiTop" type="PanelContainer" parent="BaseNode/SweeperGameUi" node_paths=PackedStringArray("mine_grid")]
+[node name="SweeperUiTop" type="PanelContainer" parent="BaseNode/SweeperGameUi"]
 unique_name_in_owner = true
 clip_contents = true
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_sd3yl")
 script = ExtResource("1_ic7g8")
-mine_grid = NodePath("../MineFieldContainer/TileMap")
 
 [node name="GameStatusBox" type="HBoxContainer" parent="BaseNode/SweeperGameUi/SweeperUiTop"]
 layout_mode = 2
@@ -171,7 +170,7 @@ size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_5le7i")
 script = ExtResource("9_gvkcf")
 
-[node name="TileMap" type="TileMap" parent="BaseNode/SweeperGameUi/MineFieldContainer" node_paths=PackedStringArray("game_state_view")]
+[node name="TileMap" type="TileMap" parent="BaseNode/SweeperGameUi/MineFieldContainer"]
 unique_name_in_owner = true
 texture_filter = 2
 position = Vector2(196, 340)
@@ -179,7 +178,6 @@ format = 2
 script = ExtResource("3_m6pnu")
 columns = 14
 rows = 9
-game_state_view = NodePath("../../../../GameStateView")
 
 [node name="SeparatorCenterBottom" type="Control" parent="BaseNode/SweeperGameUi"]
 layout_mode = 2
@@ -395,8 +393,8 @@ layout_mode = 2
 [node name="HSeparator8" type="HSeparator" parent="BaseNode/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
 layout_mode = 2
 
-[node name="GameStateView" parent="." node_paths=PackedStringArray("mine_grid") instance=ExtResource("4_5tf64")]
-mine_grid = NodePath("../BaseNode/SweeperGameUi/MineFieldContainer/TileMap")
+[node name="GameStateView" parent="." instance=ExtResource("4_5tf64")]
+unique_name_in_owner = true
 
 [node name="ListScoreWindow" type="Window" parent="."]
 unique_name_in_owner = true
