@@ -15,7 +15,7 @@ const SURROUNDING_POSITIONS: Array = [
 	Vector2i.DOWN + Vector2i.LEFT, 
 	Vector2i.DOWN + Vector2i.RIGHT
 ] 
-const OPEN_CELL = 5;
+const EMPTY_CELL = 5;
 const CELLS: Dictionary = {
 	"open_cell": Vector2i(4, 0),
 	"mine": Vector2i(0,0),
@@ -41,6 +41,7 @@ const MOUSE_HOLD_TIMES: Dictionary = {
 
 @onready var gameStateView = %GameStateView
 @onready var baseNode = %BaseNode
+@onready var theme: Theme = %BaseNode.theme
 
 signal game_start
 signal game_lost
@@ -64,7 +65,7 @@ var atlas_source = TileSetAtlasSource.new()
 
 
 func _ready():
-	var texture: Texture2D = baseNode.theme.get_meta("base_tiles")
+	var texture: Texture2D = theme.get_meta("base_tiles")
 	set_tile_set(texture)
 
 
@@ -234,7 +235,7 @@ func _calculate_3bv_neighbor_cells(cell_coord: Vector2i, marked_cells: Array[Vec
 
 
 func get_tile_label_text(mine_count: int) -> Dictionary:
-	var color_codes = baseNode.theme.get_meta("NumberColors")
+	var color_codes = theme.get_meta("NumberColors")
 	var no_mines = mine_count < 1
 	var color = "#000" if no_mines else color_codes[mine_count]
 	var text = "" if no_mines else str(mine_count)
@@ -247,11 +248,11 @@ func set_title_label(cell_coord: Vector2i, mine_count: String) -> Label:
 		cell_label = cell_labels[cell_coord]
 	else:
 		cell_label = Label.new()
-		cell_label.theme = baseNode.theme
+		cell_label.theme = theme
 		cell_label.position = cell_coord * TILE_SIZE
 		cell_label.size = TILE_SIZE
 		add_child(cell_label)
-		cell_label.add_theme_font_size_override("font_size", baseNode.theme.get_meta("label_font_size"))
+		cell_label.add_theme_font_size_override("font_size", theme.get_meta("label_font_size"))
 		cell_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 		cell_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		cell_labels[cell_coord] = cell_label
@@ -264,7 +265,8 @@ func set_title_label(cell_coord: Vector2i, mine_count: String) -> Label:
 func set_tile_cell(cell_coord: Vector2i, cell_type: Vector2i, alternative_tile: int = 0, mine_count: String = "0"):
 	if (cell_type == CELLS.open_cell): 
 		set_title_label(cell_coord, mine_count)
-		cell_type.x = OPEN_CELL
+		if (mine_count == "0" and theme.get_meta("special_empty_cell") == true):
+			cell_type.x = EMPTY_CELL
 
 	set_cell(
 		DEFAULT_LAYER, cell_coord, TILE_SET_ID, cell_type, alternative_tile
