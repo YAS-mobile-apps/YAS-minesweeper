@@ -80,7 +80,7 @@ func set_tile_set(tile_theme: Texture2D):
 	for x in range(tiles_x):
 		atlas_source.create_tile(Vector2i(x, 0))
 
-	atlas_source.create_alternative_tile(CELLS["default"])
+	atlas_source.create_alternative_tile(CELLS.default)
 	new_tileset.add_source(atlas_source)
 	self.rendering_quadrant_size = 49
 	self.tile_set = new_tileset
