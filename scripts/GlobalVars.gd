@@ -54,4 +54,3 @@ var current_scores: Dictionary = {
 		"last_player_name": "",
 	},
 }
-

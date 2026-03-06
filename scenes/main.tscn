@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cs7xfipko16xx"]
+[gd_scene load_steps=23 format=3 uid="uid://cs7xfipko16xx"]
 
 [ext_resource type="Theme" uid="uid://o0re7h3ft77b" path="res://assets/themes/dev_theme/development_theme.tres" id="1_5sqsy"]
 [ext_resource type="Script" path="res://scripts/SweeperUiTop.gd" id="1_ic7g8"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://scripts/SweeperUiBottom.gd" id="10_3fbao"]
 [ext_resource type="Texture2D" uid="uid://cewyd38vautxy" path="res://assets/themes/dev_theme/top_ui/button_smile.png" id="10_ucv3x"]
 [ext_resource type="Texture2D" uid="uid://dxeuk57gdm7rv" path="res://assets/themes/dev_theme/top_ui/button_smile_click.png" id="11_g1jv4"]
+[ext_resource type="Script" path="res://scripts/TileMapNumbers.gd" id="11_s5dhg"]
 [ext_resource type="Script" path="res://scripts/SaveScoreWindow.gd" id="12_31fka"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sd3yl"]
@@ -178,6 +179,11 @@ format = 2
 script = ExtResource("3_m6pnu")
 columns = 14
 rows = 9
+
+[node name="TileMapNumbers" type="Node2D" parent="BaseNode/SweeperGameUi/MineFieldContainer"]
+unique_name_in_owner = true
+position = Vector2(196, 340)
+script = ExtResource("11_s5dhg")
 
 [node name="SeparatorCenterBottom" type="Control" parent="BaseNode/SweeperGameUi"]
 layout_mode = 2
