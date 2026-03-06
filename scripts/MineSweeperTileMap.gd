@@ -200,7 +200,7 @@ func get_board_3bv_score() -> int:
 	var value_3bv: int = 0
 
 	for cell_coord in existing_cells:
-		mine_count = int(check_surrounding_mines(cell_coord))
+		mine_count = check_surrounding_mines(cell_coord)
 		if mine_count == 0 and !cells_with_mine.has(cell_coord):
 			if !marked_cells.has(cell_coord):
 				value_3bv = value_3bv + 1
@@ -227,7 +227,7 @@ func _calculate_3bv_neighbor_cells(cell_coord: Vector2i, marked_cells: Array[Vec
 			continue
 		if !marked_cells.has(neighboor_coord):
 			marked_cells.append(neighboor_coord)
-			if check_surrounding_mines(neighboor_coord) == "0":
+			if check_surrounding_mines(neighboor_coord) == 0:
 				_calculate_3bv_neighbor_cells(
 					neighboor_coord, marked_cells, value_3bv
 				)
@@ -242,7 +242,7 @@ func get_tile_label_text(mine_count: int) -> Dictionary:
 	return {"text":  text, "color": color}
 
 
-func set_title_label(cell_coord: Vector2i, mine_count: String) -> Label:
+func set_title_label(cell_coord: Vector2i, mine_count: int) -> Label:
 	var cell_label: Label
 	if cell_labels.has(cell_coord):
 		cell_label = cell_labels[cell_coord]
@@ -256,16 +256,16 @@ func set_title_label(cell_coord: Vector2i, mine_count: String) -> Label:
 		cell_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 		cell_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		cell_labels[cell_coord] = cell_label
-		var tile_data = get_tile_label_text(int(mine_count))
+		var tile_data = get_tile_label_text(mine_count)
 		cell_label.text = tile_data["text"]
 		cell_label.add_theme_color_override("font_color", tile_data["color"])
 	return cell_label
 
 
-func set_tile_cell(cell_coord: Vector2i, cell_type: Vector2i, alternative_tile: int = 0, mine_count: String = "0"):
+func set_tile_cell(cell_coord: Vector2i, cell_type: Vector2i, alternative_tile: int = 0, mine_count: int = 0):
 	if (cell_type == CELLS.open_cell): 
 		set_title_label(cell_coord, mine_count)
-		if (mine_count == "0" and theme.get_meta("special_empty_cell") == true):
+		if (mine_count == 0 and theme.get_meta("special_empty_cell") == true):
 			cell_type.x = EMPTY_CELL
 
 	set_cell(
@@ -332,7 +332,7 @@ func handle_cell(cell_coord: Vector2i):
 	cells_open = cells_open + 1
 	cells_checked.append(cell_coord)
 
-	if mine_count != "0": 
+	if mine_count != 0: 
 		check_for_win_condition()
 		return
 
@@ -353,14 +353,12 @@ func check_surrounding_mines(cell_coord: Vector2i):
 	for cell_direction in SURROUNDING_POSITIONS:
 		if cells_with_mine.has(cell_coord + cell_direction):
 			mine_count = mine_count + 1
-	return str(mine_count)
+	return mine_count
 
 
 func check_for_win_condition():
 	var all_cells_were_checked = false
-	if cells_open + MINE_AMOUNT[
-		GlobalVars.settings.dificulty
-	] == columns * rows:
+	if cells_open + MINE_AMOUNT[GlobalVars.settings.dificulty] == columns * rows:
 		all_cells_were_checked = true
 	if all_cells_were_checked and not is_game_finished:
 		game_won()
