@@ -15,20 +15,13 @@ const SURROUNDING_POSITIONS: Array = [
 	Vector2i.DOWN + Vector2i.LEFT, 
 	Vector2i.DOWN + Vector2i.RIGHT
 ] 
+const EMPTY_CELL = 4;
 const CELLS: Dictionary = {
-	"0": Vector2i(12, 0),
-	"1": Vector2i(0,0),
-	"2": Vector2i(1,0),
-	"3": Vector2i(2,0),
-	"4": Vector2i(3,0),
-	"5": Vector2i(4,0),
-	"6": Vector2i(5,0),
-	"7": Vector2i(6,0),
-	"8": Vector2i(7,0),
-	"mine": Vector2i(8,0),
-	"flag": Vector2i(9,0),
-	"default": Vector2i(10,0),
-	"mine_hit": Vector2i(11,0),
+	"open_cell": Vector2i(4, 0),
+	"mine": Vector2i(0,0),
+	"flag": Vector2i(1,0),
+	"default": Vector2i(2,0),
+	"mine_hit": Vector2i(3,0),
 }
 const MINE_AMOUNT: Dictionary = {
 	"dev_mode": 1,
@@ -79,13 +72,13 @@ func set_tile_set(tile_theme: Texture2D):
 	new_tileset.tile_size = TILE_SIZE
 	atlas_source.texture_region_size = TILE_SIZE
 	atlas_source.texture = tile_theme
-	
+
 	var texture_size = tile_theme.get_size()
 	var tiles_x = texture_size.x / TILE_SIZE.x
-	
+
 	for x in range(tiles_x):
 		atlas_source.create_tile(Vector2i(x, 0))
-	
+
 	atlas_source.create_alternative_tile(CELLS["default"])
 	new_tileset.add_source(atlas_source)
 	self.rendering_quadrant_size = 49
@@ -119,7 +112,7 @@ func new_game():
 
 	for child in get_children():
 		remove_child(child)
-	
+
 	for row in rows:
 		for column in columns:
 			var cell_coord = Vector2i(row - int(rows / 2.0), column - int(columns / 2.0))
@@ -134,7 +127,7 @@ func _input(event: InputEvent):
 	var is_touch_event: bool = event is InputEventScreenTouch
 	var is_press: bool = event.is_pressed()
 	var is_release: bool = event.is_released()
-	
+
 	if !is_mouse_event and !is_touch_event:
 		return
 		
@@ -152,7 +145,7 @@ func _input(event: InputEvent):
 
 	selected_position = get_local_mouse_position()
 	selected_cell_coord = local_to_map(selected_position)
-	
+
 	var release_left_button: bool = is_mouse_event and event.button_index == MOUSE_BUTTON_LEFT \
 		and is_release
 	var release_right_button: bool = is_mouse_event and event.button_index == MOUSE_BUTTON_RIGHT \
@@ -162,7 +155,7 @@ func _input(event: InputEvent):
 		else release_left_button
 	var flag_button = release_right_button if !GlobalVars.settings.click_reverse \
 		else release_left_button
-	
+
 	if mine_button:
 		if held_long_enough:
 			if is_game_finished: return new_game()
@@ -177,7 +170,7 @@ func _input(event: InputEvent):
 		else:
 			if is_game_finished: return new_game()
 			flag_placement(selected_cell_coord)
-	
+
 
 func place_mines():
 	match get_tile_range():
@@ -194,7 +187,7 @@ func place_mines():
 					)
 				cells_with_mine.append(mine_coords)
 			board_3bv_score = get_board_3bv_score()
-	
+
 	for cell in cells_with_mine:
 		erase_cell(DEFAULT_LAYER, cell)
 		set_tile_cell(cell, CELLS.default, 1)
@@ -204,7 +197,7 @@ func get_board_3bv_score() -> int:
 	var marked_cells: Array[Vector2i] = []
 	var mine_count: int = 0
 	var value_3bv: int = 0
-		
+
 	for cell_coord in existing_cells:
 		mine_count = int(check_surrounding_mines(cell_coord))
 		if mine_count == 0 and !cells_with_mine.has(cell_coord):
@@ -226,7 +219,7 @@ func get_board_3bv_score() -> int:
 
 func _calculate_3bv_neighbor_cells(cell_coord: Vector2i, marked_cells: Array[Vector2i], value_3bv: int):
 	var neighboor_coord: Vector2i
-	
+
 	for cell_direction in SURROUNDING_POSITIONS: 
 		neighboor_coord = cell_coord + cell_direction
 		if !existing_cells.has(neighboor_coord):
@@ -240,12 +233,15 @@ func _calculate_3bv_neighbor_cells(cell_coord: Vector2i, marked_cells: Array[Vec
 	return [marked_cells, value_3bv]
 
 
-func get_tile_label_text(cell_type: Vector2i) -> Dictionary:
+func get_tile_label_text(mine_count: int) -> Dictionary:
 	var color_codes = baseNode.theme.get_meta("NumberColors")
-	return {"text": str(cell_type.x + 1), "color": color_codes[cell_type.x + 1]}
+	var no_mines = mine_count < 1
+	var color = "#000" if no_mines else color_codes[mine_count]
+	var text = "" if no_mines else str(mine_count)
+	return {"text":  text, "color": color}
 
 
-func set_title_label(cell_coord: Vector2i, cell_type: Vector2i) -> Label:
+func set_title_label(cell_coord: Vector2i, mine_count: String) -> Label:
 	var cell_label: Label
 	if cell_labels.has(cell_coord):
 		cell_label = cell_labels[cell_coord]
@@ -259,16 +255,16 @@ func set_title_label(cell_coord: Vector2i, cell_type: Vector2i) -> Label:
 		cell_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 		cell_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		cell_labels[cell_coord] = cell_label
-		var tile_data = get_tile_label_text(cell_type)
+		var tile_data = get_tile_label_text(int(mine_count))
 		cell_label.text = tile_data["text"]
 		cell_label.add_theme_color_override("font_color", tile_data["color"])
 	return cell_label
 
 
-func set_tile_cell(cell_coord: Vector2i, cell_type: Vector2i, alternative_tile: int = 0):
-	if (cell_type.x <= 7): 
-		set_title_label(cell_coord, cell_type)
-		cell_type.x = 12
+func set_tile_cell(cell_coord: Vector2i, cell_type: Vector2i, alternative_tile: int = 0, mine_count: String = "0"):
+	if (cell_type == CELLS.open_cell): 
+		set_title_label(cell_coord, mine_count)
+		cell_type.x = EMPTY_CELL
 
 	set_cell(
 		DEFAULT_LAYER, cell_coord, TILE_SET_ID, cell_type, alternative_tile
@@ -280,7 +276,7 @@ func flag_placement(cell_coord: Vector2i):
 	if not tile_data:
 		return
 	var atlas_coord = get_cell_atlas_coords(DEFAULT_LAYER, cell_coord)
-	
+
 	if atlas_coord == CELLS.default:
 		if placed_flags == MINE_AMOUNT[GlobalVars.settings.dificulty]:
 			max_flags_placed.emit()
@@ -328,16 +324,16 @@ func handle_cell(cell_coord: Vector2i):
 	if placed_flags < 0:
 		placed_flags = 0
 		flag_placed.emit(placed_flags)
-	
+
 	var mine_count = check_surrounding_mines(cell_coord)
-	set_tile_cell(cell_coord, CELLS[mine_count])
+	set_tile_cell(cell_coord, CELLS.open_cell, 0, mine_count)
 	cells_open = cells_open + 1
 	cells_checked.append(cell_coord)
-	
+
 	if mine_count != "0": 
 		check_for_win_condition()
 		return
-		
+
 	for cell_direction in SURROUNDING_POSITIONS:
 		handle_surrounding_cell(cell_coord + cell_direction)
 
