@@ -15,7 +15,7 @@ const SURROUNDING_POSITIONS: Array = [
 	Vector2i.DOWN + Vector2i.LEFT, 
 	Vector2i.DOWN + Vector2i.RIGHT
 ] 
-const EMPTY_CELL = 4;
+const OPEN_CELL = 5;
 const CELLS: Dictionary = {
 	"open_cell": Vector2i(4, 0),
 	"mine": Vector2i(0,0),
@@ -264,7 +264,7 @@ func set_title_label(cell_coord: Vector2i, mine_count: String) -> Label:
 func set_tile_cell(cell_coord: Vector2i, cell_type: Vector2i, alternative_tile: int = 0, mine_count: String = "0"):
 	if (cell_type == CELLS.open_cell): 
 		set_title_label(cell_coord, mine_count)
-		cell_type.x = EMPTY_CELL
+		cell_type.x = OPEN_CELL
 
 	set_cell(
 		DEFAULT_LAYER, cell_coord, TILE_SET_ID, cell_type, alternative_tile
