@@ -60,8 +60,6 @@ func _ready():
 	var styleBox: StyleBoxFlat = get_theme_stylebox("panel").duplicate()
 	styleBox.set("bg_color", baseNode.theme.get_meta("top_ui_background_color"))
 	add_theme_stylebox_override("panel", styleBox)
-	
-	GlobalFuncs.avoid_notch(self)
 
 
 func game_reset_button_pressed():

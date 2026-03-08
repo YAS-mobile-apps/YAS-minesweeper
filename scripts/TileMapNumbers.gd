@@ -1,11 +1,10 @@
-extends Node2D
+extends Control
 
 class_name TileMapNumbers
 
-const TILE_SIZE = Vector2i(49, 48)
-
 @onready var baseNode = %BaseNode
-@onready var theme: Theme = %BaseNode.theme
+@onready var base_theme: Theme = %BaseNode.theme
+@onready var tileMap: TileMap = %TileMap
 
 var color_codes: Dictionary = {}
 var cells_mine_count: Dictionary = {}
@@ -14,15 +13,15 @@ var font_size: int = 12
 var text_vertical_offset = null
 
 func _ready():
-	font = theme.get_font("font", "Label")
-	font_size = theme.get_meta("label_font_size")
-	color_codes = theme.get_meta("NumberColors")
-	text_vertical_offset = TILE_SIZE.y / 2.0 + font_size / 2.0
+	font = base_theme.get_font("font", "Label")
+	font_size = base_theme.get_meta("label_font_size")
+	color_codes = base_theme.get_meta("NumberColors")
+	text_vertical_offset = GlobalVars.TILE_SIZE.y / 2.0 + font_size / 2.0
 
 
 func _draw():
 	for coord in cells_mine_count:
-		var tile_position = Vector2(coord) * Vector2(TILE_SIZE)
+		var tile_position = Vector2(coord) * Vector2(GlobalVars.TILE_SIZE)
 		var text = str(cells_mine_count[coord])
 		var text_position = tile_position + Vector2(0, text_vertical_offset)
 
@@ -31,7 +30,7 @@ func _draw():
 			text_position,
 			text,
 			HORIZONTAL_ALIGNMENT_CENTER,
-			TILE_SIZE.x,
+			GlobalVars.TILE_SIZE.x,
 			font_size,
 			color_codes[cells_mine_count[coord]]
 		)
