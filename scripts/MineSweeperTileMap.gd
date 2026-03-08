@@ -4,7 +4,7 @@ class_name MineSweeperTileMap
 
 const TILE_SET_ID = 0
 const DEFAULT_LAYER = 0
-const TILE_SIZE = Vector2i(49, 48)
+
 const SURROUNDING_POSITIONS: Array = [
 	Vector2i.UP, 
 	Vector2i.DOWN, 
@@ -15,32 +15,12 @@ const SURROUNDING_POSITIONS: Array = [
 	Vector2i.DOWN + Vector2i.LEFT, 
 	Vector2i.DOWN + Vector2i.RIGHT
 ] 
-const EMPTY_CELL = 5;
-const CELLS: Dictionary = {
-	"open_cell": Vector2i(4, 0),
-	"mine": Vector2i(0,0),
-	"flag": Vector2i(1,0),
-	"default": Vector2i(2,0),
-	"mine_hit": Vector2i(3,0),
-}
-const MINE_AMOUNT: Dictionary = {
-	"dev_mode": 1,
-	"normal_mode": 9,
-	"medium_mode": 12,
-	"hard_mode": 19,
-}
-const MOUSE_HOLD_TIMES: Dictionary = {
-	"short": 0.200,
-	"medium": 0.350,
-	"long": 0.450,
-}
-
 
 @export var columns = 8
 @export var rows = 8
 
 @onready var gameStateView = %GameStateView
-@onready var baseNode = %BaseNode
+@onready var baseNode: BaseNode = %BaseNode
 @onready var theme: Theme = %BaseNode.theme
 @onready var tileMapNumbers = %TileMapNumbers
 
@@ -60,23 +40,10 @@ var cells_open: int = 0
 var board_3bv_score: int = 0
 var is_mouse_hold: bool = false
 var mouse_held_timer: float = 0
-var new_tileset = TileSet.new()
-var atlas_source = TileSetAtlasSource.new()
-var texture: Texture2D = null
 
 
 func _ready():
-	## Startup time mesurements
-	#print("ready start", Time.get_ticks_msec())
-	#await get_tree().process_frame
-#
-	#print("frame 1", Time.get_ticks_msec())
-	#await get_tree().process_frame
-#
-	#print("frame 2", Time.get_ticks_msec())
-
-	texture = theme.get_meta("base_tiles")
-	set_tile_set(texture)
+	self.tile_set = baseNode.base_tileset
 
 
 func _physics_process(delta):
@@ -101,7 +68,7 @@ func _input(event: InputEvent):
 
 	var selected_position: Vector2
 	var selected_cell_coord: Vector2i
-	var held_long_enough: bool = mouse_held_timer > MOUSE_HOLD_TIMES[
+	var held_long_enough: bool = mouse_held_timer > GlobalVars.MOUSE_HOLD_TIMES[
 		GlobalVars.settings.hold_click
 		]
 
@@ -151,26 +118,9 @@ func new_game():
 	for row in rows:
 		for column in columns:
 			var cell_coord = Vector2i(row - int(rows / 2.0), column - int(columns / 2.0))
-			set_tile_cell(cell_coord, CELLS.default)
+			set_tile_cell(cell_coord, GlobalVars.CELLS.default)
 			existing_cells.append(cell_coord)
 	place_mines()
-
-
-func set_tile_set(tile_theme: Texture2D):
-	new_tileset.tile_size = TILE_SIZE
-	atlas_source.texture_region_size = TILE_SIZE
-	atlas_source.texture = tile_theme
-
-	var texture_size = tile_theme.get_size()
-	var tiles_x = texture_size.x / TILE_SIZE.x
-
-	for x in range(tiles_x):
-		atlas_source.create_tile(Vector2i(x, 0))
-
-	atlas_source.create_alternative_tile(CELLS.default)
-	new_tileset.add_source(atlas_source)
-	self.rendering_quadrant_size = 49
-	self.tile_set = new_tileset
 
 
 func get_tile_range() -> Array[int]:
@@ -184,7 +134,7 @@ func get_tile_range() -> Array[int]:
 func place_mines():
 	match get_tile_range():
 		[var row_start, var row_end, var column_start, var column_end]:
-			for i in MINE_AMOUNT[GlobalVars.settings.dificulty]:
+			for i in GlobalVars.MINE_AMOUNT[GlobalVars.settings.dificulty]:
 				var mine_coords = Vector2i(
 					randi_range(row_start, row_end), 
 					randi_range(column_start, column_end)
@@ -199,7 +149,7 @@ func place_mines():
 
 	for cell in cells_with_mine:
 		erase_cell(DEFAULT_LAYER, cell)
-		set_tile_cell(cell, CELLS.default, 1)
+		set_tile_cell(cell, GlobalVars.CELLS.default, 1)
 
 
 func get_board_3bv_score() -> int:		
@@ -244,11 +194,11 @@ func _calculate_3bv_neighbor_cells(cell_coord: Vector2i, marked_cells: Array[Vec
 
 
 func set_tile_cell(cell_coord: Vector2i, cell_type: Vector2i, alternative_tile: int = 0, mine_count: int = 0):
-	if (cell_type == CELLS.open_cell): 
+	if (cell_type == GlobalVars.CELLS.open_cell): 
 		if (mine_count > 0):
 			tileMapNumbers.cells_mine_count[cell_coord] = mine_count
 		elif (theme.get_meta("special_empty_cell") == true):
-			cell_type.x = EMPTY_CELL
+			cell_type.x = GlobalVars.EMPTY_CELL_TILE_POSITION
 
 	set_cell(
 		DEFAULT_LAYER, cell_coord, TILE_SET_ID, cell_type, alternative_tile
@@ -262,20 +212,20 @@ func flag_placement(cell_coord: Vector2i):
 		return
 	var atlas_coord = get_cell_atlas_coords(DEFAULT_LAYER, cell_coord)
 
-	if atlas_coord == CELLS.default:
-		if placed_flags == MINE_AMOUNT[GlobalVars.settings.dificulty]:
+	if atlas_coord == GlobalVars.CELLS.default:
+		if placed_flags == GlobalVars.MINE_AMOUNT[GlobalVars.settings.dificulty]:
 			max_flags_placed.emit()
 			return
 			
-		set_tile_cell(cell_coord, CELLS.flag)
+		set_tile_cell(cell_coord, GlobalVars.CELLS.flag)
 		placed_flags = placed_flags + 1
 		flag_placed.emit(placed_flags)
-	elif atlas_coord == CELLS.flag and cells_with_mine.has(cell_coord):
-		set_tile_cell(cell_coord, CELLS.default, 1)
+	elif atlas_coord == GlobalVars.CELLS.flag and cells_with_mine.has(cell_coord):
+		set_tile_cell(cell_coord, GlobalVars.CELLS.default, 1)
 		placed_flags = placed_flags - 1
 		flag_placed.emit(placed_flags)
-	elif atlas_coord == CELLS.flag:
-		set_tile_cell(cell_coord, CELLS.default)
+	elif atlas_coord == GlobalVars.CELLS.flag:
+		set_tile_cell(cell_coord, GlobalVars.CELLS.default)
 		placed_flags = placed_flags - 1
 		flag_placed.emit(placed_flags)
 	if placed_flags < 0:
@@ -303,7 +253,7 @@ func handle_cell(cell_coord: Vector2i):
 		gameStateView.timer.start()
 
 	var atlas_coord = get_cell_atlas_coords(DEFAULT_LAYER, cell_coord)
-	if atlas_coord == CELLS.flag:
+	if atlas_coord == GlobalVars.CELLS.flag:
 		placed_flags = placed_flags - 1
 		flag_placed.emit(placed_flags)
 	if placed_flags < 0:
@@ -311,7 +261,7 @@ func handle_cell(cell_coord: Vector2i):
 		flag_placed.emit(placed_flags)
 
 	var mine_count = check_surrounding_mines(cell_coord)
-	set_tile_cell(cell_coord, CELLS.open_cell, 0, mine_count)
+	set_tile_cell(cell_coord, GlobalVars.CELLS.open_cell, 0, mine_count)
 	cells_open = cells_open + 1
 	cells_checked.append(cell_coord)
 
@@ -341,7 +291,7 @@ func check_surrounding_mines(cell_coord: Vector2i):
 
 func check_for_win_condition():
 	var all_cells_were_checked = false
-	if cells_open + MINE_AMOUNT[GlobalVars.settings.dificulty] == columns * rows:
+	if cells_open + GlobalVars.MINE_AMOUNT[GlobalVars.settings.dificulty] == columns * rows:
 		all_cells_were_checked = true
 	if all_cells_were_checked and not is_game_finished:
 		game_won()
@@ -351,13 +301,13 @@ func game_won():
 	game_win.emit()
 	is_game_finished = true
 	for cell in cells_with_mine:
-		set_tile_cell(cell, CELLS.flag)
+		set_tile_cell(cell, GlobalVars.CELLS.flag)
 
 
 func game_over(cell_coord: Vector2i):
 	game_lost.emit()
 	is_game_finished = true
 	for cell in cells_with_mine:
-			set_tile_cell(cell, CELLS.mine)
-	set_tile_cell(cell_coord, CELLS.mine_hit)
+			set_tile_cell(cell, GlobalVars.CELLS.mine)
+	set_tile_cell(cell_coord, GlobalVars.CELLS.mine_hit)
 

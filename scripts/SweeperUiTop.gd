@@ -37,13 +37,20 @@ signal flip_flag_placement
 
 
 func _ready():
-	game_lost_button_texture = baseNode.theme.get_meta("button_lose")
-	game_won_button_texture = baseNode.theme.get_meta("button_win")
-	default_button_texture = baseNode.theme.get_meta("button_smile")
+	game_lost_button_texture = baseNode.get_tile_texture(GlobalVars.CELLS.lose)
+	game_won_button_texture = baseNode.get_tile_texture(GlobalVars.CELLS.win)
+	default_button_texture = baseNode.get_tile_texture(GlobalVars.CELLS.smile)
 
-	flag_placement_set_right_texture = baseNode.theme.get_meta("mine_as_default")
-	flag_placement_set_left_texture = baseNode.theme.get_meta("flag_as_default")
-	
+	flag_placement_set_right_texture = baseNode.get_tile_texture(GlobalVars.CELLS.mine)
+	flag_placement_set_left_texture = baseNode.get_tile_texture(GlobalVars.CELLS.flag)
+
+	gameStatusButton.texture_normal = baseNode.get_tile_texture(GlobalVars.CELLS.smile)
+	gameStatusButton.texture_pressed = baseNode.get_tile_texture(GlobalVars.CELLS.smile_click)
+
+	scoreButton.texture_normal = baseNode.get_tile_texture(GlobalVars.CELLS.winners)
+	scoreButton.texture_pressed = baseNode.get_tile_texture(GlobalVars.CELLS.winners)
+	scoreButton.texture_hover = baseNode.get_tile_texture(GlobalVars.CELLS.winners_click)
+
 	gameStatusButton.pressed.connect(game_status_button_pressed)
 	saveCancelButton.pressed.connect(game_reset_button_pressed)
 	saveConfirmButton.pressed.connect(save_confirm_button_pressed)

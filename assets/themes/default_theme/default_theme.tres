@@ -1,13 +1,13 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://o0re7h3ft77b"]
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://cyrlp5twyc8al"]
 
-[ext_resource type="Texture2D" uid="uid://dunq15if5jhxm" path="res://assets/themes/dev_theme/base_tiles.png" id="1_87jpu"]
-[ext_resource type="FontFile" uid="uid://xm6l2vgx03qi" path="res://assets/themes/dev_theme/font/PrStart.ttf" id="1_v2bpu"]
+[ext_resource type="FontFile" uid="uid://d1626yq8624vs" path="res://assets/themes/default_theme/font/PrStart.ttf" id="1_ha13k2"]
+[ext_resource type="Texture2D" uid="uid://w4i2b6o06bb" path="res://assets/themes/default_theme/base_tiles.png" id="2_3llkb"]
 
 [resource]
-resource_name = "dev_theme"
-default_font = ExtResource("1_v2bpu")
+resource_name = "default_theme"
+default_font = ExtResource("1_ha13k2")
 default_font_size = 11
-metadata/base_tiles = ExtResource("1_87jpu")
+metadata/base_tiles = ExtResource("2_3llkb")
 metadata/NumberColors = {
 1: Color(0, 0.431373, 0, 1),
 2: Color(0.41392, 0.322834, 0.101941, 1),
