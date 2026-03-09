@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cs7xfipko16xx"]
+[gd_scene load_steps=25 format=3 uid="uid://cs7xfipko16xx"]
 
 [ext_resource type="Script" path="res://scripts/DisplaySafeArea.gd" id="1_2q0tv"]
 [ext_resource type="Theme" uid="uid://cyrlp5twyc8al" path="res://assets/themes/default_theme/default_theme.tres" id="1_4lv0w"]
@@ -32,7 +32,16 @@ bg_color = Color(0.183811, 0.703642, 0.460706, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_giucn"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mukpf"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wrv4x"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tbs3k"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_txmul"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t2ur3"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [node name="main" type="Control"]
@@ -272,26 +281,72 @@ size_flags_vertical = 0
 [node name="GameUI" type="CanvasLayer" parent="DisplaySafeArea"]
 
 [node name="PanelContainer" type="PanelContainer" parent="DisplaySafeArea/GameUI"]
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 195.0
-offset_top = 388.0
-offset_right = -250.0
-offset_bottom = -374.0
+offset_left = -221.0
+offset_right = 221.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_mukpf")
+theme_override_styles/panel = SubResource("StyleBoxFlat_wrv4x")
 
-[node name="TileMapNumbers" type="Control" parent="DisplaySafeArea/GameUI/PanelContainer"]
-unique_name_in_owner = true
+[node name="InvisibleSweeperGameUi" type="VBoxContainer" parent="DisplaySafeArea/GameUI/PanelContainer"]
+custom_minimum_size = Vector2(440, 762)
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
+mouse_filter = 2
+alignment = 1
+script = ExtResource("3_ndd0u")
+
+[node name="SeparatorTop" type="Control" parent="DisplaySafeArea/GameUI/PanelContainer/InvisibleSweeperGameUi"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="InvisibleSweeperUiTop" type="PanelContainer" parent="DisplaySafeArea/GameUI/PanelContainer/InvisibleSweeperGameUi"]
+custom_minimum_size = Vector2(442, 48)
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tbs3k")
+
+[node name="SeparatorCenterTop" type="Control" parent="DisplaySafeArea/GameUI/PanelContainer/InvisibleSweeperGameUi"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="InvisibleMineFieldContainer" type="PanelContainer" parent="DisplaySafeArea/GameUI/PanelContainer/InvisibleSweeperGameUi"]
+custom_minimum_size = Vector2(440, 689)
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_txmul")
+
+[node name="TileMapNumbers" type="Node2D" parent="DisplaySafeArea/GameUI/PanelContainer/InvisibleSweeperGameUi/InvisibleMineFieldContainer"]
+unique_name_in_owner = true
+position = Vector2(195, 340)
 script = ExtResource("11_s5dhg")
+
+[node name="SeparatorCenterBottom" type="Control" parent="DisplaySafeArea/GameUI/PanelContainer/InvisibleSweeperGameUi"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="InvisibleSweeperUiBottom" type="PanelContainer" parent="DisplaySafeArea/GameUI/PanelContainer/InvisibleSweeperGameUi"]
+custom_minimum_size = Vector2(442, 20)
+layout_mode = 2
+size_flags_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_t2ur3")
+
+[node name="SeparatorBottom" type="Control" parent="DisplaySafeArea/GameUI/PanelContainer/InvisibleSweeperGameUi"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 2
 
 [node name="HighScoreCanvas" type="Control" parent="DisplaySafeArea/GameUI"]
 unique_name_in_owner = true

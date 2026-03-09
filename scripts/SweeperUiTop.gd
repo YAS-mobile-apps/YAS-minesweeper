@@ -21,6 +21,7 @@ const TEXT_PADDING_SIZE: int = 3
 @onready var highScoreTable = %HighScoresTable
 @onready var sweeperGameUi = %SweeperGameUi
 @onready var tileMap = %TileMap
+@onready var tileMapNumbers = %TileMapNumbers
 
 var game_lost_button_texture = null
 var game_won_button_texture = null
@@ -90,6 +91,7 @@ func score_button_pressed():
 	highScoreTable.fill_score_table(GlobalVars.settings.dificulty)
 	highScoreCanvas.visible = true
 	sweeperGameUi.visible = false
+	tileMapNumbers.visible = false
 	sweeperGameUi.process_mode = PROCESS_MODE_DISABLED
 
 func set_mine_count(mine_count: int):
