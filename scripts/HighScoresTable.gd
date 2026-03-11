@@ -11,6 +11,7 @@ class_name Table
 @onready var highScoreCanvas = %HighScoreCanvas
 @onready var sweeperGameUi = %SweeperGameUi
 @onready var baseNode = %BaseNode
+@onready var tileMapNumbers = %TileMapNumbers
 
 var current_sort_table: String = 'none'
 var score_table_dificulty: String = GlobalVars.settings.dificulty
@@ -53,6 +54,7 @@ func format_datetime_string(datetime_string: String) -> String:
 func go_back():
 	highScoreCanvas.visible = false
 	sweeperGameUi.visible = true
+	tileMapNumbers.visible = true
 	sweeperGameUi.process_mode = PROCESS_MODE_INHERIT
 
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cewyd38vautxy"
-path="res://.godot/imported/button_smile.png-e436fde5ebf19da1f24d4ee6b640468a.ctex"
+uid="uid://w4i2b6o06bb"
+path="res://.godot/imported/base_tiles.png-18bbf0c326dc8393b37b11a1981576d9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/themes/dev_theme/top_ui/button_smile.png"
-dest_files=["res://.godot/imported/button_smile.png-e436fde5ebf19da1f24d4ee6b640468a.ctex"]
+source_file="res://assets/themes/default_theme/base_tiles.png"
+dest_files=["res://.godot/imported/base_tiles.png-18bbf0c326dc8393b37b11a1981576d9.ctex"]
 
 [params]
 
@@ -23,12 +23,12 @@ compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=false
 mipmaps/limit=-1
-roughness/mode=0
+roughness/mode=1
 roughness/src_normal=""
-process/fix_alpha_border=true
+process/fix_alpha_border=false
 process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0

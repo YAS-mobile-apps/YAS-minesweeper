@@ -2,11 +2,16 @@ extends Node
 
 class_name GameStateView
 
-@onready var tileMap = %TileMap
-@onready var sweeperUiTop = %SweeperUiTop
-@onready var sweeperUiBottom = %SweeperUiBottom
-@onready var timer = $Timer
-@onready var scoreTable = %ScoreTable
+@export var sweeper_ui_top_path: NodePath
+@export var sweeper_ui_bottom_path: NodePath
+@export var score_table_path: NodePath
+@export var tile_map_path: NodePath
+
+@onready var tileMap = get_node(tile_map_path)
+@onready var sweeperUiTop = get_node(sweeper_ui_top_path)
+@onready var sweeperUiBottom = get_node(sweeper_ui_bottom_path)
+@onready var timer = $Timer    
+@onready var scoreTable = get_node(score_table_path)
 
 var time_elapsed = 0
 var opened_menu = false
@@ -32,7 +37,7 @@ func _ready():
 	tileMap.game_start.connect(on_game_start)
 	tileMap.max_flags_placed.connect(on_max_flags_placed)
 	sweeperUiTop.set_mine_count(
-		tileMap.MINE_AMOUNT[GlobalVars.settings.dificulty]
+		GlobalVars.MINE_AMOUNT[GlobalVars.settings.dificulty]
 	)
 	sweeperUiTop.flip_flag_placement.connect(flip_flag_placement)
 	tileMap.new_game()
@@ -84,7 +89,7 @@ func on_game_start():
 	load_score_table()
 	sweeperUiTop.set_timer_count(time_elapsed)
 	sweeperUiTop.set_mine_count(
-		tileMap.MINE_AMOUNT[GlobalVars.settings.dificulty]
+		GlobalVars.MINE_AMOUNT[GlobalVars.settings.dificulty]
 	)
 	sweeperUiTop.reset_smile_button()
 	sweeperUiBottom.update_dificulty(GlobalVars.settings.dificulty, opened_menu)
@@ -93,7 +98,7 @@ func on_game_start():
 
 func on_flag_placed(flag_count: int):
 	sweeperUiTop.set_mine_count(
-		tileMap.MINE_AMOUNT[GlobalVars.settings.dificulty] - flag_count
+		GlobalVars.MINE_AMOUNT[GlobalVars.settings.dificulty] - flag_count
 	)
 
 

@@ -21,6 +21,7 @@ const TEXT_PADDING_SIZE: int = 3
 @onready var highScoreTable = %HighScoresTable
 @onready var sweeperGameUi = %SweeperGameUi
 @onready var tileMap = %TileMap
+@onready var tileMapNumbers = %TileMapNumbers
 
 var game_lost_button_texture = null
 var game_won_button_texture = null
@@ -37,13 +38,20 @@ signal flip_flag_placement
 
 
 func _ready():
-	game_lost_button_texture = baseNode.theme.get_meta("button_lose")
-	game_won_button_texture = baseNode.theme.get_meta("button_win")
-	default_button_texture = baseNode.theme.get_meta("button_smile")
+	game_lost_button_texture = baseNode.get_tile_texture(GlobalVars.CELLS.lose)
+	game_won_button_texture = baseNode.get_tile_texture(GlobalVars.CELLS.win)
+	default_button_texture = baseNode.get_tile_texture(GlobalVars.CELLS.smile)
 
-	flag_placement_set_right_texture = baseNode.theme.get_meta("mine_as_default")
-	flag_placement_set_left_texture = baseNode.theme.get_meta("flag_as_default")
-	
+	flag_placement_set_right_texture = baseNode.get_tile_texture(GlobalVars.CELLS.mine)
+	flag_placement_set_left_texture = baseNode.get_tile_texture(GlobalVars.CELLS.flag)
+
+	gameStatusButton.texture_normal = baseNode.get_tile_texture(GlobalVars.CELLS.smile)
+	gameStatusButton.texture_pressed = baseNode.get_tile_texture(GlobalVars.CELLS.smile_click)
+
+	scoreButton.texture_normal = baseNode.get_tile_texture(GlobalVars.CELLS.winners)
+	scoreButton.texture_pressed = baseNode.get_tile_texture(GlobalVars.CELLS.winners)
+	scoreButton.texture_hover = baseNode.get_tile_texture(GlobalVars.CELLS.winners_click)
+
 	gameStatusButton.pressed.connect(game_status_button_pressed)
 	saveCancelButton.pressed.connect(game_reset_button_pressed)
 	saveConfirmButton.pressed.connect(save_confirm_button_pressed)
@@ -53,8 +61,6 @@ func _ready():
 	var styleBox: StyleBoxFlat = get_theme_stylebox("panel").duplicate()
 	styleBox.set("bg_color", baseNode.theme.get_meta("top_ui_background_color"))
 	add_theme_stylebox_override("panel", styleBox)
-	
-	GlobalFuncs.avoid_notch(self)
 
 
 func game_reset_button_pressed():
@@ -85,6 +91,7 @@ func score_button_pressed():
 	highScoreTable.fill_score_table(GlobalVars.settings.dificulty)
 	highScoreCanvas.visible = true
 	sweeperGameUi.visible = false
+	tileMapNumbers.visible = false
 	sweeperGameUi.process_mode = PROCESS_MODE_DISABLED
 
 func set_mine_count(mine_count: int):
