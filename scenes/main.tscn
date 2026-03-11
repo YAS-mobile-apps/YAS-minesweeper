@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cs7xfipko16xx"]
+[gd_scene load_steps=22 format=3 uid="uid://cs7xfipko16xx"]
 
 [ext_resource type="Script" path="res://scripts/DisplaySafeArea.gd" id="1_2q0tv"]
 [ext_resource type="Theme" uid="uid://cyrlp5twyc8al" path="res://assets/themes/default_theme/default_theme.tres" id="1_4lv0w"]
@@ -15,20 +15,11 @@
 [ext_resource type="Script" path="res://scripts/TileMapNumbers.gd" id="11_s5dhg"]
 [ext_resource type="Script" path="res://scripts/SaveScoreWindow.gd" id="12_31fka"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sd3yl"]
-bg_color = Color(0.376154, 0.58438, 1, 1)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ct5oy"]
 bg_color = Color(0.0313726, 0.0313726, 0.0313726, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wiw1v"]
 bg_color = Color(0.0313726, 0.0313726, 0.0313726, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5le7i"]
-bg_color = Color(0.0676209, 0.629734, 0.972422, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ndsw"]
-bg_color = Color(0.183811, 0.703642, 0.460706, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_giucn"]
 
@@ -57,15 +48,18 @@ size_flags_vertical = 3
 
 [node name="DisplaySafeArea" type="PanelContainer" parent="."]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
 anchor_bottom = 1.0
+offset_left = -222.5
+offset_right = 222.5
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_2q0tv")
 
 [node name="GameSubViewportContainer" type="SubViewportContainer" parent="DisplaySafeArea"]
-custom_minimum_size = Vector2(440, 0)
+custom_minimum_size = Vector2(445, 0)
 layout_mode = 2
 stretch = true
 
@@ -73,8 +67,12 @@ stretch = true
 disable_3d = true
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
-size = Vector2i(440, 762)
-size_2d_override_stretch = true
+positional_shadow_atlas_size = 0
+positional_shadow_atlas_quad_0 = 0
+positional_shadow_atlas_quad_1 = 0
+positional_shadow_atlas_quad_2 = 0
+positional_shadow_atlas_quad_3 = 0
+size = Vector2i(445, 762)
 render_target_update_mode = 4
 
 [node name="BaseNode" type="PanelContainer" parent="DisplaySafeArea/GameSubViewportContainer/GameSubViewport"]
@@ -82,7 +80,6 @@ unique_name_in_owner = true
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 2.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -92,7 +89,7 @@ script = ExtResource("2_rvne4")
 
 [node name="SweeperGameUi" type="VBoxContainer" parent="DisplaySafeArea/GameSubViewportContainer/GameSubViewport/BaseNode"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(440, 762)
+custom_minimum_size = Vector2(445, 762)
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
@@ -107,13 +104,16 @@ unique_name_in_owner = true
 clip_contents = true
 layout_mode = 2
 size_flags_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_sd3yl")
 script = ExtResource("1_ic7g8")
 
 [node name="GameStatusBox" type="HBoxContainer" parent="DisplaySafeArea/GameSubViewportContainer/GameSubViewport/BaseNode/SweeperGameUi/SweeperUiTop"]
 layout_mode = 2
-theme_override_constants/separation = 50
 alignment = 1
+
+[node name="SeparatorTop6" type="Control" parent="DisplaySafeArea/GameSubViewportContainer/GameSubViewport/BaseNode/SweeperGameUi/SweeperUiTop/GameStatusBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="MineCountPanel" type="Panel" parent="DisplaySafeArea/GameSubViewportContainer/GameSubViewport/BaseNode/SweeperGameUi/SweeperUiTop/GameStatusBox"]
 custom_minimum_size = Vector2(45, 35)
@@ -142,6 +142,11 @@ text = "10"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="SeparatorTop" type="Control" parent="DisplaySafeArea/GameSubViewportContainer/GameSubViewport/BaseNode/SweeperGameUi/SweeperUiTop/GameStatusBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
 [node name="ScoreButton" type="TextureButton" parent="DisplaySafeArea/GameSubViewportContainer/GameSubViewport/BaseNode/SweeperGameUi/SweeperUiTop/GameStatusBox"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(49, 48)
@@ -151,6 +156,11 @@ action_mode = 0
 ignore_texture_size = true
 stretch_mode = 5
 
+[node name="SeparatorTop2" type="Control" parent="DisplaySafeArea/GameSubViewportContainer/GameSubViewport/BaseNode/SweeperGameUi/SweeperUiTop/GameStatusBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
 [node name="GameStatusButton" type="TextureButton" parent="DisplaySafeArea/GameSubViewportContainer/GameSubViewport/BaseNode/SweeperGameUi/SweeperUiTop/GameStatusBox"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(49, 48)
@@ -158,6 +168,11 @@ layout_mode = 2
 tooltip_text = "New Game"
 ignore_texture_size = true
 stretch_mode = 5
+
+[node name="SeparatorTop3" type="Control" parent="DisplaySafeArea/GameSubViewportContainer/GameSubViewport/BaseNode/SweeperGameUi/SweeperUiTop/GameStatusBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="FlagPlacementSetButton" type="TextureButton" parent="DisplaySafeArea/GameSubViewportContainer/GameSubViewport/BaseNode/SweeperGameUi/SweeperUiTop/GameStatusBox"]
 unique_name_in_owner = true
@@ -167,6 +182,11 @@ tooltip_text = "Toggle hold to select"
 action_mode = 0
 ignore_texture_size = true
 stretch_mode = 5
+
+[node name="SeparatorTop4" type="Control" parent="DisplaySafeArea/GameSubViewportContainer/GameSubViewport/BaseNode/SweeperGameUi/SweeperUiTop/GameStatusBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="TimerCountPanel" type="Panel" parent="DisplaySafeArea/GameSubViewportContainer/GameSubViewport/BaseNode/SweeperGameUi/SweeperUiTop/GameStatusBox"]
 custom_minimum_size = Vector2(45, 35)
@@ -194,6 +214,11 @@ text = "000"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="SeparatorTop5" type="Control" parent="DisplaySafeArea/GameSubViewportContainer/GameSubViewport/BaseNode/SweeperGameUi/SweeperUiTop/GameStatusBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
 [node name="SeparatorCenterTop" type="Control" parent="DisplaySafeArea/GameSubViewportContainer/GameSubViewport/BaseNode/SweeperGameUi"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -202,14 +227,14 @@ size_flags_vertical = 3
 unique_name_in_owner = true
 custom_minimum_size = Vector2(440, 689)
 layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_5le7i")
 script = ExtResource("9_gvkcf")
 
 [node name="TileMap" type="TileMap" parent="DisplaySafeArea/GameSubViewportContainer/GameSubViewport/BaseNode/SweeperGameUi/MineFieldContainer"]
 unique_name_in_owner = true
 texture_filter = 2
-position = Vector2(195, 340)
+position = Vector2(196, 340)
 format = 2
 script = ExtResource("3_m6pnu")
 columns = 14
@@ -224,11 +249,11 @@ unique_name_in_owner = true
 clip_contents = true
 layout_mode = 2
 size_flags_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_0ndsw")
 script = ExtResource("10_3fbao")
 
 [node name="BottomUIHBoxContainer" type="HBoxContainer" parent="DisplaySafeArea/GameSubViewportContainer/GameSubViewport/BaseNode/SweeperGameUi/SweeperUiBottom"]
 layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 0
 
 [node name="MenuButton" type="MenuButton" parent="DisplaySafeArea/GameSubViewportContainer/GameSubViewport/BaseNode/SweeperGameUi/SweeperUiBottom/BottomUIHBoxContainer"]

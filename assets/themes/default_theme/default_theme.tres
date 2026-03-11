@@ -1,12 +1,37 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://cyrlp5twyc8al"]
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://cyrlp5twyc8al"]
 
 [ext_resource type="FontFile" uid="uid://d1626yq8624vs" path="res://assets/themes/default_theme/font/PrStart.ttf" id="1_ha13k2"]
 [ext_resource type="Texture2D" uid="uid://w4i2b6o06bb" path="res://assets/themes/default_theme/base_tiles.png" id="2_3llkb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i1orq"]
+bg_color = Color(0.208827, 0.258635, 0.305447, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5x8a7"]
+bg_color = Color(0.419196, 0.496209, 0.568862, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cnief"]
+bg_color = Color(0.42292, 0.500168, 0.573052, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fuc8h"]
+bg_color = Color(0.231073, 0.284646, 0.335007, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mk5gs"]
+bg_color = Color(0.43041, 0.508098, 0.581413, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6ylnb"]
+bg_color = Color(0.415487, 0.492253, 0.564665, 1)
 
 [resource]
 resource_name = "default_theme"
 default_font = ExtResource("1_ha13k2")
 default_font_size = 11
+BoxContainer/constants/separation = 0
+Button/styles/disabled = SubResource("StyleBoxFlat_i1orq")
+Button/styles/focus = SubResource("StyleBoxFlat_5x8a7")
+Button/styles/hover = SubResource("StyleBoxFlat_cnief")
+Button/styles/normal = SubResource("StyleBoxFlat_fuc8h")
+Button/styles/pressed = SubResource("StyleBoxFlat_mk5gs")
+CheckBox/styles/focus = SubResource("StyleBoxFlat_6ylnb")
 metadata/base_tiles = ExtResource("2_3llkb")
 metadata/NumberColors = {
 1: Color(0, 0.431373, 0, 1),
