@@ -22,6 +22,11 @@ const TEXT_PADDING_SIZE: int = 3
 @onready var sweeperGameUi = %SweeperGameUi
 @onready var tileMap = %TileMap
 @onready var tileMapNumbers = %TileMapNumbers
+@onready var gameStateView = %GameStateView
+
+signal toggle_score_window(visibility: bool)
+signal save_score(final_score: int, final_time: int)
+signal reset_game
 
 var game_lost_button_texture = null
 var game_won_button_texture = null
@@ -32,9 +37,6 @@ var flag_placement_set_left_texture = null
 
 var final_score: int = 0
 var final_time: int = 0
-var current_player_name: String = ""
-
-signal flip_flag_placement
 
 
 func _ready():
@@ -62,29 +64,63 @@ func _ready():
 	styleBox.set("bg_color", baseNode.theme.get_meta("top_ui_background_color"))
 	add_theme_stylebox_override("panel", styleBox)
 
+	tileMap.game_lost.connect(on_game_lost)
+	tileMap.flag_placed.connect(on_flag_placed)
+	tileMap.game_start.connect(on_game_start)
+	tileMap.max_flags_placed.connect(on_max_flags_placed)
+
+	gameStateView.timer_timeout.connect(on_timer_timeout)
+
+	swap_flag_placement_type(true)
+	set_mine_count(GlobalVars.MINE_AMOUNT[GlobalVars.settings.dificulty])
+
+
+func on_flag_placed(flag_count):
+	set_mine_count(GlobalVars.MINE_AMOUNT[GlobalVars.settings.dificulty] - flag_count)
+
+
+func on_game_start():
+	set_timer_count(0)
+	set_mine_count(GlobalVars.MINE_AMOUNT[GlobalVars.settings.dificulty])
+	reset_smile_button()
+
+
+func on_max_flags_placed():
+	max_flag_warning()
+
+
+func on_timer_timeout(time_elapsed: int):
+	set_timer_count(time_elapsed)
+	max_flag_warning(true)
+
 
 func game_reset_button_pressed():
-	saveScoreWindow.visible = false
+	toggle_score_window.emit(false)
 	clear_save_score_fields()
+
 
 func game_status_button_pressed():
-	saveScoreWindow.visible = false
+	toggle_score_window.emit(false)
 	clear_save_score_fields()
-	tileMap.new_game()
+	reset_game.emit()
+
 
 func save_confirm_button_pressed():
-	current_player_name = currentUserTextEdit.text
-	saveScoreWindow.save_score(current_player_name, final_score, final_time)
+	save_score.emit(final_score, final_time)
 	clear_save_score_fields()
 
 
-func swap_flag_placement_type(emit_flip_signal: bool = true):
-	if emit_flip_signal:
-		flip_flag_placement.emit()
+func swap_flag_placement_type(read_only: bool = false):
 	if GlobalVars.settings.click_reverse:
 		flagPlacementSetButton.texture_normal = flag_placement_set_left_texture
+		if !read_only: GlobalVars.settings.click_reverse = false
 	else:
 		flagPlacementSetButton.texture_normal = flag_placement_set_right_texture
+		if !read_only: GlobalVars.settings.click_reverse = true
+
+	if !read_only: GlobalFuncs.write_to_json_file(
+		GlobalVars.SETTINGS_FILE_PATH, GlobalVars.settings
+	)
 
 
 func score_button_pressed():
@@ -93,6 +129,7 @@ func score_button_pressed():
 	sweeperGameUi.visible = false
 	tileMapNumbers.visible = false
 	sweeperGameUi.process_mode = PROCESS_MODE_DISABLED
+
 
 func set_mine_count(mine_count: int):
 	var font_color = baseNode.theme.get_meta("mine_counter_font_color")
@@ -120,7 +157,7 @@ func set_timer_count(timer_count: int):
 	timerCountLabel.text = time_string
 
 
-func game_lost():
+func on_game_lost():
 	gameStatusButton.texture_normal = game_lost_button_texture
 
 
@@ -131,12 +168,6 @@ func game_won(time_elapsed, current_score):
 	
 	scoreTextLabel.add_text(str(final_score))
 	timeTextLabel.add_text(str(time_elapsed))
-	
-	if GlobalVars.current_scores[GlobalVars.settings.dificulty].last_player_name:
-		currentUserTextEdit.insert_text_at_caret(
-			GlobalVars.current_scores[GlobalVars.settings.dificulty].last_player_name
-		)
-	saveScoreWindow.visible = true
 
 
 func max_flag_warning(_reset: bool = false):
@@ -151,7 +182,6 @@ func reset_smile_button():
 func clear_save_score_fields():
 	scoreTextLabel.clear()
 	timeTextLabel.clear()
-	currentUserTextEdit.clear()
 
 	scoreTextLabel.add_text("Your Score: ")
 	timeTextLabel.add_text("Your Time: ")
