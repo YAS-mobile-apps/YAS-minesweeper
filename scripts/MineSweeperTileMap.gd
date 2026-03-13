@@ -23,11 +23,12 @@ const SURROUNDING_POSITIONS: Array = [
 @onready var baseNode: BaseNode = %BaseNode
 @onready var theme: Theme = %BaseNode.theme
 @onready var tileMapNumbers = %TileMapNumbers
+@onready var sweeperUiTop = %SweeperUiTop
 
 signal game_start
 signal game_lost
 signal game_win
-signal flag_placed
+signal flag_placed(flag_count)
 signal max_flags_placed
 
 var existing_cells: Array[Vector2i] = []
@@ -44,6 +45,11 @@ var mouse_held_timer: float = 0
 
 func _ready():
 	self.tile_set = baseNode.base_tileset
+	sweeperUiTop.reset_game.connect(on_game_reset)
+
+
+func on_game_reset():
+	new_game()
 
 
 func _physics_process(delta):

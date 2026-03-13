@@ -3,77 +3,39 @@ extends Node
 class_name GameStateView
 
 @export var sweeper_ui_top_path: NodePath
-@export var sweeper_ui_bottom_path: NodePath
 @export var score_table_path: NodePath
 @export var tile_map_path: NodePath
 
 @onready var tileMap = get_node(tile_map_path)
 @onready var sweeperUiTop = get_node(sweeper_ui_top_path)
-@onready var sweeperUiBottom = get_node(sweeper_ui_bottom_path)
 @onready var timer = $Timer    
 @onready var scoreTable = get_node(score_table_path)
+
+signal timer_timeout(time_elapsed)
 
 var time_elapsed = 0
 var opened_menu = false
 var timer_menu = false
 
 
-func _ready():
-	opened_menu = sweeperUiBottom.menuButton.get_popup()
-	opened_menu.connect("id_pressed", swap_dificulty)
-	timer_menu = sweeperUiBottom.holdTimerMenu.get_popup()
-	timer_menu.connect("id_pressed", swap_hold_timer)
-	
+func _ready():	
 	load_settings()
 	load_score_table()
-	
-	sweeperUiTop.swap_flag_placement_type(false)
-	sweeperUiBottom.update_dificulty(GlobalVars.settings.dificulty, opened_menu)
-	sweeperUiBottom.update_hold_timer(GlobalVars.settings.hold_click, timer_menu)
-	
+		
 	tileMap.game_lost.connect(on_game_lost)
-	tileMap.flag_placed.connect(on_flag_placed)
 	tileMap.game_win.connect(on_game_won)
 	tileMap.game_start.connect(on_game_start)
-	tileMap.max_flags_placed.connect(on_max_flags_placed)
-	sweeperUiTop.set_mine_count(
-		GlobalVars.MINE_AMOUNT[GlobalVars.settings.dificulty]
-	)
-	sweeperUiTop.flip_flag_placement.connect(flip_flag_placement)
 	tileMap.new_game()
-
-
-func flip_flag_placement():
-	if GlobalVars.settings.click_reverse:
-		GlobalVars.settings.click_reverse = false
-	else:
-		GlobalVars.settings.click_reverse = true
-	write_file_settings()
-
-
-func swap_dificulty(pressed_id: int):
-	GlobalVars.settings.dificulty = GlobalVars.PRESSED_ID[pressed_id]
-	sweeperUiBottom.update_dificulty(GlobalVars.settings.dificulty, opened_menu)
-	write_file_settings()
-	tileMap.new_game()
-
-
-func swap_hold_timer(pressed_id: int):
-	GlobalVars.settings.hold_click = GlobalVars.HOLD_TIMER_ID[pressed_id]
-	sweeperUiBottom.update_hold_timer(GlobalVars.settings.hold_click, timer_menu)
-	write_file_settings()
 
 
 func _on_timer_timeout():
 	if tileMap.first_move:
 		time_elapsed = time_elapsed + 1
-	sweeperUiTop.set_timer_count(time_elapsed)
-	sweeperUiTop.max_flag_warning(true)
+	timer_timeout.emit(time_elapsed)
 
 
 func on_game_lost():
 	timer.stop()
-	sweeperUiTop.game_lost()
 
 
 func on_game_won():
@@ -87,24 +49,6 @@ func on_game_start():
 	time_elapsed = 0
 	load_settings()
 	load_score_table()
-	sweeperUiTop.set_timer_count(time_elapsed)
-	sweeperUiTop.set_mine_count(
-		GlobalVars.MINE_AMOUNT[GlobalVars.settings.dificulty]
-	)
-	sweeperUiTop.reset_smile_button()
-	sweeperUiBottom.update_dificulty(GlobalVars.settings.dificulty, opened_menu)
-	sweeperUiBottom.update_hold_timer(GlobalVars.settings.hold_click, timer_menu)
-
-
-func on_flag_placed(flag_count: int):
-	sweeperUiTop.set_mine_count(
-		GlobalVars.MINE_AMOUNT[GlobalVars.settings.dificulty] - flag_count
-	)
-
-
-func on_max_flags_placed():
-	sweeperUiTop.max_flag_warning()
-
 
 
 func load_score_table():
@@ -138,14 +82,6 @@ func load_settings():
 			return
 	
 	GlobalVars.settings = settings
-	sweeperUiBottom.update_dificulty(GlobalVars.settings.dificulty, opened_menu)
-	sweeperUiBottom.update_hold_timer(GlobalVars.settings.hold_click, timer_menu)
-
-
-func write_file_settings():
-	GlobalFuncs.write_to_json_file(
-		GlobalVars.SETTINGS_FILE_PATH, GlobalVars.settings
-	)
 
 
 func reset_file_settings():
