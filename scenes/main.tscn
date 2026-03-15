@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" path="res://scripts/DisplaySafeArea.gd" id="1_2q0tv"]
 [ext_resource type="Theme" uid="uid://cyrlp5twyc8al" path="res://assets/themes/default_theme/default_theme.tres" id="1_4lv0w"]
-[ext_resource type="Theme" uid="uid://o0re7h3ft77b" path="res://assets/themes/dev_theme/development_theme.tres" id="1_5sqsy"]
 [ext_resource type="Script" path="res://scripts/SweeperUiTop.gd" id="1_ic7g8"]
 [ext_resource type="Script" path="res://scripts/HighScoresTable.gd" id="2_fra66"]
 [ext_resource type="Script" path="res://scripts/BaseNode.gd" id="2_rvne4"]
@@ -11,6 +10,7 @@
 [ext_resource type="Script" path="res://scripts/SweeperGameUi.gd" id="3_ndd0u"]
 [ext_resource type="PackedScene" uid="uid://b76vc2cfwp2j" path="res://scenes/game_state_view.tscn" id="4_5tf64"]
 [ext_resource type="Script" path="res://scripts/MineFieldContainer.gd" id="9_gvkcf"]
+[ext_resource type="Script" path="res://scripts/UiContainer.gd" id="9_oyv0j"]
 [ext_resource type="Script" path="res://scripts/SweeperUiBottom.gd" id="10_3fbao"]
 [ext_resource type="Script" path="res://scripts/TileMapNumbers.gd" id="11_s5dhg"]
 [ext_resource type="Script" path="res://scripts/SaveScoreWindow.gd" id="12_31fka"]
@@ -20,8 +20,6 @@ bg_color = Color(0.0313726, 0.0313726, 0.0313726, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wiw1v"]
 bg_color = Color(0.0313726, 0.0313726, 0.0313726, 1)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_giucn"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wrv4x"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -33,6 +31,9 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t2ur3"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_amb17"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [node name="main" type="Control"]
@@ -48,12 +49,9 @@ size_flags_vertical = 3
 
 [node name="DisplaySafeArea" type="PanelContainer" parent="."]
 layout_mode = 1
-anchors_preset = 13
-anchor_left = 0.5
-anchor_right = 0.5
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -222.5
-offset_right = 222.5
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_2q0tv")
@@ -89,7 +87,7 @@ script = ExtResource("2_rvne4")
 
 [node name="SweeperGameUi" type="VBoxContainer" parent="DisplaySafeArea/GameSubViewportContainer/GameSubViewport/BaseNode"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(445, 762)
+custom_minimum_size = Vector2(445, 0)
 layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
@@ -101,13 +99,13 @@ size_flags_vertical = 3
 
 [node name="SweeperUiTop" type="PanelContainer" parent="DisplaySafeArea/GameSubViewportContainer/GameSubViewport/BaseNode/SweeperGameUi"]
 unique_name_in_owner = true
-clip_contents = true
 layout_mode = 2
 size_flags_vertical = 0
 script = ExtResource("1_ic7g8")
 
 [node name="GameStatusBox" type="HBoxContainer" parent="DisplaySafeArea/GameSubViewportContainer/GameSubViewport/BaseNode/SweeperGameUi/SweeperUiTop"]
 layout_mode = 2
+size_flags_vertical = 0
 alignment = 1
 
 [node name="SeparatorTop6" type="Control" parent="DisplaySafeArea/GameSubViewportContainer/GameSubViewport/BaseNode/SweeperGameUi/SweeperUiTop/GameStatusBox"]
@@ -161,13 +159,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="GameStatusButton" type="TextureButton" parent="DisplaySafeArea/GameSubViewportContainer/GameSubViewport/BaseNode/SweeperGameUi/SweeperUiTop/GameStatusBox"]
+[node name="GameStatusButton" type="Button" parent="DisplaySafeArea/GameSubViewportContainer/GameSubViewport/BaseNode/SweeperGameUi/SweeperUiTop/GameStatusBox"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(49, 48)
 layout_mode = 2
 tooltip_text = "New Game"
-ignore_texture_size = true
-stretch_mode = 5
+focus_mode = 0
+theme_type_variation = &"GameStatusButton"
 
 [node name="SeparatorTop3" type="Control" parent="DisplaySafeArea/GameSubViewportContainer/GameSubViewport/BaseNode/SweeperGameUi/SweeperUiTop/GameStatusBox"]
 layout_mode = 2
@@ -225,16 +223,15 @@ size_flags_vertical = 3
 
 [node name="MineFieldContainer" type="PanelContainer" parent="DisplaySafeArea/GameSubViewportContainer/GameSubViewport/BaseNode/SweeperGameUi"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(440, 689)
+custom_minimum_size = Vector2(445, 689)
 layout_mode = 2
-size_flags_horizontal = 4
 size_flags_vertical = 3
 script = ExtResource("9_gvkcf")
 
 [node name="TileMap" type="TileMap" parent="DisplaySafeArea/GameSubViewportContainer/GameSubViewport/BaseNode/SweeperGameUi/MineFieldContainer"]
 unique_name_in_owner = true
 texture_filter = 2
-position = Vector2(196, 340)
+position = Vector2(198, 340)
 format = 2
 script = ExtResource("3_m6pnu")
 columns = 14
@@ -246,21 +243,22 @@ size_flags_vertical = 3
 
 [node name="SweeperUiBottom" type="PanelContainer" parent="DisplaySafeArea/GameSubViewportContainer/GameSubViewport/BaseNode/SweeperGameUi"]
 unique_name_in_owner = true
-clip_contents = true
 layout_mode = 2
 size_flags_vertical = 2
 script = ExtResource("10_3fbao")
 
 [node name="BottomUIHBoxContainer" type="HBoxContainer" parent="DisplaySafeArea/GameSubViewportContainer/GameSubViewport/BaseNode/SweeperGameUi/SweeperUiBottom"]
 layout_mode = 2
-size_flags_horizontal = 4
 size_flags_vertical = 0
+
+[node name="SeparatorBottom3" type="Control" parent="DisplaySafeArea/GameSubViewportContainer/GameSubViewport/BaseNode/SweeperGameUi/SweeperUiBottom/BottomUIHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="MenuButton" type="MenuButton" parent="DisplaySafeArea/GameSubViewportContainer/GameSubViewport/BaseNode/SweeperGameUi/SweeperUiBottom/BottomUIHBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
 text = "DIFICULTY: "
 flat = false
 alignment = 0
@@ -274,17 +272,14 @@ popup/item_1/id = 1
 popup/item_2/text = "Hard"
 popup/item_2/id = 2
 
-[node name="HSeparator" type="HSeparator" parent="DisplaySafeArea/GameSubViewportContainer/GameSubViewport/BaseNode/SweeperGameUi/SweeperUiBottom/BottomUIHBoxContainer"]
+[node name="SeparatorBottom" type="Control" parent="DisplaySafeArea/GameSubViewportContainer/GameSubViewport/BaseNode/SweeperGameUi/SweeperUiBottom/BottomUIHBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 0
-theme_override_styles/separator = SubResource("StyleBoxEmpty_giucn")
+size_flags_vertical = 3
 
 [node name="HoldTimerMenu" type="MenuButton" parent="DisplaySafeArea/GameSubViewportContainer/GameSubViewport/BaseNode/SweeperGameUi/SweeperUiBottom/BottomUIHBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
 text = ":HOLD TIMER"
 flat = false
 alignment = 2
@@ -298,93 +293,105 @@ popup/item_1/id = 1
 popup/item_2/text = "Long"
 popup/item_2/id = 2
 
-[node name="SeparatorBottom" type="Control" parent="DisplaySafeArea/GameSubViewportContainer/GameSubViewport/BaseNode/SweeperGameUi"]
-custom_minimum_size = Vector2(0, 5)
+[node name="SeparatorBottom2" type="Control" parent="DisplaySafeArea/GameSubViewportContainer/GameSubViewport/BaseNode/SweeperGameUi/SweeperUiBottom/BottomUIHBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SeparatorBottom" type="Control" parent="DisplaySafeArea/GameSubViewportContainer/GameSubViewport/BaseNode/SweeperGameUi"]
+layout_mode = 2
+size_flags_vertical = 3
 
 [node name="GameUI" type="CanvasLayer" parent="DisplaySafeArea"]
 
-[node name="PanelContainer" type="PanelContainer" parent="DisplaySafeArea/GameUI"]
+[node name="InvisibleUiContainer" type="PanelContainer" parent="DisplaySafeArea/GameUI"]
 anchors_preset = 13
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -221.0
-offset_right = 221.0
+offset_left = -222.5
+offset_right = 222.5
+offset_bottom = -18.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_wrv4x")
+script = ExtResource("9_oyv0j")
 
-[node name="InvisibleSweeperGameUi" type="VBoxContainer" parent="DisplaySafeArea/GameUI/PanelContainer"]
+[node name="InvisibleSweeperGameUi" type="VBoxContainer" parent="DisplaySafeArea/GameUI/InvisibleUiContainer"]
 custom_minimum_size = Vector2(440, 762)
 layout_mode = 2
 mouse_filter = 2
+theme_override_constants/separation = 0
 alignment = 1
 script = ExtResource("3_ndd0u")
 
-[node name="SeparatorTop" type="Control" parent="DisplaySafeArea/GameUI/PanelContainer/InvisibleSweeperGameUi"]
+[node name="SeparatorTop" type="Control" parent="DisplaySafeArea/GameUI/InvisibleUiContainer/InvisibleSweeperGameUi"]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="InvisibleSweeperUiTop" type="PanelContainer" parent="DisplaySafeArea/GameUI/PanelContainer/InvisibleSweeperGameUi"]
-custom_minimum_size = Vector2(442, 48)
+[node name="InvisibleSweeperUiTop" type="PanelContainer" parent="DisplaySafeArea/GameUI/InvisibleUiContainer/InvisibleSweeperGameUi"]
+custom_minimum_size = Vector2(445, 48)
 layout_mode = 2
 size_flags_vertical = 0
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_tbs3k")
 
-[node name="SeparatorCenterTop" type="Control" parent="DisplaySafeArea/GameUI/PanelContainer/InvisibleSweeperGameUi"]
+[node name="SeparatorCenterTop" type="Control" parent="DisplaySafeArea/GameUI/InvisibleUiContainer/InvisibleSweeperGameUi"]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="InvisibleMineFieldContainer" type="PanelContainer" parent="DisplaySafeArea/GameUI/PanelContainer/InvisibleSweeperGameUi"]
-custom_minimum_size = Vector2(440, 689)
+[node name="InvisibleMineFieldContainer" type="PanelContainer" parent="DisplaySafeArea/GameUI/InvisibleUiContainer/InvisibleSweeperGameUi"]
+custom_minimum_size = Vector2(445, 689)
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_txmul")
 
-[node name="TileMapNumbers" type="Node2D" parent="DisplaySafeArea/GameUI/PanelContainer/InvisibleSweeperGameUi/InvisibleMineFieldContainer"]
+[node name="TileMapNumbers" type="Node2D" parent="DisplaySafeArea/GameUI/InvisibleUiContainer/InvisibleSweeperGameUi/InvisibleMineFieldContainer"]
 unique_name_in_owner = true
-position = Vector2(195, 340)
+position = Vector2(198, 340)
 script = ExtResource("11_s5dhg")
 
-[node name="SeparatorCenterBottom" type="Control" parent="DisplaySafeArea/GameUI/PanelContainer/InvisibleSweeperGameUi"]
+[node name="SeparatorCenterBottom" type="Control" parent="DisplaySafeArea/GameUI/InvisibleUiContainer/InvisibleSweeperGameUi"]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="InvisibleSweeperUiBottom" type="PanelContainer" parent="DisplaySafeArea/GameUI/PanelContainer/InvisibleSweeperGameUi"]
-custom_minimum_size = Vector2(442, 20)
+[node name="InvisibleSweeperUiBottom" type="PanelContainer" parent="DisplaySafeArea/GameUI/InvisibleUiContainer/InvisibleSweeperGameUi"]
+custom_minimum_size = Vector2(445, 12)
 layout_mode = 2
 size_flags_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_t2ur3")
 
-[node name="SeparatorBottom" type="Control" parent="DisplaySafeArea/GameUI/PanelContainer/InvisibleSweeperGameUi"]
-custom_minimum_size = Vector2(0, 5)
+[node name="SeparatorBottom" type="Control" parent="DisplaySafeArea/GameUI/InvisibleUiContainer/InvisibleSweeperGameUi"]
 layout_mode = 2
-size_flags_vertical = 0
+size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="HighScoreCanvas" type="Control" parent="DisplaySafeArea/GameUI"]
-unique_name_in_owner = true
-visible = false
-custom_minimum_size = Vector2(440, 752)
-layout_mode = 3
+[node name="UiContainer" type="PanelContainer" parent="DisplaySafeArea/GameUI"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_amb17")
+script = ExtResource("9_oyv0j")
 
-[node name="HighScoresTable" type="Control" parent="DisplaySafeArea/GameUI/HighScoreCanvas"]
+[node name="HighScoreCanvas" type="Control" parent="DisplaySafeArea/GameUI/UiContainer"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(440, 752)
+layout_mode = 2
+
+[node name="HighScoresTable" type="Control" parent="DisplaySafeArea/GameUI/UiContainer/HighScoreCanvas"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -394,36 +401,45 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_fra66")
 
-[node name="HighScoresWindow" type="PanelContainer" parent="DisplaySafeArea/GameUI/HighScoreCanvas/HighScoresTable"]
+[node name="HighScoresWindow" type="PanelContainer" parent="DisplaySafeArea/GameUI/UiContainer/HighScoreCanvas/HighScoresTable"]
 layout_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ScoreMarginContainer" type="MarginContainer" parent="DisplaySafeArea/GameUI/HighScoreCanvas/HighScoresTable/HighScoresWindow"]
+[node name="ScoreMarginContainer" type="MarginContainer" parent="DisplaySafeArea/GameUI/UiContainer/HighScoreCanvas/HighScoresTable/HighScoresWindow"]
 layout_mode = 2
 script = ExtResource("3_0ccf3")
 
-[node name="ScoreScreen" type="VBoxContainer" parent="DisplaySafeArea/GameUI/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer"]
+[node name="ScoreScreen" type="VBoxContainer" parent="DisplaySafeArea/GameUI/UiContainer/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer"]
 layout_mode = 2
 
-[node name="ScreenHeader" type="HBoxContainer" parent="DisplaySafeArea/GameUI/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen"]
+[node name="SeparatorTop" type="Control" parent="DisplaySafeArea/GameUI/UiContainer/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen"]
+custom_minimum_size = Vector2(0, 5)
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="DisplaySafeArea/GameUI/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen/ScreenHeader"]
+[node name="ScreenHeader" type="HBoxContainer" parent="DisplaySafeArea/GameUI/UiContainer/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen"]
 layout_mode = 2
-theme_override_constants/margin_left = 2
-theme_override_constants/margin_top = 2
 
-[node name="ReturnToHome" type="Button" parent="DisplaySafeArea/GameUI/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen/ScreenHeader/MarginContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="DisplaySafeArea/GameUI/UiContainer/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen/ScreenHeader"]
+custom_minimum_size = Vector2(0, 37)
+layout_mode = 2
+theme_override_constants/margin_left = 7
+
+[node name="ReturnToHome" type="Button" parent="DisplaySafeArea/GameUI/UiContainer/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen/ScreenHeader/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "<  BACK"
+text = "<  BACK  "
 icon_alignment = 1
 language = "en"
 
-[node name="HighScoresLabel" type="MenuButton" parent="DisplaySafeArea/GameUI/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen/ScreenHeader"]
+[node name="SeparatorMiddle" type="Control" parent="DisplaySafeArea/GameUI/UiContainer/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen/ScreenHeader"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HighScoresLabel" type="MenuButton" parent="DisplaySafeArea/GameUI/UiContainer/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen/ScreenHeader"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -438,27 +454,36 @@ popup/item_1/id = 1
 popup/item_2/text = "Hard"
 popup/item_2/id = 2
 
-[node name="HSeparator5" type="HSeparator" parent="DisplaySafeArea/GameUI/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen"]
+[node name="SeparatorRight" type="Control" parent="DisplaySafeArea/GameUI/UiContainer/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen/ScreenHeader"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SeparatorMiddleTop" type="Control" parent="DisplaySafeArea/GameUI/UiContainer/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen"]
+custom_minimum_size = Vector2(0, 5)
 layout_mode = 2
 
-[node name="TableMargins" type="MarginContainer" parent="DisplaySafeArea/GameUI/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen"]
+[node name="HSeparator5" type="HSeparator" parent="DisplaySafeArea/GameUI/UiContainer/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen"]
+layout_mode = 2
+
+[node name="TableMargins" type="MarginContainer" parent="DisplaySafeArea/GameUI/UiContainer/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ScrollContainer" type="ScrollContainer" parent="DisplaySafeArea/GameUI/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen/TableMargins"]
+[node name="ScrollContainer" type="ScrollContainer" parent="DisplaySafeArea/GameUI/UiContainer/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen/TableMargins"]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="ScoreTableContents" type="GridContainer" parent="DisplaySafeArea/GameUI/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer"]
+[node name="ScoreTableContents" type="GridContainer" parent="DisplaySafeArea/GameUI/UiContainer/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 columns = 9
 
-[node name="VSeparator4" type="VSeparator" parent="DisplaySafeArea/GameUI/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
+[node name="VSeparator4" type="VSeparator" parent="DisplaySafeArea/GameUI/UiContainer/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
 layout_mode = 2
 
-[node name="Name" type="Button" parent="DisplaySafeArea/GameUI/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
+[node name="Name" type="Button" parent="DisplaySafeArea/GameUI/UiContainer/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
@@ -466,10 +491,10 @@ text = "Name ˅"
 flat = true
 language = "en"
 
-[node name="VSeparator" type="VSeparator" parent="DisplaySafeArea/GameUI/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
+[node name="VSeparator" type="VSeparator" parent="DisplaySafeArea/GameUI/UiContainer/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
 layout_mode = 2
 
-[node name="Score" type="Button" parent="DisplaySafeArea/GameUI/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
+[node name="Score" type="Button" parent="DisplaySafeArea/GameUI/UiContainer/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
@@ -477,10 +502,10 @@ text = "Score ˅"
 flat = true
 language = "en"
 
-[node name="VSeparator2" type="VSeparator" parent="DisplaySafeArea/GameUI/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
+[node name="VSeparator2" type="VSeparator" parent="DisplaySafeArea/GameUI/UiContainer/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
 layout_mode = 2
 
-[node name="Time" type="Button" parent="DisplaySafeArea/GameUI/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
+[node name="Time" type="Button" parent="DisplaySafeArea/GameUI/UiContainer/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
@@ -488,10 +513,10 @@ text = "Time ˅"
 flat = true
 language = "en"
 
-[node name="VSeparator3" type="VSeparator" parent="DisplaySafeArea/GameUI/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
+[node name="VSeparator3" type="VSeparator" parent="DisplaySafeArea/GameUI/UiContainer/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
 layout_mode = 2
 
-[node name="CreatedAt" type="Button" parent="DisplaySafeArea/GameUI/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
+[node name="CreatedAt" type="Button" parent="DisplaySafeArea/GameUI/UiContainer/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
 layout_mode = 2
 size_flags_horizontal = 3
 focus_mode = 0
@@ -499,47 +524,46 @@ text = "Datetime ˅"
 flat = true
 language = "en"
 
-[node name="VSeparator5" type="VSeparator" parent="DisplaySafeArea/GameUI/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
+[node name="VSeparator5" type="VSeparator" parent="DisplaySafeArea/GameUI/UiContainer/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
 layout_mode = 2
 
-[node name="HSeparator" type="HSeparator" parent="DisplaySafeArea/GameUI/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
+[node name="HSeparator" type="HSeparator" parent="DisplaySafeArea/GameUI/UiContainer/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
 layout_mode = 2
 
-[node name="HSeparator2" type="HSeparator" parent="DisplaySafeArea/GameUI/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
+[node name="HSeparator2" type="HSeparator" parent="DisplaySafeArea/GameUI/UiContainer/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
 layout_mode = 2
 
-[node name="HSeparator3" type="HSeparator" parent="DisplaySafeArea/GameUI/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
+[node name="HSeparator3" type="HSeparator" parent="DisplaySafeArea/GameUI/UiContainer/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
 layout_mode = 2
 
-[node name="HSeparator4" type="HSeparator" parent="DisplaySafeArea/GameUI/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
+[node name="HSeparator4" type="HSeparator" parent="DisplaySafeArea/GameUI/UiContainer/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
 layout_mode = 2
 
-[node name="HSeparator5" type="HSeparator" parent="DisplaySafeArea/GameUI/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
+[node name="HSeparator5" type="HSeparator" parent="DisplaySafeArea/GameUI/UiContainer/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
 layout_mode = 2
 
-[node name="HSeparator6" type="HSeparator" parent="DisplaySafeArea/GameUI/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
+[node name="HSeparator6" type="HSeparator" parent="DisplaySafeArea/GameUI/UiContainer/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
 layout_mode = 2
 
-[node name="HSeparator7" type="HSeparator" parent="DisplaySafeArea/GameUI/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
+[node name="HSeparator7" type="HSeparator" parent="DisplaySafeArea/GameUI/UiContainer/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
 layout_mode = 2
 
-[node name="HSeparator9" type="HSeparator" parent="DisplaySafeArea/GameUI/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
+[node name="HSeparator9" type="HSeparator" parent="DisplaySafeArea/GameUI/UiContainer/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
 layout_mode = 2
 
-[node name="HSeparator8" type="HSeparator" parent="DisplaySafeArea/GameUI/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
+[node name="HSeparator8" type="HSeparator" parent="DisplaySafeArea/GameUI/UiContainer/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen/TableMargins/ScrollContainer/ScoreTableContents"]
 layout_mode = 2
 
-[node name="SaveScoreWindow" type="Window" parent="DisplaySafeArea/GameUI"]
+[node name="SaveScoreWindow" type="Window" parent="DisplaySafeArea/GameUI/UiContainer"]
 unique_name_in_owner = true
 title = "Save Score"
 initial_position = 1
 size = Vector2i(300, 300)
 visible = false
 borderless = true
-theme = ExtResource("1_5sqsy")
 script = ExtResource("12_31fka")
 
-[node name="MarginContainer" type="MarginContainer" parent="DisplaySafeArea/GameUI/SaveScoreWindow"]
+[node name="MarginContainer" type="MarginContainer" parent="DisplaySafeArea/GameUI/UiContainer/SaveScoreWindow"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -552,81 +576,81 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="DisplaySafeArea/GameUI/SaveScoreWindow/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="DisplaySafeArea/GameUI/UiContainer/SaveScoreWindow/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="CurrentUserName" type="HBoxContainer" parent="DisplaySafeArea/GameUI/SaveScoreWindow/MarginContainer/VBoxContainer"]
+[node name="CurrentUserName" type="HBoxContainer" parent="DisplaySafeArea/GameUI/UiContainer/SaveScoreWindow/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="CurrentUserTextEdit" type="LineEdit" parent="DisplaySafeArea/GameUI/SaveScoreWindow/MarginContainer/VBoxContainer/CurrentUserName"]
+[node name="CurrentUserTextEdit" type="LineEdit" parent="DisplaySafeArea/GameUI/UiContainer/SaveScoreWindow/MarginContainer/VBoxContainer/CurrentUserName"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "Score owner name..."
 max_length = 7
 
-[node name="CurrentScore" type="HBoxContainer" parent="DisplaySafeArea/GameUI/SaveScoreWindow/MarginContainer/VBoxContainer"]
+[node name="CurrentScore" type="HBoxContainer" parent="DisplaySafeArea/GameUI/UiContainer/SaveScoreWindow/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ScoreTextLabel" type="RichTextLabel" parent="DisplaySafeArea/GameUI/SaveScoreWindow/MarginContainer/VBoxContainer/CurrentScore"]
+[node name="ScoreTextLabel" type="RichTextLabel" parent="DisplaySafeArea/GameUI/UiContainer/SaveScoreWindow/MarginContainer/VBoxContainer/CurrentScore"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Your Score: "
 
-[node name="CurrentTime" type="HBoxContainer" parent="DisplaySafeArea/GameUI/SaveScoreWindow/MarginContainer/VBoxContainer"]
+[node name="CurrentTime" type="HBoxContainer" parent="DisplaySafeArea/GameUI/UiContainer/SaveScoreWindow/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="TimeTextLabel" type="RichTextLabel" parent="DisplaySafeArea/GameUI/SaveScoreWindow/MarginContainer/VBoxContainer/CurrentTime"]
+[node name="TimeTextLabel" type="RichTextLabel" parent="DisplaySafeArea/GameUI/UiContainer/SaveScoreWindow/MarginContainer/VBoxContainer/CurrentTime"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Your Time: "
 
-[node name="SaveScoreOrCancel" type="HBoxContainer" parent="DisplaySafeArea/GameUI/SaveScoreWindow/MarginContainer/VBoxContainer"]
+[node name="SaveScoreOrCancel" type="HBoxContainer" parent="DisplaySafeArea/GameUI/UiContainer/SaveScoreWindow/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 10
 
-[node name="SaveCancelButton" type="Button" parent="DisplaySafeArea/GameUI/SaveScoreWindow/MarginContainer/VBoxContainer/SaveScoreOrCancel"]
+[node name="SaveCancelButton" type="Button" parent="DisplaySafeArea/GameUI/UiContainer/SaveScoreWindow/MarginContainer/VBoxContainer/SaveScoreOrCancel"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Cancel"
 
-[node name="SaveConfirmButton" type="Button" parent="DisplaySafeArea/GameUI/SaveScoreWindow/MarginContainer/VBoxContainer/SaveScoreOrCancel"]
+[node name="SaveConfirmButton" type="Button" parent="DisplaySafeArea/GameUI/UiContainer/SaveScoreWindow/MarginContainer/VBoxContainer/SaveScoreOrCancel"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Save"
 
-[node name="ListScoreWindow" type="Window" parent="DisplaySafeArea/GameUI"]
+[node name="ListScoreWindow" type="Window" parent="DisplaySafeArea/GameUI/UiContainer"]
 unique_name_in_owner = true
 title = "Score table"
 initial_position = 2
 size = Vector2i(300, 300)
 visible = false
 
-[node name="MarginContainer" type="MarginContainer" parent="DisplaySafeArea/GameUI/ListScoreWindow"]
+[node name="MarginContainer" type="MarginContainer" parent="DisplaySafeArea/GameUI/UiContainer/ListScoreWindow"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="DisplaySafeArea/GameUI/ListScoreWindow/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="DisplaySafeArea/GameUI/UiContainer/ListScoreWindow/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="ScoreTable" type="ItemList" parent="DisplaySafeArea/GameUI/ListScoreWindow/MarginContainer/VBoxContainer"]
+[node name="ScoreTable" type="ItemList" parent="DisplaySafeArea/GameUI/UiContainer/ListScoreWindow/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
@@ -642,6 +666,5 @@ item_0/disabled = true
 [node name="GameStateView" parent="." instance=ExtResource("4_5tf64")]
 unique_name_in_owner = true
 sweeper_ui_top_path = NodePath("../DisplaySafeArea/GameSubViewportContainer/GameSubViewport/BaseNode/SweeperGameUi/SweeperUiTop")
-sweeper_ui_bottom_path = NodePath("../DisplaySafeArea/GameSubViewportContainer/GameSubViewport/BaseNode/SweeperGameUi/SweeperUiBottom")
-score_table_path = NodePath("../DisplaySafeArea/GameUI/ListScoreWindow/MarginContainer/VBoxContainer/ScoreTable")
+score_table_path = NodePath("../DisplaySafeArea/GameUI/UiContainer/ListScoreWindow/MarginContainer/VBoxContainer/ScoreTable")
 tile_map_path = NodePath("../DisplaySafeArea/GameSubViewportContainer/GameSubViewport/BaseNode/SweeperGameUi/MineFieldContainer/TileMap")

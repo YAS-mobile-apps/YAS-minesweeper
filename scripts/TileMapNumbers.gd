@@ -2,9 +2,8 @@ extends Node2D
 
 class_name TileMapNumbers
 
-@onready var baseNode = %BaseNode
-@onready var base_theme: Theme = %BaseNode.theme
 @onready var tileMap: TileMap = %TileMap
+@onready var baseNode: BaseNode = %BaseNode
 
 var color_codes: Dictionary = {}
 var cells_mine_count: Dictionary = {}
@@ -13,9 +12,9 @@ var font_size: int = 12
 var text_vertical_offset = null
 
 func _ready():
-	font = base_theme.get_font("font", "Label")
-	font_size = base_theme.get_meta("label_font_size")
-	color_codes = base_theme.get_meta("NumberColors")
+	font = ThemeManager.get_font("Label")
+	font_size = ThemeManager.get_metadata("label_font_size")
+	color_codes = ThemeManager.get_metadata("NumberColors")
 	text_vertical_offset = GlobalVars.TILE_SIZE.y / 2.0 + font_size / 2.0
 
 

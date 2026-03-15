@@ -10,7 +10,6 @@ const TEXT_PADDING_SIZE: int = 3
 @onready var timerCountLabel = %TimerCountLabel
 @onready var saveScoreWindow = %SaveScoreWindow
 @onready var scoreButton = %ScoreButton
-@onready var currentUserTextEdit = %CurrentUserTextEdit
 @onready var scoreTextLabel = %ScoreTextLabel
 @onready var timeTextLabel = %TimeTextLabel
 @onready var saveCancelButton = %SaveCancelButton
@@ -40,6 +39,7 @@ var final_time: int = 0
 
 
 func _ready():
+	await get_tree().process_frame
 	game_lost_button_texture = baseNode.get_tile_texture(GlobalVars.CELLS.lose)
 	game_won_button_texture = baseNode.get_tile_texture(GlobalVars.CELLS.win)
 	default_button_texture = baseNode.get_tile_texture(GlobalVars.CELLS.smile)
@@ -47,8 +47,8 @@ func _ready():
 	flag_placement_set_right_texture = baseNode.get_tile_texture(GlobalVars.CELLS.mine)
 	flag_placement_set_left_texture = baseNode.get_tile_texture(GlobalVars.CELLS.flag)
 
-	gameStatusButton.texture_normal = baseNode.get_tile_texture(GlobalVars.CELLS.smile)
-	gameStatusButton.texture_pressed = baseNode.get_tile_texture(GlobalVars.CELLS.smile_click)
+	#gameStatusButton.texture_normal = baseNode.get_tile_texture(GlobalVars.CELLS.smile)
+	#gameStatusButton.texture_pressed = baseNode.get_tile_texture(GlobalVars.CELLS.smile_click)
 
 	scoreButton.texture_normal = baseNode.get_tile_texture(GlobalVars.CELLS.winners)
 	scoreButton.texture_pressed = baseNode.get_tile_texture(GlobalVars.CELLS.winners)
@@ -59,10 +59,6 @@ func _ready():
 	saveConfirmButton.pressed.connect(save_confirm_button_pressed)
 	flagPlacementSetButton.pressed.connect(swap_flag_placement_type)
 	scoreButton.pressed.connect(score_button_pressed)
-
-	var styleBox: StyleBoxFlat = get_theme_stylebox("panel").duplicate()
-	styleBox.set("bg_color", baseNode.theme.get_meta("top_ui_background_color"))
-	add_theme_stylebox_override("panel", styleBox)
 
 	tileMap.game_lost.connect(on_game_lost)
 	tileMap.flag_placed.connect(on_flag_placed)
@@ -132,10 +128,10 @@ func score_button_pressed():
 
 
 func set_mine_count(mine_count: int):
-	var font_color = baseNode.theme.get_meta("mine_counter_font_color")
+	var font_color = ThemeManager.get_metadata("mine_counter_font_color")
 	mineCountLabel.add_theme_color_override("font_color", font_color)
 
-	var font_size = baseNode.theme.get_meta("mine_counter_font_size")
+	var font_size = ThemeManager.get_metadata("mine_counter_font_size")
 	mineCountLabel.add_theme_font_size_override("font_size", font_size)
 
 	var mine_count_string = str(mine_count)
@@ -145,10 +141,10 @@ func set_mine_count(mine_count: int):
 
 
 func set_timer_count(timer_count: int):
-	var font_color = baseNode.theme.get_meta("timer_font_color")
+	var font_color = ThemeManager.get_metadata("timer_font_color")
 	timerCountLabel.add_theme_color_override("font_color", font_color)
 
-	var font_size = baseNode.theme.get_meta("timer_font_size")
+	var font_size = ThemeManager.get_metadata("timer_font_size")
 	mineCountLabel.add_theme_font_size_override("font_size", font_size)
 
 	var time_string = str(timer_count)
@@ -158,13 +154,13 @@ func set_timer_count(timer_count: int):
 
 
 func on_game_lost():
-	gameStatusButton.texture_normal = game_lost_button_texture
+	pass
 
 
 func game_won(time_elapsed, current_score):
 	final_time = time_elapsed
 	final_score = current_score
-	gameStatusButton.texture_normal = game_won_button_texture
+	# gameStatusButton.texture_normal = game_won_button_texture
 	
 	scoreTextLabel.add_text(str(final_score))
 	timeTextLabel.add_text(str(time_elapsed))
@@ -176,7 +172,8 @@ func max_flag_warning(_reset: bool = false):
 
 
 func reset_smile_button():
-	gameStatusButton.texture_normal = default_button_texture
+	#gameStatusButton.texture_normal = default_button_texture
+	pass
 
 
 func clear_save_score_fields():

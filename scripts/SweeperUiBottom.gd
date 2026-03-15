@@ -13,9 +13,6 @@ class_name SweeperUiBottom
 
 
 func _ready():
-	var styleBox: StyleBoxFlat = get_theme_stylebox("panel").duplicate()
-	styleBox.set("bg_color", baseNode.theme.get_meta("bottom_ui_background_color"))
-	add_theme_stylebox_override("panel", styleBox)
 	GlobalFuncs.avoid_notch_bottom(self)
 
 	opened_menu.connect("id_pressed", update_dificulty)

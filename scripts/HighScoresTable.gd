@@ -10,7 +10,6 @@ class_name Table
 @onready var headerCreatedAt = %ScoreTableContents/CreatedAt
 @onready var highScoreCanvas = %HighScoreCanvas
 @onready var sweeperGameUi = %SweeperGameUi
-@onready var baseNode = %BaseNode
 @onready var tileMapNumbers = %TileMapNumbers
 
 var current_sort_table: String = 'none'
@@ -19,8 +18,6 @@ var opened_menu = null
 
 func _ready():
 	GlobalFuncs.avoid_notch(self)
-
-	self.theme = baseNode.theme
 	opened_menu = scoreDificiltyMenu.get_popup()
 	opened_menu.connect("id_pressed", swap_dificulty)
 	

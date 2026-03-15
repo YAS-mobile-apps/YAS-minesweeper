@@ -203,7 +203,7 @@ func set_tile_cell(cell_coord: Vector2i, cell_type: Vector2i, alternative_tile: 
 	if (cell_type == GlobalVars.CELLS.open_cell): 
 		if (mine_count > 0):
 			tileMapNumbers.cells_mine_count[cell_coord] = mine_count
-		elif (theme.get_meta("special_empty_cell") == true):
+		elif (ThemeManager.get_metadata("special_empty_cell") == true):
 			cell_type.x = GlobalVars.EMPTY_CELL_TILE_POSITION
 
 	set_cell(
