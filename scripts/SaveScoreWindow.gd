@@ -36,7 +36,7 @@ func save_score(final_score: int, final_time: int):
 
 	if GlobalVars.current_scores[GlobalVars.settings.dificulty].highest_score < final_score:
 		GlobalVars.current_scores[
-			GlobalVars.settings.dificcurrent_player_nameulty
+			GlobalVars.settings.dificulty
 		].highest_score = final_score
 
 	GlobalVars.current_scores[

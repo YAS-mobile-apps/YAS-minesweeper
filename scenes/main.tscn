@@ -556,6 +556,7 @@ layout_mode = 2
 
 [node name="SaveScoreWindow" type="Window" parent="DisplaySafeArea/GameUI/UiContainer"]
 unique_name_in_owner = true
+disable_3d = true
 title = "Save Score"
 initial_position = 1
 size = Vector2i(300, 300)
@@ -563,7 +564,7 @@ visible = false
 borderless = true
 script = ExtResource("12_31fka")
 
-[node name="MarginContainer" type="MarginContainer" parent="DisplaySafeArea/GameUI/UiContainer/SaveScoreWindow"]
+[node name="PanelContainer" type="PanelContainer" parent="DisplaySafeArea/GameUI/UiContainer/SaveScoreWindow"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -571,61 +572,66 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="DisplaySafeArea/GameUI/UiContainer/SaveScoreWindow/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="DisplaySafeArea/GameUI/UiContainer/SaveScoreWindow/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="DisplaySafeArea/GameUI/UiContainer/SaveScoreWindow/PanelContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="CurrentUserName" type="HBoxContainer" parent="DisplaySafeArea/GameUI/UiContainer/SaveScoreWindow/MarginContainer/VBoxContainer"]
+[node name="CurrentUserName" type="HBoxContainer" parent="DisplaySafeArea/GameUI/UiContainer/SaveScoreWindow/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="CurrentUserTextEdit" type="LineEdit" parent="DisplaySafeArea/GameUI/UiContainer/SaveScoreWindow/MarginContainer/VBoxContainer/CurrentUserName"]
+[node name="CurrentUserTextEdit" type="LineEdit" parent="DisplaySafeArea/GameUI/UiContainer/SaveScoreWindow/PanelContainer/MarginContainer/VBoxContainer/CurrentUserName"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "Score owner name..."
 max_length = 7
 
-[node name="CurrentScore" type="HBoxContainer" parent="DisplaySafeArea/GameUI/UiContainer/SaveScoreWindow/MarginContainer/VBoxContainer"]
+[node name="CurrentScore" type="HBoxContainer" parent="DisplaySafeArea/GameUI/UiContainer/SaveScoreWindow/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ScoreTextLabel" type="RichTextLabel" parent="DisplaySafeArea/GameUI/UiContainer/SaveScoreWindow/MarginContainer/VBoxContainer/CurrentScore"]
+[node name="ScoreTextLabel" type="RichTextLabel" parent="DisplaySafeArea/GameUI/UiContainer/SaveScoreWindow/PanelContainer/MarginContainer/VBoxContainer/CurrentScore"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Your Score: "
 
-[node name="CurrentTime" type="HBoxContainer" parent="DisplaySafeArea/GameUI/UiContainer/SaveScoreWindow/MarginContainer/VBoxContainer"]
+[node name="CurrentTime" type="HBoxContainer" parent="DisplaySafeArea/GameUI/UiContainer/SaveScoreWindow/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="TimeTextLabel" type="RichTextLabel" parent="DisplaySafeArea/GameUI/UiContainer/SaveScoreWindow/MarginContainer/VBoxContainer/CurrentTime"]
+[node name="TimeTextLabel" type="RichTextLabel" parent="DisplaySafeArea/GameUI/UiContainer/SaveScoreWindow/PanelContainer/MarginContainer/VBoxContainer/CurrentTime"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Your Time: "
 
-[node name="SaveScoreOrCancel" type="HBoxContainer" parent="DisplaySafeArea/GameUI/UiContainer/SaveScoreWindow/MarginContainer/VBoxContainer"]
+[node name="SaveScoreOrCancel" type="HBoxContainer" parent="DisplaySafeArea/GameUI/UiContainer/SaveScoreWindow/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 10
 
-[node name="SaveCancelButton" type="Button" parent="DisplaySafeArea/GameUI/UiContainer/SaveScoreWindow/MarginContainer/VBoxContainer/SaveScoreOrCancel"]
+[node name="SaveCancelButton" type="Button" parent="DisplaySafeArea/GameUI/UiContainer/SaveScoreWindow/PanelContainer/MarginContainer/VBoxContainer/SaveScoreOrCancel"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Cancel"
 
-[node name="SaveConfirmButton" type="Button" parent="DisplaySafeArea/GameUI/UiContainer/SaveScoreWindow/MarginContainer/VBoxContainer/SaveScoreOrCancel"]
+[node name="SaveConfirmButton" type="Button" parent="DisplaySafeArea/GameUI/UiContainer/SaveScoreWindow/PanelContainer/MarginContainer/VBoxContainer/SaveScoreOrCancel"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
