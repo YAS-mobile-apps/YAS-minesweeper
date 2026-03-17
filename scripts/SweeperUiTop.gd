@@ -125,12 +125,6 @@ func score_button_pressed():
 
 
 func set_mine_count(mine_count: int):
-	var font_color = ThemeManager.get_metadata("mine_counter_font_color")
-	mineCountLabel.add_theme_color_override("font_color", font_color)
-
-	var font_size = ThemeManager.get_metadata("mine_counter_font_size")
-	mineCountLabel.add_theme_font_size_override("font_size", font_size)
-
 	var mine_count_string = str(mine_count)
 	if len(mine_count_string) < TEXT_PADDING_SIZE:
 		mine_count_string = mine_count_string.lpad(TEXT_PADDING_SIZE, "0")
@@ -138,12 +132,6 @@ func set_mine_count(mine_count: int):
 
 
 func set_timer_count(timer_count: int):
-	var font_color = ThemeManager.get_metadata("timer_font_color")
-	timerCountLabel.add_theme_color_override("font_color", font_color)
-
-	var font_size = ThemeManager.get_metadata("timer_font_size")
-	mineCountLabel.add_theme_font_size_override("font_size", font_size)
-
 	var time_string = str(timer_count)
 	if len(time_string) < 3:
 		time_string = time_string.lpad(3, "0")
