@@ -27,9 +27,9 @@ signal toggle_score_window(visibility: bool)
 signal save_score(final_score: int, final_time: int)
 signal reset_game
 
-var game_lost_button_texture = null
-var game_won_button_texture = null
-var default_button_texture = null
+var game_lost_button = StyleBoxTexture.new()
+var game_won_button = StyleBoxTexture.new()
+var default_button = StyleBoxTexture.new()
 
 var flag_placement_set_right_texture = null
 var flag_placement_set_left_texture = null
@@ -40,15 +40,12 @@ var final_time: int = 0
 
 func _ready():
 	await get_tree().process_frame
-	game_lost_button_texture = baseNode.get_tile_texture(GlobalVars.CELLS.lose)
-	game_won_button_texture = baseNode.get_tile_texture(GlobalVars.CELLS.win)
-	default_button_texture = baseNode.get_tile_texture(GlobalVars.CELLS.smile)
+	game_lost_button.texture = baseNode.get_tile_texture(GlobalVars.CELLS.lose)
+	game_won_button.texture = baseNode.get_tile_texture(GlobalVars.CELLS.win)
+	default_button.texture = baseNode.get_tile_texture(GlobalVars.CELLS.smile)
 
 	flag_placement_set_right_texture = baseNode.get_tile_texture(GlobalVars.CELLS.mine)
 	flag_placement_set_left_texture = baseNode.get_tile_texture(GlobalVars.CELLS.flag)
-
-	#gameStatusButton.texture_normal = baseNode.get_tile_texture(GlobalVars.CELLS.smile)
-	#gameStatusButton.texture_pressed = baseNode.get_tile_texture(GlobalVars.CELLS.smile_click)
 
 	scoreButton.texture_normal = baseNode.get_tile_texture(GlobalVars.CELLS.winners)
 	scoreButton.texture_pressed = baseNode.get_tile_texture(GlobalVars.CELLS.winners)
@@ -154,14 +151,13 @@ func set_timer_count(timer_count: int):
 
 
 func on_game_lost():
-	pass
+	gameStatusButton.add_theme_stylebox_override("normal", game_lost_button)
 
 
 func game_won(time_elapsed, current_score):
 	final_time = time_elapsed
 	final_score = current_score
-	# gameStatusButton.texture_normal = game_won_button_texture
-	
+	gameStatusButton.add_theme_stylebox_override("normal", game_won_button)
 	scoreTextLabel.add_text(str(final_score))
 	timeTextLabel.add_text(str(time_elapsed))
 
@@ -172,8 +168,7 @@ func max_flag_warning(_reset: bool = false):
 
 
 func reset_smile_button():
-	#gameStatusButton.texture_normal = default_button_texture
-	pass
+	gameStatusButton.add_theme_stylebox_override("normal", default_button)
 
 
 func clear_save_score_fields():
