@@ -94,6 +94,7 @@ alignment = 1
 script = ExtResource("3_ndd0u")
 
 [node name="SeparatorTop" type="Control" parent="DisplaySafeArea/GameSubViewportContainer/GameSubViewport/BaseNode/SweeperGameUi"]
+custom_minimum_size = Vector2(0, 5)
 layout_mode = 2
 size_flags_vertical = 3
 
@@ -219,6 +220,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="SeparatorCenterTop" type="Control" parent="DisplaySafeArea/GameSubViewportContainer/GameSubViewport/BaseNode/SweeperGameUi"]
+custom_minimum_size = Vector2(0, 6)
 layout_mode = 2
 size_flags_vertical = 3
 
@@ -322,7 +324,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_wrv4x")
 script = ExtResource("9_oyv0j")
 
 [node name="InvisibleSweeperGameUi" type="VBoxContainer" parent="DisplaySafeArea/GameUI/InvisibleUiContainer"]
-custom_minimum_size = Vector2(440, 762)
+custom_minimum_size = Vector2(445, 780)
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 0
@@ -355,7 +357,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_txmul")
 
 [node name="TileMapNumbers" type="Node2D" parent="DisplaySafeArea/GameUI/InvisibleUiContainer/InvisibleSweeperGameUi/InvisibleMineFieldContainer"]
 unique_name_in_owner = true
-position = Vector2(198, 340)
+position = Vector2(198, 345)
 script = ExtResource("11_s5dhg")
 
 [node name="SeparatorCenterBottom" type="Control" parent="DisplaySafeArea/GameUI/InvisibleUiContainer/InvisibleSweeperGameUi"]
@@ -364,7 +366,7 @@ size_flags_vertical = 3
 mouse_filter = 2
 
 [node name="InvisibleSweeperUiBottom" type="PanelContainer" parent="DisplaySafeArea/GameUI/InvisibleUiContainer/InvisibleSweeperGameUi"]
-custom_minimum_size = Vector2(445, 12)
+custom_minimum_size = Vector2(445, 21)
 layout_mode = 2
 size_flags_vertical = 2
 mouse_filter = 2
