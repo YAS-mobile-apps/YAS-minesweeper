@@ -6,7 +6,7 @@ var base_tileset: TileSet
 
 # Called when the node enters the scene tree for the first time.
 func _enter_tree():
-	ThemeManager.apply(self, "default")
+	ThemeManager.apply(self, "oceanBlue")
 	base_tileset = create_tileset(get_theme().get_meta("base_tiles"))
 
 

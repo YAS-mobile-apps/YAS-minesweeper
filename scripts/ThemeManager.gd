@@ -2,6 +2,7 @@ extends Node
 
 var themes := {
 	"default": preload("res://assets/themes/default_theme/default_theme.tres"),
+	"oceanBlue": preload("res://assets/themes/oceanBlue_theme/oceanBlue_theme.tres"),
 	"development": preload("res://assets/themes/dev_theme/development_theme.tres")
 }
 
