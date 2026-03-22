@@ -15,7 +15,6 @@ const TEXT_PADDING_SIZE: int = 3
 @onready var saveCancelButton = %SaveCancelButton
 @onready var saveConfirmButton = %SaveConfirmButton
 @onready var flagPlacementSetButton = %FlagPlacementSetButton
-@onready var baseNode = %BaseNode
 @onready var highScoreCanvas = %HighScoreCanvas
 @onready var highScoreTable = %HighScoresTable
 @onready var sweeperGameUi = %SweeperGameUi
@@ -27,29 +26,21 @@ signal toggle_score_window(visibility: bool)
 signal save_score(final_score: int, final_time: int)
 signal reset_game
 
-var game_lost_button = StyleBoxTexture.new()
-var game_won_button = StyleBoxTexture.new()
-var default_button = StyleBoxTexture.new()
+var game_lost_button = ThemeManager.get_game_lost_button()
+var game_won_button = ThemeManager.get_game_won_button()
+var default_button = ThemeManager.get_default_button()
 
-var flag_placement_set_right_texture = null
-var flag_placement_set_left_texture = null
+var flag_placement_set_right_texture =  ThemeManager.get_tile_texture(GlobalVars.CELLS.mine)
+var flag_placement_set_left_texture = ThemeManager.get_tile_texture(GlobalVars.CELLS.flag)
 
 var final_score: int = 0
 var final_time: int = 0
 
 
 func _ready():
-	await get_tree().process_frame
-	game_lost_button.texture = baseNode.get_tile_texture(GlobalVars.CELLS.lose)
-	game_won_button.texture = baseNode.get_tile_texture(GlobalVars.CELLS.win)
-	default_button.texture = baseNode.get_tile_texture(GlobalVars.CELLS.smile)
-
-	flag_placement_set_right_texture = baseNode.get_tile_texture(GlobalVars.CELLS.mine)
-	flag_placement_set_left_texture = baseNode.get_tile_texture(GlobalVars.CELLS.flag)
-
-	scoreButton.texture_normal = baseNode.get_tile_texture(GlobalVars.CELLS.winners)
-	scoreButton.texture_pressed = baseNode.get_tile_texture(GlobalVars.CELLS.winners)
-	scoreButton.texture_hover = baseNode.get_tile_texture(GlobalVars.CELLS.winners_click)
+	scoreButton.texture_normal = ThemeManager.get_tile_texture(GlobalVars.CELLS.winners)
+	scoreButton.texture_pressed = ThemeManager.get_tile_texture(GlobalVars.CELLS.winners)
+	scoreButton.texture_hover = ThemeManager.get_tile_texture(GlobalVars.CELLS.winners_click)
 
 	gameStatusButton.pressed.connect(game_status_button_pressed)
 	saveCancelButton.pressed.connect(game_reset_button_pressed)
@@ -64,8 +55,19 @@ func _ready():
 
 	gameStateView.timer_timeout.connect(on_timer_timeout)
 
+	ThemeManager.theme_changed.connect(on_theme_changed)
 	swap_flag_placement_type(true)
 	set_mine_count(GlobalVars.MINE_AMOUNT[GlobalVars.settings.dificulty])
+
+func on_theme_changed(_theme_name: String = ""):
+	game_lost_button = ThemeManager.get_game_lost_button()
+	game_won_button = ThemeManager.get_game_won_button()
+	default_button = ThemeManager.get_default_button()
+	flag_placement_set_right_texture =  ThemeManager.get_tile_texture(GlobalVars.CELLS.mine)
+	flag_placement_set_left_texture = ThemeManager.get_tile_texture(GlobalVars.CELLS.flag)
+	scoreButton.texture_normal = ThemeManager.get_tile_texture(GlobalVars.CELLS.winners)
+	scoreButton.texture_pressed = ThemeManager.get_tile_texture(GlobalVars.CELLS.winners)
+	scoreButton.texture_hover = ThemeManager.get_tile_texture(GlobalVars.CELLS.winners_click)
 
 
 func on_flag_placed(flag_count):
@@ -151,7 +153,7 @@ func game_won(time_elapsed, current_score):
 
 
 func max_flag_warning(_reset: bool = false):
-	var color = baseNode.theme.get_meta("mine_counter_font_color")
+	var color = ThemeManager.get_metadata("mine_counter_font_color")
 	mineCountLabel.add_theme_color_override("font_color", color)
 
 

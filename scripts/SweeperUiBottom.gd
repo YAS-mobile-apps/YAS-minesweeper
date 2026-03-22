@@ -4,7 +4,6 @@ class_name SweeperUiBottom
 
 @onready var menuButton = %MenuButton
 @onready var holdTimerMenu = %HoldTimerMenu
-@onready var baseNode = %BaseNode
 @onready var gameStateView = %GameStateView
 @onready var tileMap = %TileMap
 

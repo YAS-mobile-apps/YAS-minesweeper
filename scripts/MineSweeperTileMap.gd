@@ -20,8 +20,6 @@ const SURROUNDING_POSITIONS: Array = [
 @export var rows = 8
 
 @onready var gameStateView = %GameStateView
-@onready var baseNode: BaseNode = %BaseNode
-@onready var theme: Theme = %BaseNode.theme
 @onready var tileMapNumbers = %TileMapNumbers
 @onready var sweeperUiTop = %SweeperUiTop
 
@@ -44,9 +42,13 @@ var mouse_held_timer: float = 0
 
 
 func _ready():
-	self.tile_set = baseNode.base_tileset
+	ThemeManager.theme_changed.connect(refresh_tileset)
 	sweeperUiTop.reset_game.connect(on_game_reset)
+	refresh_tileset("")
 
+func refresh_tileset(_theme_name: String):
+	self.tile_set = ThemeManager.get_tileset()
+	print("refreshing tileset")
 
 func on_game_reset():
 	new_game()

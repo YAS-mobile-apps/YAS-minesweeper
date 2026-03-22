@@ -2,14 +2,13 @@ extends Node2D
 
 class_name TileMapNumbers
 
-@onready var tileMap: TileMap = %TileMap
-@onready var baseNode: BaseNode = %BaseNode
 
 var color_codes: Dictionary = {}
 var cells_mine_count: Dictionary = {}
 var font: Font = null
 var font_size: int = 12
 var text_vertical_offset = null
+
 
 func _ready():
 	font = ThemeManager.get_font("Label")

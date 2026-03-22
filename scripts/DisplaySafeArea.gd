@@ -4,4 +4,4 @@ extends PanelContainer
 func _ready():
 	GlobalFuncs.avoid_notch(self)
 	GlobalFuncs.avoid_notch_bottom(self)
-	GlobalFuncs.set_background_color(self, ThemeManager.current_theme, "background_color")
+	GlobalFuncs.set_background_color(self, ThemeManager.get_current_theme(), "background_color")
