@@ -10,6 +10,7 @@ extends PanelContainer
 @onready var themeMenuUiContainer = %ThemeMenuUiContainer
 
 func _ready():
+	GlobalFuncs.avoid_notch(self)
 	ThemeManager.theme_changed.connect(on_theme_changed)
 	on_theme_changed()
 

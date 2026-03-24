@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cs7xfipko16xx"]
+[gd_scene load_steps=28 format=3 uid="uid://cs7xfipko16xx"]
 
 [ext_resource type="Script" path="res://scripts/DisplaySafeArea.gd" id="1_2q0tv"]
 [ext_resource type="Theme" uid="uid://cyrlp5twyc8al" path="res://assets/themes/default_theme/default_theme.tres" id="1_4lv0w"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://scripts/MineFieldContainer.gd" id="9_gvkcf"]
 [ext_resource type="Script" path="res://scripts/UiContainer.gd" id="9_oyv0j"]
 [ext_resource type="Script" path="res://scripts/SweeperUiBottom.gd" id="10_3fbao"]
+[ext_resource type="Script" path="res://scripts/ScoreTableUi/ScoreTableUiContainer.gd" id="11_2av8e"]
 [ext_resource type="Script" path="res://scripts/TileMapNumbers.gd" id="11_s5dhg"]
 [ext_resource type="Script" path="res://scripts/SaveScoreWindow.gd" id="12_31fka"]
 [ext_resource type="Script" path="res://scripts/ThemeMenu/ThemeMenuUiContainer.gd" id="14_pqh81"]
@@ -60,6 +61,9 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -222.5
+offset_right = 222.5
+offset_bottom = 740.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_2q0tv")
@@ -393,7 +397,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_amb17")
-script = ExtResource("9_oyv0j")
+script = ExtResource("11_2av8e")
 
 [node name="HighScoreCanvas" type="Control" parent="DisplaySafeArea/GameUI/ScoreTableUiContainer"]
 unique_name_in_owner = true

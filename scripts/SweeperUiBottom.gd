@@ -12,7 +12,7 @@ class_name SweeperUiBottom
 
 
 func _ready():
-	GlobalFuncs.avoid_notch_bottom(self)
+	# GlobalFuncs.avoid_notch_bottom(self)
 
 	opened_menu.connect("id_pressed", update_dificulty)
 	timer_menu.connect("id_pressed", update_hold_timer)

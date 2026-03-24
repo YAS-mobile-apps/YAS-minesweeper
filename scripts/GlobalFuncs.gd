@@ -22,7 +22,7 @@ func write_to_json_file(file_path: String, file_contents: Dictionary):
 
 func avoid_notch(root: Control):
 	var safe = DisplayServer.get_display_safe_area()
-	root.add_theme_constant_override("margin_top", safe.position.y)
+	root.position.y += safe.position.y
 
 
 func avoid_notch_bottom(root: Control):

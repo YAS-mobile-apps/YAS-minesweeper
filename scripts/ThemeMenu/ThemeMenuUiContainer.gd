@@ -5,6 +5,7 @@ extends PanelContainer
 @onready var themeMenuReturnToHome = %ThemeMenuReturnToHome
 
 func _ready():
+	GlobalFuncs.avoid_notch(self)
 	ThemeManager.theme_changed.connect(on_theme_changed)
 	on_theme_changed()
 	draw_theme_selection()
