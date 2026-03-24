@@ -9,14 +9,13 @@ const TEXT_PADDING_SIZE: int = 3
 @onready var gameStatusButton = %GameStatusButton
 @onready var timerCountLabel = %TimerCountLabel
 @onready var saveScoreWindow = %SaveScoreWindow
-@onready var scoreButton = %ScoreButton
+@onready var menuButton = %ScoreButton
 @onready var scoreTextLabel = %ScoreTextLabel
 @onready var timeTextLabel = %TimeTextLabel
 @onready var saveCancelButton = %SaveCancelButton
 @onready var saveConfirmButton = %SaveConfirmButton
 @onready var flagPlacementSetButton = %FlagPlacementSetButton
-@onready var highScoreCanvas = %HighScoreCanvas
-@onready var highScoreTable = %HighScoresTable
+@onready var menuUiContainer = %MenuUiContainer
 @onready var sweeperGameUi = %SweeperGameUi
 @onready var tileMap = %TileMap
 @onready var tileMapNumbers = %TileMapNumbers
@@ -38,15 +37,15 @@ var final_time: int = 0
 
 
 func _ready():
-	scoreButton.texture_normal = ThemeManager.get_tile_texture(GlobalVars.CELLS.winners)
-	scoreButton.texture_pressed = ThemeManager.get_tile_texture(GlobalVars.CELLS.winners)
-	scoreButton.texture_hover = ThemeManager.get_tile_texture(GlobalVars.CELLS.winners_click)
+	menuButton.texture_normal = ThemeManager.get_tile_texture(GlobalVars.CELLS.winners)
+	menuButton.texture_pressed = ThemeManager.get_tile_texture(GlobalVars.CELLS.winners)
+	menuButton.texture_hover = ThemeManager.get_tile_texture(GlobalVars.CELLS.winners_click)
 
 	gameStatusButton.pressed.connect(game_status_button_pressed)
 	saveCancelButton.pressed.connect(game_reset_button_pressed)
 	saveConfirmButton.pressed.connect(save_confirm_button_pressed)
 	flagPlacementSetButton.pressed.connect(swap_flag_placement_type)
-	scoreButton.pressed.connect(score_button_pressed)
+	menuButton.pressed.connect(on_menu_button_pressed)
 
 	tileMap.game_lost.connect(on_game_lost)
 	tileMap.flag_placed.connect(on_flag_placed)
@@ -54,9 +53,9 @@ func _ready():
 	tileMap.max_flags_placed.connect(on_max_flags_placed)
 
 	gameStateView.timer_timeout.connect(on_timer_timeout)
+	gameStateView.settings_loaded.connect(on_settings_loaded)
 
 	ThemeManager.theme_changed.connect(on_theme_changed)
-	swap_flag_placement_type(true)
 	set_mine_count(GlobalVars.MINE_AMOUNT[GlobalVars.settings.dificulty])
 
 func on_theme_changed(_theme_name: String = ""):
@@ -65,10 +64,17 @@ func on_theme_changed(_theme_name: String = ""):
 	default_button = ThemeManager.get_default_button()
 	flag_placement_set_right_texture =  ThemeManager.get_tile_texture(GlobalVars.CELLS.mine)
 	flag_placement_set_left_texture = ThemeManager.get_tile_texture(GlobalVars.CELLS.flag)
-	scoreButton.texture_normal = ThemeManager.get_tile_texture(GlobalVars.CELLS.winners)
-	scoreButton.texture_pressed = ThemeManager.get_tile_texture(GlobalVars.CELLS.winners)
-	scoreButton.texture_hover = ThemeManager.get_tile_texture(GlobalVars.CELLS.winners_click)
+	menuButton.texture_normal = ThemeManager.get_tile_texture(GlobalVars.CELLS.winners)
+	menuButton.texture_pressed = ThemeManager.get_tile_texture(GlobalVars.CELLS.winners)
+	menuButton.texture_hover = ThemeManager.get_tile_texture(GlobalVars.CELLS.winners_click)
+	if GlobalVars.settings.click_reverse == true:
+		flagPlacementSetButton.texture_normal = flag_placement_set_left_texture
+	else:
+		flagPlacementSetButton.texture_normal = flag_placement_set_right_texture
 
+
+func on_settings_loaded():
+	swap_flag_placement_type(true)
 
 func on_flag_placed(flag_count):
 	set_mine_count(GlobalVars.MINE_AMOUNT[GlobalVars.settings.dificulty] - flag_count)
@@ -106,24 +112,29 @@ func save_confirm_button_pressed():
 
 
 func swap_flag_placement_type(read_only: bool = false):
-	if GlobalVars.settings.click_reverse:
+	var is_click_reversed = GlobalVars.settings.click_reverse == true
+	print("is_click_reversed = ", is_click_reversed)
+	print("read_only = ", read_only)
+	if !read_only: 
+		if is_click_reversed:
+			flagPlacementSetButton.texture_normal = flag_placement_set_right_texture
+			GlobalVars.settings.click_reverse = false
+		else:
+			flagPlacementSetButton.texture_normal = flag_placement_set_left_texture
+			GlobalVars.settings.click_reverse = true
+		GlobalFuncs.write_to_json_file(
+			GlobalVars.SETTINGS_FILE_PATH, GlobalVars.settings
+		)
+		return
+
+	if is_click_reversed:
 		flagPlacementSetButton.texture_normal = flag_placement_set_left_texture
-		if !read_only: GlobalVars.settings.click_reverse = false
 	else:
 		flagPlacementSetButton.texture_normal = flag_placement_set_right_texture
-		if !read_only: GlobalVars.settings.click_reverse = true
-
-	if !read_only: GlobalFuncs.write_to_json_file(
-		GlobalVars.SETTINGS_FILE_PATH, GlobalVars.settings
-	)
 
 
-func score_button_pressed():
-	highScoreTable.fill_score_table(GlobalVars.settings.dificulty)
-	highScoreCanvas.visible = true
-	sweeperGameUi.visible = false
-	tileMapNumbers.visible = false
-	sweeperGameUi.process_mode = PROCESS_MODE_DISABLED
+func on_menu_button_pressed():
+	menuUiContainer.visible = true
 
 
 func set_mine_count(mine_count: int):

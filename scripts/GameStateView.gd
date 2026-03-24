@@ -12,6 +12,7 @@ class_name GameStateView
 @onready var scoreTable = get_node(score_table_path)
 
 signal timer_timeout(time_elapsed)
+signal settings_loaded
 
 var time_elapsed: int = 0
 var opened_menu: bool = false
@@ -80,6 +81,8 @@ func load_settings():
 			return
 	
 	GlobalVars.settings = settings
+	
+	settings_loaded.emit()
 
 
 func reset_file_settings():

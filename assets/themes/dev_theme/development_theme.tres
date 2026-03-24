@@ -7,6 +7,10 @@
 resource_name = "dev_theme"
 default_font = ExtResource("1_v2bpu")
 default_font_size = 11
+GameStatusButton/base_type = &"Button"
+MenuOptionsButton/base_type = &"Button"
+ScoresButton/base_type = &"Button"
+ThemesButton/base_type = &"Button"
 metadata/base_tiles = ExtResource("1_87jpu")
 metadata/NumberColors = {
 1: Color(0, 0.431373, 0, 1),

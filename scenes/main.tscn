@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cs7xfipko16xx"]
+[gd_scene load_steps=27 format=3 uid="uid://cs7xfipko16xx"]
 
 [ext_resource type="Script" path="res://scripts/DisplaySafeArea.gd" id="1_2q0tv"]
 [ext_resource type="Theme" uid="uid://cyrlp5twyc8al" path="res://assets/themes/default_theme/default_theme.tres" id="1_4lv0w"]
@@ -16,6 +16,8 @@
 [ext_resource type="Script" path="res://scripts/SaveScoreWindow.gd" id="12_31fka"]
 [ext_resource type="Script" path="res://scripts/ThemeMenu/ThemeMenuUiContainer.gd" id="14_pqh81"]
 [ext_resource type="Texture2D" uid="uid://dunq15if5jhxm" path="res://assets/themes/dev_theme/base_tiles.png" id="15_1yurp"]
+[ext_resource type="Theme" uid="uid://dx6dndk6te5or" path="res://assets/themes/oceanBlue_theme/oceanBlue_theme.tres" id="16_m33iv"]
+[ext_resource type="Script" path="res://scripts/MenuUi/MenuUiContainer.gd" id="17_b33ot"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ct5oy"]
 bg_color = Color(0.0313726, 0.0313726, 0.0313726, 1)
@@ -77,6 +79,7 @@ positional_shadow_atlas_quad_1 = 0
 positional_shadow_atlas_quad_2 = 0
 positional_shadow_atlas_quad_3 = 0
 size = Vector2i(445, 780)
+render_target_update_mode = 4
 
 [node name="BaseNode" type="PanelContainer" parent="DisplaySafeArea/GameSubViewportContainer/GameSubViewport"]
 unique_name_in_owner = true
@@ -679,6 +682,7 @@ item_0/disabled = true
 
 [node name="ThemeMenuUiContainer" type="PanelContainer" parent="DisplaySafeArea/GameUI"]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(445, 780)
 anchors_preset = 13
 anchor_left = 0.5
@@ -799,6 +803,175 @@ text = "apply"
 [node name="SeparatorRight" type="Control" parent="DisplaySafeArea/GameUI/ThemeMenuUiContainer/ThemeMenuVBoxContainer/ThemeMenuScrollContainer/ThemeSelectorVBoxContainer/ThemeSelectorLine"]
 custom_minimum_size = Vector2(8, 0)
 layout_mode = 2
+size_flags_vertical = 4
+
+[node name="MenuUiContainer" type="PanelContainer" parent="DisplaySafeArea/GameUI"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(0, 780)
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 123.0
+grow_vertical = 2
+size_flags_horizontal = 0
+theme = ExtResource("16_m33iv")
+script = ExtResource("17_b33ot")
+
+[node name="MenuVBoxContainer" type="VBoxContainer" parent="DisplaySafeArea/GameUI/MenuUiContainer"]
+layout_mode = 2
+
+[node name="SeparatorTop" type="Control" parent="DisplaySafeArea/GameUI/MenuUiContainer/MenuVBoxContainer"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="MenuHeaderHBoxContainer" type="HBoxContainer" parent="DisplaySafeArea/GameUI/MenuUiContainer/MenuVBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="DisplaySafeArea/GameUI/MenuUiContainer/MenuVBoxContainer/MenuHeaderHBoxContainer"]
+custom_minimum_size = Vector2(0, 37)
+layout_mode = 2
+theme_override_constants/margin_left = 7
+
+[node name="MenuReturnToHome" type="Button" parent="DisplaySafeArea/GameUI/MenuUiContainer/MenuVBoxContainer/MenuHeaderHBoxContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "<  BACK  "
+
+[node name="SeparatorRight" type="Control" parent="DisplaySafeArea/GameUI/MenuUiContainer/MenuVBoxContainer/MenuHeaderHBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SeparatorMiddle" type="Control" parent="DisplaySafeArea/GameUI/MenuUiContainer/MenuVBoxContainer"]
+custom_minimum_size = Vector2(0, 6)
+layout_mode = 2
+
+[node name="MenuScrollContainer" type="ScrollContainer" parent="DisplaySafeArea/GameUI/MenuUiContainer/MenuVBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="SelectorVBoxContainer" type="VBoxContainer" parent="DisplaySafeArea/GameUI/MenuUiContainer/MenuVBoxContainer/MenuScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="OpenScoresTable" type="PanelContainer" parent="DisplaySafeArea/GameUI/MenuUiContainer/MenuVBoxContainer/MenuScrollContainer/SelectorVBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Control" type="Control" parent="DisplaySafeArea/GameUI/MenuUiContainer/MenuVBoxContainer/MenuScrollContainer/SelectorVBoxContainer/OpenScoresTable"]
+custom_minimum_size = Vector2(0, 6)
+layout_mode = 2
+
+[node name="SelectorLine" type="HBoxContainer" parent="DisplaySafeArea/GameUI/MenuUiContainer/MenuVBoxContainer/MenuScrollContainer/SelectorVBoxContainer/OpenScoresTable"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="SeparatorLeft" type="Control" parent="DisplaySafeArea/GameUI/MenuUiContainer/MenuVBoxContainer/MenuScrollContainer/SelectorVBoxContainer/OpenScoresTable/SelectorLine"]
+custom_minimum_size = Vector2(8, 0)
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="SelectorLineContainer" type="PanelContainer" parent="DisplaySafeArea/GameUI/MenuUiContainer/MenuVBoxContainer/MenuScrollContainer/SelectorVBoxContainer/OpenScoresTable/SelectorLine"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
+
+[node name="HBoxContainerLine1" type="HBoxContainer" parent="DisplaySafeArea/GameUI/MenuUiContainer/MenuVBoxContainer/MenuScrollContainer/SelectorVBoxContainer/OpenScoresTable/SelectorLine/SelectorLineContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="SeparatorLeft" type="Control" parent="DisplaySafeArea/GameUI/MenuUiContainer/MenuVBoxContainer/MenuScrollContainer/SelectorVBoxContainer/OpenScoresTable/SelectorLine/SelectorLineContainer/HBoxContainerLine1"]
+custom_minimum_size = Vector2(6, 0)
+layout_mode = 2
+
+[node name="ScoresIcon" type="Button" parent="DisplaySafeArea/GameUI/MenuUiContainer/MenuVBoxContainer/MenuScrollContainer/SelectorVBoxContainer/OpenScoresTable/SelectorLine/SelectorLineContainer/HBoxContainerLine1"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(49, 48)
+layout_mode = 2
+theme_type_variation = &"ScoresButton"
+
+[node name="SeparatorMiddle" type="Control" parent="DisplaySafeArea/GameUI/MenuUiContainer/MenuVBoxContainer/MenuScrollContainer/SelectorVBoxContainer/OpenScoresTable/SelectorLine/SelectorLineContainer/HBoxContainerLine1"]
+custom_minimum_size = Vector2(3, 0)
+layout_mode = 2
+
+[node name="ScoresButton" type="Button" parent="DisplaySafeArea/GameUI/MenuUiContainer/MenuVBoxContainer/MenuScrollContainer/SelectorVBoxContainer/OpenScoresTable/SelectorLine/SelectorLineContainer/HBoxContainerLine1"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"SideMenuButton"
+text = "Score Table"
+
+[node name="SeparatorRight" type="Control" parent="DisplaySafeArea/GameUI/MenuUiContainer/MenuVBoxContainer/MenuScrollContainer/SelectorVBoxContainer/OpenScoresTable/SelectorLine/SelectorLineContainer/HBoxContainerLine1"]
+custom_minimum_size = Vector2(6, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="SeparatorRight" type="Control" parent="DisplaySafeArea/GameUI/MenuUiContainer/MenuVBoxContainer/MenuScrollContainer/SelectorVBoxContainer/OpenScoresTable/SelectorLine"]
+custom_minimum_size = Vector2(8, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="OpenThemeMenu" type="PanelContainer" parent="DisplaySafeArea/GameUI/MenuUiContainer/MenuVBoxContainer/MenuScrollContainer/SelectorVBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Control" type="Control" parent="DisplaySafeArea/GameUI/MenuUiContainer/MenuVBoxContainer/MenuScrollContainer/SelectorVBoxContainer/OpenThemeMenu"]
+custom_minimum_size = Vector2(0, 6)
+layout_mode = 2
+
+[node name="SelectorLine" type="HBoxContainer" parent="DisplaySafeArea/GameUI/MenuUiContainer/MenuVBoxContainer/MenuScrollContainer/SelectorVBoxContainer/OpenThemeMenu"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="SeparatorLeft" type="Control" parent="DisplaySafeArea/GameUI/MenuUiContainer/MenuVBoxContainer/MenuScrollContainer/SelectorVBoxContainer/OpenThemeMenu/SelectorLine"]
+custom_minimum_size = Vector2(8, 0)
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="SelectorLineContainer" type="PanelContainer" parent="DisplaySafeArea/GameUI/MenuUiContainer/MenuVBoxContainer/MenuScrollContainer/SelectorVBoxContainer/OpenThemeMenu/SelectorLine"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
+
+[node name="HBoxContainerLine1" type="HBoxContainer" parent="DisplaySafeArea/GameUI/MenuUiContainer/MenuVBoxContainer/MenuScrollContainer/SelectorVBoxContainer/OpenThemeMenu/SelectorLine/SelectorLineContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="SeparatorLeft" type="Control" parent="DisplaySafeArea/GameUI/MenuUiContainer/MenuVBoxContainer/MenuScrollContainer/SelectorVBoxContainer/OpenThemeMenu/SelectorLine/SelectorLineContainer/HBoxContainerLine1"]
+custom_minimum_size = Vector2(6, 0)
+layout_mode = 2
+
+[node name="ThemesIcon" type="Button" parent="DisplaySafeArea/GameUI/MenuUiContainer/MenuVBoxContainer/MenuScrollContainer/SelectorVBoxContainer/OpenThemeMenu/SelectorLine/SelectorLineContainer/HBoxContainerLine1"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(49, 48)
+layout_mode = 2
+theme_type_variation = &"GameStatusButton"
+
+[node name="SeparatorMiddle" type="Control" parent="DisplaySafeArea/GameUI/MenuUiContainer/MenuVBoxContainer/MenuScrollContainer/SelectorVBoxContainer/OpenThemeMenu/SelectorLine/SelectorLineContainer/HBoxContainerLine1"]
+custom_minimum_size = Vector2(3, 0)
+layout_mode = 2
+
+[node name="ThemesButton" type="Button" parent="DisplaySafeArea/GameUI/MenuUiContainer/MenuVBoxContainer/MenuScrollContainer/SelectorVBoxContainer/OpenThemeMenu/SelectorLine/SelectorLineContainer/HBoxContainerLine1"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"SideMenuButton"
+text = "Change Theme"
+
+[node name="SeparatorRight" type="Control" parent="DisplaySafeArea/GameUI/MenuUiContainer/MenuVBoxContainer/MenuScrollContainer/SelectorVBoxContainer/OpenThemeMenu/SelectorLine/SelectorLineContainer/HBoxContainerLine1"]
+custom_minimum_size = Vector2(6, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="SeparatorRight" type="Control" parent="DisplaySafeArea/GameUI/MenuUiContainer/MenuVBoxContainer/MenuScrollContainer/SelectorVBoxContainer/OpenThemeMenu/SelectorLine"]
+custom_minimum_size = Vector2(8, 0)
+layout_mode = 2
+size_flags_horizontal = 0
 size_flags_vertical = 4
 
 [node name="GameStateView" parent="." instance=ExtResource("4_5tf64")]
