@@ -39,10 +39,6 @@ var final_time: int = 0
 
 
 func _ready():
-	menuButton.texture_normal = ThemeManager.get_tile_texture(GlobalVars.CELLS.winners)
-	menuButton.texture_pressed = ThemeManager.get_tile_texture(GlobalVars.CELLS.winners)
-	menuButton.texture_hover = ThemeManager.get_tile_texture(GlobalVars.CELLS.winners_click)
-
 	gameStatusButton.pressed.connect(game_status_button_pressed)
 	saveCancelButton.pressed.connect(game_reset_button_pressed)
 	saveConfirmButton.pressed.connect(save_confirm_button_pressed)
@@ -63,9 +59,6 @@ func _ready():
 func on_theme_changed(_theme_name: String = ""):
 	flag_placement_set_right_texture =  ThemeManager.get_tile_texture(GlobalVars.CELLS.mine)
 	flag_placement_set_left_texture = ThemeManager.get_tile_texture(GlobalVars.CELLS.flag)
-	menuButton.texture_normal = ThemeManager.get_tile_texture(GlobalVars.CELLS.winners)
-	menuButton.texture_pressed = ThemeManager.get_tile_texture(GlobalVars.CELLS.winners)
-	menuButton.texture_hover = ThemeManager.get_tile_texture(GlobalVars.CELLS.winners_click)
 	swap_flag_placement_type(true)
 
 	game_lost_button = ThemeManager.get_game_lost_button(true)

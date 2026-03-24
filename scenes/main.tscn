@@ -154,14 +154,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ScoreButton" type="TextureButton" parent="DisplaySafeArea/GameSubViewportContainer/GameSubViewport/BaseNode/SweeperGameUi/SweeperUiTop/GameStatusBox"]
+[node name="ScoreButton" type="Button" parent="DisplaySafeArea/GameSubViewportContainer/GameSubViewport/BaseNode/SweeperGameUi/SweeperUiTop/GameStatusBox"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(49, 48)
 layout_mode = 2
 tooltip_text = "Score Table"
+theme_type_variation = &"MenuOptionsButton"
 action_mode = 0
-ignore_texture_size = true
-stretch_mode = 5
 
 [node name="SeparatorTop2" type="Control" parent="DisplaySafeArea/GameSubViewportContainer/GameSubViewport/BaseNode/SweeperGameUi/SweeperUiTop/GameStatusBox"]
 layout_mode = 2
@@ -950,7 +949,7 @@ layout_mode = 2
 unique_name_in_owner = true
 custom_minimum_size = Vector2(49, 48)
 layout_mode = 2
-theme_type_variation = &"GameStatusButton"
+theme_type_variation = &"ThemesButton"
 
 [node name="SeparatorMiddle" type="Control" parent="DisplaySafeArea/GameUI/MenuUiContainer/MenuVBoxContainer/MenuScrollContainer/SelectorVBoxContainer/OpenThemeMenu/SelectorLine/SelectorLineContainer/HBoxContainerLine1"]
 custom_minimum_size = Vector2(3, 0)

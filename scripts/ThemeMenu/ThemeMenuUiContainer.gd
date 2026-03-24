@@ -37,6 +37,7 @@ func draw_theme_selection():
 		apply_button.pressed.connect(save_and_apply_theme.bind(game_theme))
 		themeSelectorVBoxContainer.add_child(new_theme_line)
 
+
 func save_and_apply_theme(game_theme: String):
 	ThemeManager.change_global_theme(game_theme)
 	GlobalVars.settings.current_theme = game_theme
