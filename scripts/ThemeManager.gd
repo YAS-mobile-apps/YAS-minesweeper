@@ -17,8 +17,9 @@ var tileset = get_tileset(true)
 
 signal theme_changed(theme_name: String)
 
+
+
 func change_global_theme(theme_name: String):
-	print(theme_name)
 	current_theme_name = theme_name
 	current_theme = themes[theme_name]
 	game_lost_button = get_game_lost_button(true)
@@ -32,20 +33,24 @@ func apply(root: Control, theme_name: String) -> Theme:
 	current_theme = themes[theme_name]
 	return themes[theme_name]
 
+
 func get_metadata(metadata: String, theme_name: String = ""):
 	if theme_name:
 		return themes[theme_name].get_meta(metadata)
 	return current_theme.get_meta(metadata)
+
 
 func get_font(font_type: String, theme_name: String = "") -> Font:
 	if theme_name:
 		return themes[theme_name].get_font("font", font_type)
 	return current_theme.get_font("font", font_type)
 
+
 func get_tileset(refresh: bool = false):
 	if not tileset or refresh == true:
 		_innit_tileset()
 	return tileset
+
 
 func _innit_tileset():
 	tileset = TileSet.new()
@@ -64,14 +69,16 @@ func _innit_tileset():
 
 	atlas_source.create_alternative_tile(GlobalVars.CELLS.default)
 	tileset.add_source(atlas_source)
-	print("current_tileset changed")
 	return self
+
 
 func get_current_theme() -> Theme:
 	return current_theme
 
+
 func get_current_theme_name() -> String:
 	return current_theme_name
+
 
 func get_tile_texture(coords: Vector2i) -> Texture2D:
 	if not tileset:
@@ -85,20 +92,24 @@ func get_tile_texture(coords: Vector2i) -> Texture2D:
 	
 	return atlas
 
+
 func get_game_lost_button(refresh: bool = false) -> StyleBoxTexture:
 	if not game_lost_button or refresh == true:
 		_innit_button("lose", GlobalVars.CELLS.lose)
 	return game_lost_button
+
 
 func get_game_won_button(refresh: bool = false) -> StyleBoxTexture:
 	if not game_won_button or refresh == true:
 		_innit_button("win", GlobalVars.CELLS.win)
 	return game_won_button
 
+
 func get_default_button(refresh: bool = false) -> StyleBoxTexture:
 	if not default_button or refresh == true:
 		_innit_button("smile", GlobalVars.CELLS.smile)
 	return default_button
+
 
 func _innit_button(button_key: String, button_position: Vector2):
 	var tile_texture = get_tile_texture(button_position)

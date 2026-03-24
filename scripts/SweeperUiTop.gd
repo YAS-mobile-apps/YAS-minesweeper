@@ -76,6 +76,7 @@ func on_theme_changed(_theme_name: String = ""):
 func on_settings_loaded():
 	swap_flag_placement_type(true)
 
+
 func on_flag_placed(flag_count):
 	set_mine_count(GlobalVars.MINE_AMOUNT[GlobalVars.settings.dificulty] - flag_count)
 
@@ -113,8 +114,6 @@ func save_confirm_button_pressed():
 
 func swap_flag_placement_type(read_only: bool = false):
 	var is_click_reversed = GlobalVars.settings.click_reverse == true
-	print("is_click_reversed = ", is_click_reversed)
-	print("read_only = ", read_only)
 	if !read_only: 
 		if is_click_reversed:
 			flagPlacementSetButton.texture_normal = flag_placement_set_right_texture

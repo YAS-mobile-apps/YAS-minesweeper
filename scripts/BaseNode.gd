@@ -9,5 +9,4 @@ func _enter_tree():
 	on_theme_changed("")
 
 func on_theme_changed(_theme_name: String):
-	print(ThemeManager.get_current_theme_name())
 	ThemeManager.apply(self, ThemeManager.get_current_theme_name())

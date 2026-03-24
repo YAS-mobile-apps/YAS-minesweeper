@@ -44,11 +44,12 @@ var mouse_held_timer: float = 0
 func _ready():
 	ThemeManager.theme_changed.connect(refresh_tileset)
 	sweeperUiTop.reset_game.connect(on_game_reset)
-	refresh_tileset("")
+	refresh_tileset()
 
-func refresh_tileset(_theme_name: String):
+
+func refresh_tileset(_theme_name: String = ""):
 	self.tile_set = ThemeManager.get_tileset()
-	print("refreshing tileset")
+
 
 func on_game_reset():
 	new_game()
