@@ -1,15 +1,72 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://o0re7h3ft77b"]
+[gd_resource type="Theme" load_steps=15 format=3 uid="uid://o0re7h3ft77b"]
 
 [ext_resource type="Texture2D" uid="uid://dunq15if5jhxm" path="res://assets/themes/dev_theme/base_tiles.png" id="1_87jpu"]
+[ext_resource type="Texture2D" uid="uid://cd2t2mfrdj7xm" path="res://assets/themes/dev_theme/tileset_atlas.tres" id="1_pmsp8"]
 [ext_resource type="FontFile" uid="uid://xm6l2vgx03qi" path="res://assets/themes/dev_theme/font/PrStart.ttf" id="1_v2bpu"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5arc6"]
+texture = ExtResource("1_pmsp8")
+region_rect = Rect2(441, 0, 49, 48)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jenfk"]
+texture = ExtResource("1_pmsp8")
+region_rect = Rect2(392, 0, 49, 48)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cjtxq"]
+texture = ExtResource("1_pmsp8")
+region_rect = Rect2(343, 0, 49, 48)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6ddpa"]
+texture = ExtResource("1_pmsp8")
+region_rect = Rect2(343, 0, 49, 48)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xnbsb"]
+texture = ExtResource("1_pmsp8")
+region_rect = Rect2(294, 0, 49, 48)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dm00h"]
+texture = ExtResource("1_pmsp8")
+region_rect = Rect2(343, 0, 49, 48)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qqteq"]
+texture = ExtResource("1_pmsp8")
+region_rect = Rect2(490, 0, 49, 48)
+modulate_color = Color(1, 1, 1, 0.52549)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8dn8m"]
+texture = ExtResource("1_pmsp8")
+region_rect = Rect2(539, 0, 49, 48)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ewd3n"]
+texture = ExtResource("1_pmsp8")
+region_rect = Rect2(539, 0, 49, 48)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ix2il"]
+texture = ExtResource("1_pmsp8")
+region_rect = Rect2(490, 0, 49, 48)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3ra2r"]
+texture = ExtResource("1_pmsp8")
+region_rect = Rect2(539, 0, 49, 48)
 
 [resource]
 resource_name = "dev_theme"
 default_font = ExtResource("1_v2bpu")
 default_font_size = 11
 GameStatusButton/base_type = &"Button"
+GameStatusButton/styles/disabled = SubResource("StyleBoxTexture_5arc6")
+GameStatusButton/styles/focus = SubResource("StyleBoxTexture_jenfk")
+GameStatusButton/styles/focus_pressed = SubResource("StyleBoxTexture_cjtxq")
+GameStatusButton/styles/hover = SubResource("StyleBoxTexture_6ddpa")
+GameStatusButton/styles/normal = SubResource("StyleBoxTexture_xnbsb")
+GameStatusButton/styles/pressed = SubResource("StyleBoxTexture_dm00h")
 MenuOptionsButton/base_type = &"Button"
 ScoresButton/base_type = &"Button"
+ScoresButton/styles/disabled = SubResource("StyleBoxTexture_qqteq")
+ScoresButton/styles/focus = SubResource("StyleBoxTexture_8dn8m")
+ScoresButton/styles/hover = SubResource("StyleBoxTexture_ewd3n")
+ScoresButton/styles/normal = SubResource("StyleBoxTexture_ix2il")
+ScoresButton/styles/pressed = SubResource("StyleBoxTexture_3ra2r")
 ThemesButton/base_type = &"Button"
 metadata/base_tiles = ExtResource("1_87jpu")
 metadata/NumberColors = {

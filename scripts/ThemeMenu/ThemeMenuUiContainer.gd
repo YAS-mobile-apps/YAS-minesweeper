@@ -6,14 +6,14 @@ extends PanelContainer
 
 func _ready():
 	ThemeManager.theme_changed.connect(on_theme_changed)
-	on_theme_changed("")
+	on_theme_changed()
 	draw_theme_selection()
 	themeMenuReturnToHome.pressed.connect(go_back)
 
 func go_back():
 	self.visible = false
 
-func on_theme_changed(_theme_name: String):
+func on_theme_changed(_theme_name: String = ""):
 	ThemeManager.apply(self, ThemeManager.get_current_theme_name())
 
 func draw_theme_selection():

@@ -10,6 +10,9 @@ extends PanelContainer
 @onready var themeMenuUiContainer = %ThemeMenuUiContainer
 
 func _ready():
+	ThemeManager.theme_changed.connect(on_theme_changed)
+	on_theme_changed()
+
 	menuReturnToHome.pressed.connect(on_return_button_pressed)
 
 	scoresButton.pressed.connect(on_score_button_pressed)
@@ -21,6 +24,10 @@ func _ready():
 
 func on_return_button_pressed():
 	self.visible = false
+
+
+func on_theme_changed(_theme_name: String = ""):
+	ThemeManager.apply(self, ThemeManager.get_current_theme_name())
 
 
 func on_score_button_pressed():

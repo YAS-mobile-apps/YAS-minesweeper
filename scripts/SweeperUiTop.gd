@@ -29,6 +29,8 @@ var game_lost_button = ThemeManager.get_game_lost_button()
 var game_won_button = ThemeManager.get_game_won_button()
 var default_button = ThemeManager.get_default_button()
 
+var current_emote: String = "normal" # Enum[str] in < normal, win, lose >
+
 var flag_placement_set_right_texture =  ThemeManager.get_tile_texture(GlobalVars.CELLS.mine)
 var flag_placement_set_left_texture = ThemeManager.get_tile_texture(GlobalVars.CELLS.flag)
 
@@ -59,9 +61,6 @@ func _ready():
 	set_mine_count(GlobalVars.MINE_AMOUNT[GlobalVars.settings.dificulty])
 
 func on_theme_changed(_theme_name: String = ""):
-	game_lost_button = ThemeManager.get_game_lost_button()
-	game_won_button = ThemeManager.get_game_won_button()
-	default_button = ThemeManager.get_default_button()
 	flag_placement_set_right_texture =  ThemeManager.get_tile_texture(GlobalVars.CELLS.mine)
 	flag_placement_set_left_texture = ThemeManager.get_tile_texture(GlobalVars.CELLS.flag)
 	menuButton.texture_normal = ThemeManager.get_tile_texture(GlobalVars.CELLS.winners)
@@ -71,6 +70,20 @@ func on_theme_changed(_theme_name: String = ""):
 		flagPlacementSetButton.texture_normal = flag_placement_set_left_texture
 	else:
 		flagPlacementSetButton.texture_normal = flag_placement_set_right_texture
+
+	game_lost_button = ThemeManager.get_game_lost_button(true)
+	game_won_button = ThemeManager.get_game_won_button(true)
+	default_button = ThemeManager.get_default_button(true)
+	print("current_emote=",current_emote)
+	print("current_theme_name=",ThemeManager.get_current_theme_name())
+	if current_emote == "lose":
+		gameStatusButton.add_theme_stylebox_override("normal", game_lost_button)
+	elif current_emote == "win":
+		gameStatusButton.add_theme_stylebox_override("normal", game_won_button)
+	else:
+		print("hiiiiiiiiii")
+		gameStatusButton.add_theme_stylebox_override("normal", default_button)
+	
 
 
 func on_settings_loaded():
@@ -152,12 +165,14 @@ func set_timer_count(timer_count: int):
 
 func on_game_lost():
 	gameStatusButton.add_theme_stylebox_override("normal", game_lost_button)
+	current_emote = "lose"
 
 
 func game_won(time_elapsed, current_score):
 	final_time = time_elapsed
 	final_score = current_score
 	gameStatusButton.add_theme_stylebox_override("normal", game_won_button)
+	current_emote = "win"
 	scoreTextLabel.add_text(str(final_score))
 	timeTextLabel.add_text(str(time_elapsed))
 
@@ -169,6 +184,7 @@ func max_flag_warning(_reset: bool = false):
 
 func reset_smile_button():
 	gameStatusButton.add_theme_stylebox_override("normal", default_button)
+	current_emote = "normal"
 
 
 func clear_save_score_fields():
