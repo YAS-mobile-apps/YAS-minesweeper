@@ -66,22 +66,16 @@ func on_theme_changed(_theme_name: String = ""):
 	menuButton.texture_normal = ThemeManager.get_tile_texture(GlobalVars.CELLS.winners)
 	menuButton.texture_pressed = ThemeManager.get_tile_texture(GlobalVars.CELLS.winners)
 	menuButton.texture_hover = ThemeManager.get_tile_texture(GlobalVars.CELLS.winners_click)
-	if GlobalVars.settings.click_reverse == true:
-		flagPlacementSetButton.texture_normal = flag_placement_set_left_texture
-	else:
-		flagPlacementSetButton.texture_normal = flag_placement_set_right_texture
+	swap_flag_placement_type(true)
 
 	game_lost_button = ThemeManager.get_game_lost_button(true)
 	game_won_button = ThemeManager.get_game_won_button(true)
 	default_button = ThemeManager.get_default_button(true)
-	print("current_emote=",current_emote)
-	print("current_theme_name=",ThemeManager.get_current_theme_name())
 	if current_emote == "lose":
 		gameStatusButton.add_theme_stylebox_override("normal", game_lost_button)
 	elif current_emote == "win":
 		gameStatusButton.add_theme_stylebox_override("normal", game_won_button)
 	else:
-		print("hiiiiiiiiii")
 		gameStatusButton.add_theme_stylebox_override("normal", default_button)
 	
 

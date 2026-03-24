@@ -34,5 +34,14 @@ func draw_theme_selection():
 		theme_name.text = game_theme
 		theme_requirements.text = "Find 0/8 number '1'"
 		new_theme_line.visible = true
-		apply_button.pressed.connect(ThemeManager.change_global_theme.bind(game_theme))
+		apply_button.pressed.connect(save_and_apply_theme.bind(game_theme))
 		themeSelectorVBoxContainer.add_child(new_theme_line)
+
+func save_and_apply_theme(game_theme: String):
+	ThemeManager.change_global_theme(game_theme)
+	GlobalVars.settings.current_theme = game_theme
+
+	GlobalFuncs.write_to_json_file(
+		GlobalVars.SETTINGS_FILE_PATH, GlobalVars.settings
+	)
+

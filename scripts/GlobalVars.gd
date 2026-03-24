@@ -53,7 +53,6 @@ const MOUSE_HOLD_TIMES: Dictionary = {
 	"medium": 0.350,
 	"long": 0.450,
 }
-
 const MENU_OPTIONS: Array = [
 	"winners", 
 	#"themes"
@@ -63,7 +62,10 @@ var settings: Dictionary = {
 	"dificulty": "dev_mode",
 	"hold_click": "long",
 	"click_reverse": false,
+	"current_theme": "default",
+	"active_themes": ["default", "oceanBlue"]
 }
+
 var current_scores: Dictionary = {
 	"dev_mode":{
 		"scores":[],

@@ -6,9 +6,8 @@ var themes: Dictionary = {
 	"development": preload("res://assets/themes/dev_theme/development_theme.tres")
 }
 
-var active_themes: Array = ["default", "oceanBlue"]
-
-var current_theme_name: String = "oceanBlue"
+var active_themes: Array = GlobalVars.settings.active_themes
+var current_theme_name: String = GlobalVars.settings.current_theme
 var current_theme: Theme = themes[current_theme_name]
 var game_lost_button = get_game_lost_button()
 var game_won_button = get_game_won_button()
@@ -16,7 +15,6 @@ var default_button = get_default_button()
 var tileset = get_tileset(true)
 
 signal theme_changed(theme_name: String)
-
 
 
 func change_global_theme(theme_name: String):
@@ -27,6 +25,7 @@ func change_global_theme(theme_name: String):
 	default_button = get_default_button(true)
 	tileset = get_tileset(true)
 	theme_changed.emit(theme_name)
+
 
 func apply(root: Control, theme_name: String) -> Theme:
 	root.theme = themes[theme_name]

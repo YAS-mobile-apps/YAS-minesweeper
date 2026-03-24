@@ -82,6 +82,8 @@ func load_settings():
 	
 	GlobalVars.settings = settings
 	
+	ThemeManager.change_global_theme(GlobalVars.settings.current_theme)
+
 	settings_loaded.emit()
 
 
