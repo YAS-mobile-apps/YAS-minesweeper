@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=15 format=3 uid="uid://o0re7h3ft77b"]
+[gd_resource type="Theme" load_steps=25 format=3 uid="uid://o0re7h3ft77b"]
 
 [ext_resource type="Texture2D" uid="uid://dunq15if5jhxm" path="res://assets/themes/dev_theme/base_tiles.png" id="1_87jpu"]
 [ext_resource type="Texture2D" uid="uid://cd2t2mfrdj7xm" path="res://assets/themes/dev_theme/tileset_atlas.tres" id="1_pmsp8"]
@@ -28,6 +28,30 @@ region_rect = Rect2(294, 0, 49, 48)
 texture = ExtResource("1_pmsp8")
 region_rect = Rect2(343, 0, 49, 48)
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_h7jk5"]
+texture = ExtResource("1_pmsp8")
+region_rect = Rect2(686, 0, 49, 48)
+modulate_color = Color(0.580392, 0.580392, 0.580392, 0.741176)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5wj3r"]
+texture = ExtResource("1_pmsp8")
+region_rect = Rect2(686, 0, 49, 48)
+modulate_color = Color(0.968627, 0.658824, 0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nn4s3"]
+texture = ExtResource("1_pmsp8")
+region_rect = Rect2(686, 0, 49, 48)
+modulate_color = Color(0.968627, 0.658824, 0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1oawa"]
+texture = ExtResource("1_pmsp8")
+region_rect = Rect2(686, 0, 49, 48)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_t724a"]
+texture = ExtResource("1_pmsp8")
+region_rect = Rect2(686, 0, 49, 48)
+modulate_color = Color(0.968627, 0.658824, 0, 1)
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qqteq"]
 texture = ExtResource("1_pmsp8")
 region_rect = Rect2(490, 0, 49, 48)
@@ -49,6 +73,30 @@ region_rect = Rect2(490, 0, 49, 48)
 texture = ExtResource("1_pmsp8")
 region_rect = Rect2(539, 0, 49, 48)
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7p66m"]
+texture = ExtResource("1_pmsp8")
+region_rect = Rect2(588, 0, 49, 48)
+modulate_color = Color(0.396078, 0.396078, 0.396078, 0.654902)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ramuc"]
+texture = ExtResource("1_pmsp8")
+region_rect = Rect2(588, 0, 49, 48)
+modulate_color = Color(0.968106, 0.658516, 1.15514e-06, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0uaon"]
+texture = ExtResource("1_pmsp8")
+region_rect = Rect2(588, 0, 49, 48)
+modulate_color = Color(0.968627, 0.658824, 0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_eca7l"]
+texture = ExtResource("1_pmsp8")
+region_rect = Rect2(588, 0, 49, 48)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1qs56"]
+texture = ExtResource("1_pmsp8")
+region_rect = Rect2(588, 0, 49, 48)
+modulate_color = Color(0.968627, 0.658824, 0, 1)
+
 [resource]
 resource_name = "dev_theme"
 default_font = ExtResource("1_v2bpu")
@@ -61,6 +109,11 @@ GameStatusButton/styles/hover = SubResource("StyleBoxTexture_6ddpa")
 GameStatusButton/styles/normal = SubResource("StyleBoxTexture_xnbsb")
 GameStatusButton/styles/pressed = SubResource("StyleBoxTexture_dm00h")
 MenuOptionsButton/base_type = &"Button"
+MenuOptionsButton/styles/disabled = SubResource("StyleBoxTexture_h7jk5")
+MenuOptionsButton/styles/focus = SubResource("StyleBoxTexture_5wj3r")
+MenuOptionsButton/styles/hover = SubResource("StyleBoxTexture_nn4s3")
+MenuOptionsButton/styles/normal = SubResource("StyleBoxTexture_1oawa")
+MenuOptionsButton/styles/pressed = SubResource("StyleBoxTexture_t724a")
 ScoresButton/base_type = &"Button"
 ScoresButton/styles/disabled = SubResource("StyleBoxTexture_qqteq")
 ScoresButton/styles/focus = SubResource("StyleBoxTexture_8dn8m")
@@ -68,6 +121,11 @@ ScoresButton/styles/hover = SubResource("StyleBoxTexture_ewd3n")
 ScoresButton/styles/normal = SubResource("StyleBoxTexture_ix2il")
 ScoresButton/styles/pressed = SubResource("StyleBoxTexture_3ra2r")
 ThemesButton/base_type = &"Button"
+ThemesButton/styles/disabled = SubResource("StyleBoxTexture_7p66m")
+ThemesButton/styles/focus = SubResource("StyleBoxTexture_ramuc")
+ThemesButton/styles/hover = SubResource("StyleBoxTexture_0uaon")
+ThemesButton/styles/normal = SubResource("StyleBoxTexture_eca7l")
+ThemesButton/styles/pressed = SubResource("StyleBoxTexture_1qs56")
 metadata/base_tiles = ExtResource("1_87jpu")
 metadata/NumberColors = {
 1: Color(0, 0.431373, 0, 1),

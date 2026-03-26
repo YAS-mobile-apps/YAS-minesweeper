@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=42 format=3 uid="uid://cyrlp5twyc8al"]
+[gd_resource type="Theme" load_steps=52 format=3 uid="uid://cyrlp5twyc8al"]
 
 [ext_resource type="Texture2D" uid="uid://dueamaxh4maqe" path="res://assets/themes/default_theme/tileset_atlas.tres" id="1_cbhuy"]
 [ext_resource type="FontFile" uid="uid://d1626yq8624vs" path="res://assets/themes/default_theme/font/PrStart.ttf" id="1_ha13k2"]
@@ -245,6 +245,30 @@ expand_margin_top = 4.0
 expand_margin_right = 4.0
 expand_margin_bottom = 4.0
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_e6eqw"]
+texture = ExtResource("1_cbhuy")
+region_rect = Rect2(686, 0, 49, 48)
+modulate_color = Color(0.811765, 0.811765, 0.811765, 0.701961)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xy1pi"]
+texture = ExtResource("1_cbhuy")
+region_rect = Rect2(686, 0, 49, 48)
+modulate_color = Color(0.64889, 0.791066, 0.980341, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jomb6"]
+texture = ExtResource("1_cbhuy")
+region_rect = Rect2(686, 0, 49, 48)
+modulate_color = Color(0.647059, 0.792157, 0.980392, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_737al"]
+texture = ExtResource("1_cbhuy")
+region_rect = Rect2(686, 0, 49, 48)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ccofy"]
+texture = ExtResource("1_cbhuy")
+region_rect = Rect2(686, 0, 49, 48)
+modulate_color = Color(0.647059, 0.792157, 0.980392, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yixl5"]
 bg_color = Color(0.317647, 0.384314, 0.447059, 1)
 
@@ -294,6 +318,30 @@ region_rect = Rect2(490, 0, 49, 48)
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_djgj3"]
 texture = ExtResource("1_cbhuy")
 region_rect = Rect2(539, 0, 49, 48)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_a4j8v"]
+texture = ExtResource("1_cbhuy")
+region_rect = Rect2(588, 0, 49, 48)
+modulate_color = Color(0.713726, 0.713726, 0.713726, 0.768627)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dcw4g"]
+texture = ExtResource("1_cbhuy")
+region_rect = Rect2(588, 0, 49, 48)
+modulate_color = Color(0.647059, 0.792157, 0.980392, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sjmtf"]
+texture = ExtResource("1_cbhuy")
+region_rect = Rect2(588, 0, 49, 48)
+modulate_color = Color(0.647059, 0.792157, 0.980392, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6ves5"]
+texture = ExtResource("1_cbhuy")
+region_rect = Rect2(588, 0, 49, 48)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vm0iy"]
+texture = ExtResource("1_cbhuy")
+region_rect = Rect2(588, 0, 49, 48)
+modulate_color = Color(0.647059, 0.792157, 0.980392, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ypgjl"]
 bg_color = Color(0.317647, 0.384314, 0.447059, 1)
@@ -380,6 +428,11 @@ MenuButton/styles/hover = SubResource("StyleBoxFlat_63byw")
 MenuButton/styles/normal = SubResource("StyleBoxFlat_gdkc8")
 MenuButton/styles/pressed = SubResource("StyleBoxFlat_bvqxq")
 MenuOptionsButton/base_type = &"Button"
+MenuOptionsButton/styles/disabled = SubResource("StyleBoxTexture_e6eqw")
+MenuOptionsButton/styles/focus = SubResource("StyleBoxTexture_xy1pi")
+MenuOptionsButton/styles/hover = SubResource("StyleBoxTexture_jomb6")
+MenuOptionsButton/styles/normal = SubResource("StyleBoxTexture_737al")
+MenuOptionsButton/styles/pressed = SubResource("StyleBoxTexture_ccofy")
 MineCountLabel/base_type = &"Label"
 MineCountLabel/colors/font_color = Color(0.905506, 0, 0, 1)
 Panel/styles/panel = SubResource("StyleBoxFlat_yixl5")
@@ -399,6 +452,12 @@ ScoresButton/styles/focus = SubResource("StyleBoxTexture_gj6g2")
 ScoresButton/styles/hover = SubResource("StyleBoxTexture_tis5h")
 ScoresButton/styles/normal = SubResource("StyleBoxTexture_1umxe")
 ScoresButton/styles/pressed = SubResource("StyleBoxTexture_djgj3")
+ThemesButton/base_type = &"Button"
+ThemesButton/styles/disabled = SubResource("StyleBoxTexture_a4j8v")
+ThemesButton/styles/focus = SubResource("StyleBoxTexture_dcw4g")
+ThemesButton/styles/hover = SubResource("StyleBoxTexture_sjmtf")
+ThemesButton/styles/normal = SubResource("StyleBoxTexture_6ves5")
+ThemesButton/styles/pressed = SubResource("StyleBoxTexture_vm0iy")
 TimerCountLabel/base_type = &"Label"
 TimerCountLabel/colors/font_color = Color(0.905882, 0, 0, 1)
 TooltipPanel/styles/panel = SubResource("StyleBoxFlat_ypgjl")

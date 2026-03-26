@@ -45,8 +45,7 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 texture = ExtResource("15_1yurp")
 axis_stretch_horizontal = 1
 
-[node name="main" type="Control"]
-layout_mode = 3
+[node name="main" type="Panel"]
 anchors_preset = 13
 anchor_left = 0.5
 anchor_right = 0.5
@@ -856,10 +855,14 @@ horizontal_scroll_mode = 0
 
 [node name="SelectorVBoxContainer" type="VBoxContainer" parent="DisplaySafeArea/GameUI/MenuUiContainer/MenuVBoxContainer/MenuScrollContainer"]
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_constants/separation = 4
 alignment = 1
+
+[node name="SeparatorTop" type="Control" parent="DisplaySafeArea/GameUI/MenuUiContainer/MenuVBoxContainer/MenuScrollContainer/SelectorVBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 
 [node name="OpenScoresTable" type="PanelContainer" parent="DisplaySafeArea/GameUI/MenuUiContainer/MenuVBoxContainer/MenuScrollContainer/SelectorVBoxContainer"]
 unique_name_in_owner = true
@@ -885,7 +888,6 @@ size_flags_vertical = 2
 
 [node name="HBoxContainerLine1" type="HBoxContainer" parent="DisplaySafeArea/GameUI/MenuUiContainer/MenuVBoxContainer/MenuScrollContainer/SelectorVBoxContainer/OpenScoresTable/SelectorLine/SelectorLineContainer"]
 layout_mode = 2
-size_flags_horizontal = 0
 
 [node name="SeparatorLeft" type="Control" parent="DisplaySafeArea/GameUI/MenuUiContainer/MenuVBoxContainer/MenuScrollContainer/SelectorVBoxContainer/OpenScoresTable/SelectorLine/SelectorLineContainer/HBoxContainerLine1"]
 custom_minimum_size = Vector2(6, 0)
@@ -919,6 +921,10 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 
+[node name="SeparatorMiddle" type="Control" parent="DisplaySafeArea/GameUI/MenuUiContainer/MenuVBoxContainer/MenuScrollContainer/SelectorVBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
 [node name="OpenThemeMenu" type="PanelContainer" parent="DisplaySafeArea/GameUI/MenuUiContainer/MenuVBoxContainer/MenuScrollContainer/SelectorVBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
@@ -943,7 +949,6 @@ size_flags_vertical = 2
 
 [node name="HBoxContainerLine1" type="HBoxContainer" parent="DisplaySafeArea/GameUI/MenuUiContainer/MenuVBoxContainer/MenuScrollContainer/SelectorVBoxContainer/OpenThemeMenu/SelectorLine/SelectorLineContainer"]
 layout_mode = 2
-size_flags_horizontal = 0
 
 [node name="SeparatorLeft" type="Control" parent="DisplaySafeArea/GameUI/MenuUiContainer/MenuVBoxContainer/MenuScrollContainer/SelectorVBoxContainer/OpenThemeMenu/SelectorLine/SelectorLineContainer/HBoxContainerLine1"]
 custom_minimum_size = Vector2(6, 0)
@@ -976,6 +981,26 @@ custom_minimum_size = Vector2(8, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
+
+[node name="SeparatorBottom2" type="Control" parent="DisplaySafeArea/GameUI/MenuUiContainer/MenuVBoxContainer/MenuScrollContainer/SelectorVBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SeparatorBottom3" type="Control" parent="DisplaySafeArea/GameUI/MenuUiContainer/MenuVBoxContainer/MenuScrollContainer/SelectorVBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SeparatorBottom5" type="Control" parent="DisplaySafeArea/GameUI/MenuUiContainer/MenuVBoxContainer/MenuScrollContainer/SelectorVBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SeparatorBottom4" type="Control" parent="DisplaySafeArea/GameUI/MenuUiContainer/MenuVBoxContainer/MenuScrollContainer/SelectorVBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SeparatorBottom" type="Control" parent="DisplaySafeArea/GameUI/MenuUiContainer/MenuVBoxContainer/MenuScrollContainer/SelectorVBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
 
 [node name="GameStateView" parent="." instance=ExtResource("4_5tf64")]
 unique_name_in_owner = true

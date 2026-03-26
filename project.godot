@@ -15,6 +15,7 @@ run/main_scene="res://scenes/main.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 run/max_fps=240
 run/low_processor_mode=true
+boot_splash/bg_color=Color(0.348583, 0.418694, 0.67151, 1)
 config/icon="res://assets/mimeIcon.png"
 
 [autoload]
@@ -39,3 +40,4 @@ renderer/rendering_method="mobile"
 renderer/rendering_method.mobile="gl_compatibility"
 textures/vram_compression/import_etc2_astc=true
 anti_aliasing/screen_space_roughness_limiter/enabled=false
+environment/defaults/default_clear_color=Color(0.277977, 0.314408, 0.422937, 1)
