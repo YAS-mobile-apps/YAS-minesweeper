@@ -4,7 +4,6 @@ class_name SweeperUiBottom
 
 @onready var menuButton = %MenuButton
 @onready var holdTimerMenu = %HoldTimerMenu
-@onready var baseNode = %BaseNode
 @onready var gameStateView = %GameStateView
 @onready var tileMap = %TileMap
 
@@ -13,10 +12,7 @@ class_name SweeperUiBottom
 
 
 func _ready():
-	var styleBox: StyleBoxFlat = get_theme_stylebox("panel").duplicate()
-	styleBox.set("bg_color", baseNode.theme.get_meta("bottom_ui_background_color"))
-	add_theme_stylebox_override("panel", styleBox)
-	GlobalFuncs.avoid_notch_bottom(self)
+	# GlobalFuncs.avoid_notch_bottom(self)
 
 	opened_menu.connect("id_pressed", update_dificulty)
 	timer_menu.connect("id_pressed", update_hold_timer)

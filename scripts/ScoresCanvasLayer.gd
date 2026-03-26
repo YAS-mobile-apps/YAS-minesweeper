@@ -1,4 +1,5 @@
 extends MarginContainer
 
 func _ready():
-	GlobalFuncs.avoid_notch(self)
+	# GlobalFuncs.avoid_notch(self)
+	pass

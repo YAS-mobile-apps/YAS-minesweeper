@@ -1,5 +1,6 @@
 extends Node
 
+
 func load_from_json_file(filepath: String):
 	if !FileAccess.file_exists(filepath):
 		return false
@@ -19,12 +20,12 @@ func write_to_json_file(file_path: String, file_contents: Dictionary):
 	file.close()
 
 
-func avoid_notch(node):
+func avoid_notch(root: Control):
 	var safe = DisplayServer.get_display_safe_area()
-	node.add_theme_constant_override("margin_top", safe.position.y)
+	root.position.y += safe.position.y
 
 
-func avoid_notch_bottom(node):
+func avoid_notch_bottom(root: Control):
 	var notch_list: Array[Rect2] = DisplayServer.get_display_cutouts()
 	var window_size: Vector2i = \
 		DisplayServer.window_get_size_with_decorations()
@@ -35,7 +36,7 @@ func avoid_notch_bottom(node):
 		if notch_area and window_size.y >= notch_area.size.y:
 			top_margin = int(notch_area.size.y)
 			
-	node.add_theme_constant_override("margin_bottom", top_margin)
+	root.add_theme_constant_override("margin_bottom", top_margin)
 
 
 func quick_sort(arr, key_to_sort):
@@ -57,3 +58,9 @@ func quick_sort(arr, key_to_sort):
 			greater.append(item)
 
 	return quick_sort(less, key_to_sort) + equal + quick_sort(greater, key_to_sort)
+
+
+func set_background_color(root: Control, theme: Theme, background_type: String):
+	var styleBox: StyleBoxFlat = root.get_theme_stylebox("panel").duplicate()
+	styleBox.set("bg_color", theme.get_meta(background_type))
+	root.add_theme_stylebox_override("panel", styleBox)

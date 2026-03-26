@@ -12,10 +12,11 @@ class_name GameStateView
 @onready var scoreTable = get_node(score_table_path)
 
 signal timer_timeout(time_elapsed)
+signal settings_loaded
 
-var time_elapsed = 0
-var opened_menu = false
-var timer_menu = false
+var time_elapsed: int = 0
+var opened_menu: bool = false
+var timer_menu: bool = false
 
 
 func _ready():	
@@ -40,9 +41,7 @@ func on_game_lost():
 
 func on_game_won():
 	timer.stop()
-	var total_score = tileMap.board_3bv_score / max(time_elapsed, 1)
-	var current_score = max(total_score, tileMap.board_3bv_score)
-	sweeperUiTop.game_won(time_elapsed, current_score)
+	sweeperUiTop.game_won(time_elapsed, tileMap.board_3bv_score)
 
 
 func on_game_start():
@@ -82,6 +81,10 @@ func load_settings():
 			return
 	
 	GlobalVars.settings = settings
+	
+	ThemeManager.change_global_theme(GlobalVars.settings.current_theme)
+
+	settings_loaded.emit()
 
 
 func reset_file_settings():

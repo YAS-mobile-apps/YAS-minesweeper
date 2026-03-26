@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://dfuhiuq03xjrh"]
+
+[ext_resource type="Texture2D" uid="uid://dog47hdiqidn" path="res://assets/themes/oceanBlue_theme/base_tiles.png" id="1_ttip8"]
+
+[resource]
+atlas = ExtResource("1_ttip8")
+region = Rect2(0, 0, 49, 48)

@@ -1,9 +1,10 @@
 extends PanelContainer
 
-class_name BaseNode
 
-# Called when the node enters the scene tree for the first time.
-func _enter_tree():
+func _ready():
+	var safe = DisplayServer.get_display_safe_area()
+	self.position.y -= safe.position.y
+
 	ThemeManager.theme_changed.connect(on_theme_changed)
 	on_theme_changed()
 

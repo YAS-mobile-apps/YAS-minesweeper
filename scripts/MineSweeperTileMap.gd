@@ -20,8 +20,6 @@ const SURROUNDING_POSITIONS: Array = [
 @export var rows = 8
 
 @onready var gameStateView = %GameStateView
-@onready var baseNode: BaseNode = %BaseNode
-@onready var theme: Theme = %BaseNode.theme
 @onready var tileMapNumbers = %TileMapNumbers
 @onready var sweeperUiTop = %SweeperUiTop
 
@@ -44,8 +42,13 @@ var mouse_held_timer: float = 0
 
 
 func _ready():
-	self.tile_set = baseNode.base_tileset
+	ThemeManager.theme_changed.connect(refresh_tileset)
 	sweeperUiTop.reset_game.connect(on_game_reset)
+	refresh_tileset()
+
+
+func refresh_tileset(_theme_name: String = ""):
+	self.tile_set = ThemeManager.get_tileset()
 
 
 func on_game_reset():
@@ -203,7 +206,7 @@ func set_tile_cell(cell_coord: Vector2i, cell_type: Vector2i, alternative_tile: 
 	if (cell_type == GlobalVars.CELLS.open_cell): 
 		if (mine_count > 0):
 			tileMapNumbers.cells_mine_count[cell_coord] = mine_count
-		elif (theme.get_meta("special_empty_cell") == true):
+		elif (ThemeManager.get_metadata("special_empty_cell") == true):
 			cell_type.x = GlobalVars.EMPTY_CELL_TILE_POSITION
 
 	set_cell(
