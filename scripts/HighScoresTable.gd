@@ -17,7 +17,6 @@ var score_table_dificulty: String = GlobalVars.settings.dificulty
 var opened_menu = null
 
 func _ready():
-	GlobalFuncs.avoid_notch(self)
 	opened_menu = scoreDificiltyMenu.get_popup()
 	opened_menu.connect("id_pressed", swap_dificulty)
 	
