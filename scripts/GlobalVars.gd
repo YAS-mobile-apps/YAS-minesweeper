@@ -63,7 +63,7 @@ var settings: Dictionary = {
 	"hold_click": "long",
 	"click_reverse": false,
 	"current_theme": "default",
-	"active_themes": ["default", "oceanBlue"]
+	"active_themes": ["default", "blueOcean"]
 }
 
 var current_scores: Dictionary = {

@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://daqc6snvohi3f"
-path="res://.godot/imported/prstartk.ttf-657bef6fa684b6fe55e80aba6f2f120e.fontdata"
+uid="uid://3qlmdv08uh6p_5"
+path="res://.godot/imported/PrStart.ttf-0e6c3071a162ea6c89126e87c3accb5f.fontdata"
 
 [deps]
 
-source_file="res://assets/themes/oceanBlue_theme/font/prstartk.ttf"
-dest_files=["res://.godot/imported/prstartk.ttf-657bef6fa684b6fe55e80aba6f2f120e.fontdata"]
+source_file="res://assets/themes/5_orangeLavaField_theme/font/PrStart.ttf"
+dest_files=["res://.godot/imported/PrStart.ttf-0e6c3071a162ea6c89126e87c3accb5f.fontdata"]
 
 [params]
 
