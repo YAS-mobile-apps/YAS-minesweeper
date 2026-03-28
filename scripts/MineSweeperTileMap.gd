@@ -269,7 +269,8 @@ func handle_cell(cell_coord: Vector2i):
 		placed_flags = 0
 		flag_placed.emit(placed_flags)
 
-	var mine_count = check_surrounding_mines(cell_coord)
+	var mine_count: int = check_surrounding_mines(cell_coord)
+	if mine_count > 0: GlobalFuncs.numbers_found_tracking(mine_count)
 	set_tile_cell(cell_coord, GlobalVars.CELLS.open_cell, 0, mine_count)
 	cells_open = cells_open + 1
 	cells_checked.append(cell_coord)
@@ -290,7 +291,7 @@ func handle_surrounding_cell(cell_coord: Vector2i):
 	handle_cell(cell_coord)
 
 
-func check_surrounding_mines(cell_coord: Vector2i):
+func check_surrounding_mines(cell_coord: Vector2i) -> int:
 	var mine_count = 0
 	for cell_direction in SURROUNDING_POSITIONS:
 		if cells_with_mine.has(cell_coord + cell_direction):
