@@ -81,6 +81,7 @@ func draw_theme_selection(redraw: bool = false):
 			if !is_enabled:
 				panel.modulate.a = 0.5
 
+
 func save_and_apply_theme(game_theme: String):
 	ThemeManager.change_global_theme(game_theme)
 	GlobalVars.settings.current_theme = game_theme
