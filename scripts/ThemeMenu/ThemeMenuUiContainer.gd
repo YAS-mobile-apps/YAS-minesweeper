@@ -4,6 +4,8 @@ extends PanelContainer
 @onready var themeSelectorVBoxContainer = %ThemeSelectorVBoxContainer
 @onready var themeMenuReturnToHome = %ThemeMenuReturnToHome
 
+@onready var numbers_unlocked: Dictionary = GlobalVars.settings.achievements.numbers_found
+
 func _ready():
 	GlobalFuncs.avoid_notch(self)
 	ThemeManager.theme_changed.connect(on_theme_changed)
@@ -18,6 +20,9 @@ func on_theme_changed(_theme_name: String = ""):
 	ThemeManager.apply(self, ThemeManager.get_current_theme_name())
 
 func draw_theme_selection():
+	var number_requirement: int = 1
+	var number_amount_to_find: int = 8
+
 	for game_theme in ThemeManager.themes.keys():
 		var new_theme_line = themeSelectorLine.duplicate()
 		
@@ -33,10 +38,18 @@ func draw_theme_selection():
 		base_tileset.axis_stretch_vertical = (StyleBoxTexture.AXIS_STRETCH_MODE_TILE_FIT)
 
 		theme_name.text = game_theme
-		theme_requirements.text = "Find 0/8 number '1'"
 		new_theme_line.visible = true
 		apply_button.pressed.connect(save_and_apply_theme.bind(game_theme))
 		themeSelectorVBoxContainer.add_child(new_theme_line)
+		theme_requirements.text = ""
+		
+		if game_theme not in ["default", "development"]:
+			var unlocked_numbers = numbers_unlocked[str(number_requirement)]
+			var is_enabled = unlocked_numbers >= number_amount_to_find
+			theme_requirements.text = "Find '" + str(unlocked_numbers) + "/" + str(number_amount_to_find) + "' number" + " '" + str(number_requirement) + "'"
+			number_requirement += 1
+			number_amount_to_find -= 1
+			apply_button.disabled = !is_enabled
 
 
 func save_and_apply_theme(game_theme: String):
