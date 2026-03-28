@@ -17,7 +17,7 @@
 [ext_resource type="Script" path="res://scripts/SaveScoreWindow.gd" id="12_31fka"]
 [ext_resource type="Script" path="res://scripts/ThemeMenu/ThemeMenuUiContainer.gd" id="14_pqh81"]
 [ext_resource type="Texture2D" uid="uid://dunq15if5jhxm" path="res://assets/themes/dev_theme/base_tiles.png" id="15_1yurp"]
-[ext_resource type="Theme" uid="uid://dx6dndk6te5or" path="res://assets/themes/oceanBlue_theme/oceanBlue_theme.tres" id="16_m33iv"]
+[ext_resource type="Theme" uid="uid://b6qva4dhqpgrj" path="res://assets/themes/1_blueOcean_theme/blueOcean_theme.tres" id="16_m33iv"]
 [ext_resource type="Script" path="res://scripts/MenuUi/MenuUiContainer.gd" id="17_b33ot"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ct5oy"]

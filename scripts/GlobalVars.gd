@@ -39,8 +39,9 @@ const CELLS: Dictionary = {
 	"lose": Vector2i(9,0),
 	"winners": Vector2i(10,0),
 	"winners_click": Vector2i(11,0),
-	#"themes": Vector2i(12,0),
-	#"themes_click": Vector2i(13,0)
+	"themes": Vector2i(12,0),
+	"themes_click": Vector2i(13,0),
+	"settings": Vector2i(14,0)
 }
 const MINE_AMOUNT: Dictionary = {
 	"dev_mode": 1,
@@ -55,7 +56,7 @@ const MOUSE_HOLD_TIMES: Dictionary = {
 }
 const MENU_OPTIONS: Array = [
 	"winners", 
-	#"themes"
+	"themes"
 ]
 
 var settings: Dictionary = {
@@ -63,7 +64,19 @@ var settings: Dictionary = {
 	"hold_click": "long",
 	"click_reverse": false,
 	"current_theme": "default",
-	"active_themes": ["default", "oceanBlue"]
+	"active_themes": ["default", "blueOcean"],
+	"achievements": {
+		"numbers_found": {
+			"1": 0,
+			"2": 0,
+			"3": 0,
+			"4": 0,
+			"5": 0,
+			"6": 0,
+			"7": 0,
+			"8": 0,
+		}
+	}
 }
 
 var current_scores: Dictionary = {

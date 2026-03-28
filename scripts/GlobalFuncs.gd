@@ -13,6 +13,11 @@ func load_from_json_file(filepath: String):
 		
 	return json_object.data
 
+func numbers_found_tracking(number_found: int):
+	GlobalVars.settings.achievements.numbers_found[str(number_found)] += 1
+	GlobalFuncs.write_to_json_file(
+		GlobalVars.SETTINGS_FILE_PATH, GlobalVars.settings
+	)
 
 func write_to_json_file(file_path: String, file_contents: Dictionary):
 	var file = FileAccess.open(file_path, FileAccess.WRITE_READ)

@@ -1,9 +1,16 @@
 extends Node
 
 var themes: Dictionary = {
+	"development": preload("res://assets/themes/dev_theme/development_theme.tres"),
 	"default": preload("res://assets/themes/default_theme/default_theme.tres"),
-	"oceanBlue": preload("res://assets/themes/oceanBlue_theme/oceanBlue_theme.tres"),
-	"development": preload("res://assets/themes/dev_theme/development_theme.tres")
+	"blueOcean": preload("res://assets/themes/1_blueOcean_theme/blueOcean_theme.tres"),
+	"greenFlowerField": preload("res://assets/themes/2_greenFlowerField_theme/greenFlowerField_theme.tres"),
+	"yellowBeach": preload("res://assets/themes/3_yellowBeach_theme/yellowBeach_theme.tres"),
+	"brownDesert": preload("res://assets/themes/4_brownDesert_theme/brownDesert_theme.tres"),
+	"orangeLavaField": preload("res://assets/themes/5_orangeLavaField_theme/orangeLavaField_theme.tres"),
+	"purpleTech": preload("res://assets/themes/6_purpleTech_theme/purpleTech_theme.tres"),
+	"nightSky": preload("res://assets/themes/7_nightSky_theme/nightSky_theme.tres"),
+	"goldAscendency": preload("res://assets/themes/8_goldAscendency_theme/goldAscendency_theme.tres"),
 }
 
 var active_themes: Array = GlobalVars.settings.active_themes
