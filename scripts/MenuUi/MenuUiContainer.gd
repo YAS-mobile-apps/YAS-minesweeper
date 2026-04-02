@@ -1,4 +1,4 @@
-extends PanelContainer
+extends MarginContainer
 
 @onready var menuReturnToHome: Button = %MenuReturnToHome
 @onready var scoresButton: Button = %ScoresButton

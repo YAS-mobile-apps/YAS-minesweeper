@@ -26,14 +26,16 @@ func write_to_json_file(file_path: String, file_contents: Dictionary):
 
 
 func avoid_notch(root: Control):
-	var safe = DisplayServer.get_display_safe_area()
-	root.position.y += safe.position.y
+	var safe_area = DisplayServer.get_display_safe_area()
+	var top_safe = safe_area.position.y
+	root.add_theme_constant_override("margin_top", top_safe)
 
 
 func avoid_notch_bottom(root: Control):
-	var safe = DisplayServer.get_display_safe_area()
-
-	root.size.y -= safe.position.y * 2
+	var safe_area = DisplayServer.get_display_safe_area()
+	var screen = DisplayServer.screen_get_size()	
+	var bottom_safe = screen.y - (safe_area.position.y + safe_area.size.y)
+	root.add_theme_constant_override("margin_bottom", bottom_safe)
 
 func quick_sort(arr, key_to_sort):
 	if arr.size() <= 1:

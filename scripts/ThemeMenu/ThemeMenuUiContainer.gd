@@ -1,4 +1,4 @@
-extends PanelContainer
+extends MarginContainer
 
 @onready var themeSelectorLine = %ThemeSelectorLine
 @onready var themeSelectorVBoxContainer = %ThemeSelectorVBoxContainer
