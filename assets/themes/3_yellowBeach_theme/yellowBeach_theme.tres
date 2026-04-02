@@ -1,8 +1,8 @@
 [gd_resource type="Theme" load_steps=57 format=3 uid="uid://bdssk4sq36kdm"]
 
-[ext_resource type="Texture2D" path="res://assets/themes/3_yellowBeach_theme/tileset_atlas.tres" id="1_4n5y4_3"]
+[ext_resource type="Texture2D" uid="uid://cpjdno78wx300" path="res://assets/themes/3_yellowBeach_theme/tileset_atlas.tres" id="1_4n5y4_3"]
 [ext_resource type="FontFile" path="res://assets/themes/3_yellowBeach_theme/font/PrStart.ttf" id="2_tuqd1_3"]
-[ext_resource type="Texture2D" path="res://assets/themes/3_yellowBeach_theme/base_tiles.png" id="3_yjxyj_3"]
+[ext_resource type="Texture2D" uid="uid://5lpdf7r6bxyk" path="res://assets/themes/3_yellowBeach_theme/base_tiles.png" id="3_yjxyj_3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i1orq_3"]
 content_margin_left = 4.0

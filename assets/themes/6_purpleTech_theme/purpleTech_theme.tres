@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://caurl1gakt4nn" path="res://assets/themes/6_purpleTech_theme/tileset_atlas.tres" id="1_4n5y4_6"]
 [ext_resource type="FontFile" path="res://assets/themes/6_purpleTech_theme/font/PrStart.ttf" id="2_tuqd1_6"]
-[ext_resource type="Texture2D" path="res://assets/themes/6_purpleTech_theme/base_tiles.png" id="3_yjxyj_6"]
+[ext_resource type="Texture2D" uid="uid://bx15rq0bv706b" path="res://assets/themes/6_purpleTech_theme/base_tiles.png" id="3_yjxyj_6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i1orq_6"]
 content_margin_left = 4.0

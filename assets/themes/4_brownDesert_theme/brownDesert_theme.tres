@@ -1,8 +1,8 @@
 [gd_resource type="Theme" load_steps=57 format=3 uid="uid://glsl0i0vd6np"]
 
-[ext_resource type="Texture2D" path="res://assets/themes/4_brownDesert_theme/tileset_atlas.tres" id="1_4n5y4_4"]
+[ext_resource type="Texture2D" uid="uid://d1emd5nxvauuf" path="res://assets/themes/4_brownDesert_theme/tileset_atlas.tres" id="1_4n5y4_4"]
 [ext_resource type="FontFile" path="res://assets/themes/4_brownDesert_theme/font/PrStart.ttf" id="2_tuqd1_4"]
-[ext_resource type="Texture2D" path="res://assets/themes/4_brownDesert_theme/base_tiles.png" id="3_yjxyj_4"]
+[ext_resource type="Texture2D" uid="uid://bccbmo7s1asgi" path="res://assets/themes/4_brownDesert_theme/base_tiles.png" id="3_yjxyj_4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i1orq_4"]
 content_margin_left = 4.0

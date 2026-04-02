@@ -1,8 +1,8 @@
 [gd_resource type="Theme" load_steps=57 format=3 uid="uid://d1pabqjuqrvdh"]
 
-[ext_resource type="Texture2D" path="res://assets/themes/7_nightSky_theme/tileset_atlas.tres" id="1_4n5y4_7"]
+[ext_resource type="Texture2D" uid="uid://b65w3usme58rl" path="res://assets/themes/7_nightSky_theme/tileset_atlas.tres" id="1_4n5y4_7"]
 [ext_resource type="FontFile" path="res://assets/themes/7_nightSky_theme/font/PrStart.ttf" id="2_tuqd1_7"]
-[ext_resource type="Texture2D" path="res://assets/themes/7_nightSky_theme/base_tiles.png" id="3_yjxyj_7"]
+[ext_resource type="Texture2D" uid="uid://btvmym7o5qgkq" path="res://assets/themes/7_nightSky_theme/base_tiles.png" id="3_yjxyj_7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i1orq_7"]
 content_margin_left = 4.0
