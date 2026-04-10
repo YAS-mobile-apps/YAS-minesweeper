@@ -1,8 +1,8 @@
 [gd_resource type="Theme" load_steps=57 format=3 uid="uid://brreqqalkwfgi"]
 
-[ext_resource type="Texture2D" path="res://assets/themes/8_goldAscendency_theme/tileset_atlas.tres" id="1_4n5y4_8"]
+[ext_resource type="Texture2D" uid="uid://dhij55dkkwc6c" path="res://assets/themes/8_goldAscendency_theme/tileset_atlas.tres" id="1_4n5y4_8"]
 [ext_resource type="FontFile" path="res://assets/themes/8_goldAscendency_theme/font/PrStart.ttf" id="2_tuqd1_8"]
-[ext_resource type="Texture2D" path="res://assets/themes/8_goldAscendency_theme/base_tiles.png" id="3_yjxyj_8"]
+[ext_resource type="Texture2D" uid="uid://dwemu6e67moxk" path="res://assets/themes/8_goldAscendency_theme/base_tiles.png" id="3_yjxyj_8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i1orq_8"]
 content_margin_left = 4.0
