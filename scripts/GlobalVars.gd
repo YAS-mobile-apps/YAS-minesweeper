@@ -7,13 +7,16 @@ const SCORE_LIST_MAX_SIZE: int = 200
 const PRESSED_ID: Dictionary = {
 	0:"normal_mode",
 	1:"medium_mode",
-	2:"hard_mode"
+	2:"hard_mode",
+	3:"extra",
+	4:"dev_mode",
 }
 const DIFICULTY_ID: Dictionary = {
 	"normal_mode":0,
 	"medium_mode":1,
 	"hard_mode":2,
-	"dev_mode":0
+	"extra":3,
+	"dev_mode":4,
 }
 const HOLD_TIMER_ID: Dictionary = {
 	0:"short",
@@ -48,6 +51,7 @@ const MINE_AMOUNT: Dictionary = {
 	"normal_mode": 9,
 	"medium_mode": 12,
 	"hard_mode": 19,
+	"extra": 29
 }
 const MOUSE_HOLD_TIMES: Dictionary = {
 	"short": 0.200,
@@ -96,6 +100,11 @@ var current_scores: Dictionary = {
 		"last_player_name": "",
 	},
 	"hard_mode":{
+		"scores":[],
+		"highest_score": 0,
+		"last_player_name": "",
+	},
+	"extra":{
 		"scores":[],
 		"highest_score": 0,
 		"last_player_name": "",

@@ -1,0 +1,3 @@
+extends CanvasLayer
+
+signal dificulty_extra_unlocked
