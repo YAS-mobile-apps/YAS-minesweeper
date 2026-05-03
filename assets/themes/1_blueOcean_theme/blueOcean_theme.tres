@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" path="res://assets/themes/1_blueOcean_theme/tileset_atlas.tres" id="1_4n5y4_1"]
 [ext_resource type="FontFile" path="res://assets/themes/1_blueOcean_theme/font/PrStart.ttf" id="2_tuqd1_1"]
-[ext_resource type="Texture2D" path="res://assets/themes/1_blueOcean_theme/base_tiles.png" id="3_yjxyj_1"]
+[ext_resource type="Texture2D" uid="uid://du564qe47r1sm" path="res://assets/themes/1_blueOcean_theme/base_tiles.png" id="3_yjxyj_1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i1orq_1"]
 content_margin_left = 4.0
