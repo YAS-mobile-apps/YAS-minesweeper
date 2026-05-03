@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cs7xfipko16xx"]
+[gd_scene load_steps=28 format=3 uid="uid://cs7xfipko16xx"]
 
 [ext_resource type="Script" path="res://scripts/DisplaySafeArea.gd" id="1_2q0tv"]
 [ext_resource type="Theme" uid="uid://cyrlp5twyc8al" path="res://assets/themes/default_theme/default_theme.tres" id="1_4lv0w"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://scripts/MineFieldContainer.gd" id="9_gvkcf"]
 [ext_resource type="Script" path="res://scripts/UiContainer.gd" id="9_oyv0j"]
 [ext_resource type="Script" path="res://scripts/SweeperUiBottom.gd" id="10_3fbao"]
+[ext_resource type="Script" path="res://scripts/UserInterface/GameUI.gd" id="10_neb5b"]
 [ext_resource type="Script" path="res://scripts/ScoreTableUi/ScoreTableUiContainer.gd" id="11_2av8e"]
 [ext_resource type="Script" path="res://scripts/TileMapNumbers.gd" id="11_s5dhg"]
 [ext_resource type="Script" path="res://scripts/SaveScoreWindow.gd" id="12_31fka"]
@@ -268,13 +269,15 @@ flat = false
 alignment = 0
 icon_alignment = 1
 expand_icon = true
-item_count = 3
+item_count = 4
 popup/item_0/text = "Normal"
 popup/item_0/id = 0
 popup/item_1/text = "Medium"
 popup/item_1/id = 1
 popup/item_2/text = "Hard"
 popup/item_2/id = 2
+popup/item_3/text = "Extra"
+popup/item_3/id = 3
 
 [node name="SeparatorBottom" type="Control" parent="PanelContainer/DisplaySafeArea/GameSubViewportContainer/GameSubViewport/BaseNode/SweeperGameUi/SweeperUiBottom/BottomUIHBoxContainer"]
 layout_mode = 2
@@ -307,6 +310,8 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="GameUI" type="CanvasLayer" parent="PanelContainer/DisplaySafeArea"]
+unique_name_in_owner = true
+script = ExtResource("10_neb5b")
 
 [node name="InvisibleUiContainer" type="MarginContainer" parent="PanelContainer/DisplaySafeArea/GameUI"]
 anchors_preset = 13
@@ -448,13 +453,17 @@ size_flags_horizontal = 3
 text = "High Scores"
 flat = false
 language = "en"
-item_count = 3
+item_count = 5
 popup/item_0/text = "Normal"
 popup/item_0/id = 0
 popup/item_1/text = "Medium"
 popup/item_1/id = 1
 popup/item_2/text = "Hard"
 popup/item_2/id = 2
+popup/item_3/text = ""
+popup/item_3/id = 3
+popup/item_4/text = ""
+popup/item_4/id = 4
 
 [node name="SeparatorRight" type="Control" parent="PanelContainer/DisplaySafeArea/GameUI/ScoreTableUiContainer/HighScoreCanvas/HighScoresTable/HighScoresWindow/ScoreMarginContainer/ScoreScreen/ScreenHeader"]
 visible = false
