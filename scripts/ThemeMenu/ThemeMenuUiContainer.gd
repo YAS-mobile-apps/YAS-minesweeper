@@ -11,6 +11,7 @@ var apply_button_path: NodePath = "ThemeSelectorLineContainer/ThemeLineGridConta
 var theme_requirements_path: NodePath = "ThemeSelectorLineContainer/ThemeLineGridContainer/HBoxContainerLine1/ThemeLineRequirementsLabel"
 
 var numbers_unlocked: Dictionary = GlobalVars.settings.achievements.numbers_found
+var unlocked_themes: Array = []
 
 
 func _ready():
@@ -42,7 +43,16 @@ func draw_theme_selection(redraw: bool = false):
 	var number_amount_to_find: int = 8
 	numbers_unlocked = GlobalVars.settings.achievements.numbers_found
 
-	for game_theme in ThemeManager.themes.keys():
+	var unlocked_numbers: int = numbers_unlocked[str(number_requirement)]
+	var is_enabled: bool = unlocked_numbers >= number_amount_to_find
+	var display_unlocked_numbers: int = min(unlocked_numbers, number_amount_to_find)
+
+	var available_themes: Array = ThemeManager.themes.keys()
+	available_themes.remove_at(0)
+	available_themes.resize(available_themes.size() -1)
+	available_themes.resize(available_themes.size() -1)
+
+	for game_theme in available_themes:
 		var new_theme_line = themeSelectorLine.duplicate()
 		
 		var panel = new_theme_line.get_node(panel_path)
@@ -70,16 +80,15 @@ func draw_theme_selection(redraw: bool = false):
 		themeSelectorVBoxContainer.add_child(new_theme_line)
 		theme_requirements.text = ""
 		
-		if game_theme not in ["default", "development"]:
-			var unlocked_numbers: int = numbers_unlocked[str(number_requirement)]
-			var is_enabled: bool = unlocked_numbers >= number_amount_to_find
-			var display_unlocked_numbers: int = min(unlocked_numbers, number_amount_to_find)
-			theme_requirements.text = "Find '" + str(display_unlocked_numbers) + "/" + str(number_amount_to_find) + "' number" + " '" + str(number_requirement) + "'"
-			number_requirement += 1
-			number_amount_to_find -= 1
-			apply_button.disabled = !is_enabled
-			if !is_enabled:
-				panel.modulate.a = 0.5
+		unlocked_numbers = numbers_unlocked[str(number_requirement)]
+		is_enabled = unlocked_numbers >= number_amount_to_find
+		display_unlocked_numbers = min(unlocked_numbers, number_amount_to_find)
+		theme_requirements.text = "Find '" + str(display_unlocked_numbers) + "/" + str(number_amount_to_find) + "' number" + " '" + str(number_requirement) + "'"
+		number_requirement += 1
+		number_amount_to_find -= 1
+		apply_button.disabled = !is_enabled
+		if !is_enabled:
+			panel.modulate.a = 0.5
 
 
 func save_and_apply_theme(game_theme: String):
