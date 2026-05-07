@@ -64,7 +64,7 @@ const MENU_OPTIONS: Array = [
 ]
 
 var settings: Dictionary = {
-	"dificulty": "dev_mode",
+	"dificulty": "normal_mode",
 	"hold_click": "long",
 	"click_reverse": false,
 	"current_theme": "default",
