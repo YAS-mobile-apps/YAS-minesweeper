@@ -19,3 +19,6 @@ builds/
 android/
 Flashpost-tests/
 .vscode/
+
+#mem swap files
+*.swp
